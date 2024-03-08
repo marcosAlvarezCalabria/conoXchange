@@ -1,0 +1,39 @@
+
+<h1>Skills</h1>
+<form action="/skills/new" method="post">
+ 
+  
+  
+   <div class="mb-3">
+    <label for="avatar" class="form-label">Category</label>
+    <select name="category" class="form-select" id="avatar">
+      <option selected>Select a category</option>
+      <option>Crafts</option>
+      <option>Cocking</option>
+      <option>Gardening and Horticulture</option>
+      <option>Everyday Life skills</option>
+      <option>Music</option>
+      <option>Sports</option>
+      <option>Technology</option>
+      <option>Languages and Culture</option>
+      <option>Others</option>
+     
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" name="name">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      name="description"
+      placeholder="write a brief description about your skill"
+    ></textarea>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>

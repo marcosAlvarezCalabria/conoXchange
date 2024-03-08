@@ -25,4 +25,9 @@ const skillSchema = new Schema(
         required: true
 
     }
-)
+},
+// { timestamps: true }
+);
+
+const Skill = mongoose.model("Skill", skillSchema);
+module.exports = Skill

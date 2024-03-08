@@ -1,4 +1,26 @@
 <h1>profile</h1>
-<p>{{currentUser.username}}</p>
 
-<a href="/skills/new">New skill</a>
+
+<div class="card" style="width: 18rem;">
+  <img src="https://i.pravatar.cc/150?u=iron-fake@pravatar.com" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{currentUser.username}}</h5>
+    <p class="card-text">{{currentUser.description}}</p>
+   
+  </div>
+</div>
+
+
+<a class="btn btn-primary mt-2" href="/skills/new">New skill</a>
+<br>
+<a class="btn btn-primary mt-2" href="/edit">Edit profile</a>
+
+<div>
+  <h2>Skills de {{currentUser.username}}</h2>
+    <ul>
+        
+        {{#each skills as |skill|}}
+        <li>{{skill.name}}</li>
+        {{/each}}
+    </ul>
+</div>

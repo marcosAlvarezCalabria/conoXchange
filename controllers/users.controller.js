@@ -60,6 +60,6 @@ module.exports.doLogin = (req, res, next) => {
     .catch((error) => next(error));
 };
 
-module.exports.profile = (req, res, next) => {
+/*module.exports.profile = (req, res, next) => {
   res.render("users/profile");
-};
+};*/

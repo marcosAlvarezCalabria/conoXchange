@@ -12,13 +12,13 @@ const app = express();
 
 app.set ("view engine", "hbs");
 app.set('views',`${__dirname}/views`);
-
+app.use(express.urlencoded());
 //middlewares
 const { session ,loadUserSession} = require("./configs/session.config");
 app.use(session);
 app.use(loadUserSession);
 
-app.use(express.urlencoded());
+
 
 //session middleware
 
