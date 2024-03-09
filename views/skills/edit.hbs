@@ -1,0 +1,46 @@
+<h1>
+    <h1>Edit Skills</h1>
+<form action="/skills/{{skill.id}}/edit" method="post">
+ 
+  
+  
+   <div class="mb-3">
+    <label for="avatar"  class="form-label">Category</label>
+    <select value="{{skill.category}}" name="category" class="form-select {{#if errors.category}}is-invalid{{/if}}" id="avatar">
+      <option selected>{{skill.category}}</option>
+      <option>Select a category</option>
+      <option>Crafts</option>
+      <option>Coking</option>
+      <option>Gardening and Horticulture</option>
+      <option>Everyday Life skills</option>
+      <option>Music</option>
+      <option>Sports</option>
+      <option>Technology</option>
+      <option>Languages and Culture</option>
+      <option>Others</option>
+     
+    </select>
+   
+  {{#if errors.category}} <div class="invalid-feedback">{{errors.category}}</div>{{/if}}
+
+
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" value="{{skill.name}}" class="form-control {{#if errors.name}}is-invalid{{/if}}"name="name">
+    {{#if errors.name}}<div class="invalid-feedback">{{errors.name}} </div>{{/if}}
+  </div>
+  <div class="mb-3">
+    <label for="description"class="form-label">Description</label>
+    <textarea
+      class="form-control {{#if errors.description}}is-invalid{{/if}}"
+      rows="3"
+      name="description"
+      placeholder="write a brief description about your skill"
+    >{{skill.description}}</textarea>
+   {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+</h1>

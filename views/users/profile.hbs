@@ -5,7 +5,9 @@
   <img src="https://i.pravatar.cc/150?u=iron-fake@pravatar.com" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{currentUser.username}}</h5>
+    <p class="card-text">{{currentUser.email}}</p>
     <p class="card-text">{{currentUser.description}}</p>
+    
    
   </div>
 </div>
@@ -16,11 +18,19 @@
 <a class="btn btn-primary mt-2" href="/edit">Edit profile</a>
 
 <div>
-  <h2>Skills de {{currentUser.username}}</h2>
-    <ul>
-        
+   <!-- <ul>
         {{#each skills as |skill|}}
         <li>{{skill.name}}</li>
         {{/each}}
     </ul>
+</div>
+-->
+<h1>Listado de Skills</h1>
+<div class="list-group">
+   {{#each skills as |skill|}}
+       
+  <a href="/detail/{{skill.id}}" class="list-group-item list-group-item-action ">{{skill.category}} ,{{skill.name}}</a>
+
+   {{/each}}
+  
 </div>

@@ -17,6 +17,8 @@ module.exports.doCreate = (req, res, next) => {
           email: req.body.email,
           password: req.body.password,
           username: req.body.username,
+          description: req.body.description,
+          avatar: req.body.avatar
         };
         return User.create(user).then(() => res.redirect("/login"));
       }
@@ -63,3 +65,32 @@ module.exports.doLogin = (req, res, next) => {
 /*module.exports.profile = (req, res, next) => {
   res.render("users/profile");
 };*/
+
+module.exports.edit = (req, res, next) => {
+
+  res.render("users/edit");
+}
+module.exports.doEdit = (req, res, next) => {
+const userId = req.user.id;
+
+const user = req.body;
+
+User.findByIdAndUpdate(userId, req.body, { runValidators: true } )
+  .then((user) => {
+    if(!user) {
+      return res.status(400).send("user not found")
+    } else {
+      res.redirect(`/profile`);
+    
+
+    }
+  })
+  .catch((error) => {
+    if (error instanceof mongoose.Error.ValidationError) {
+      res.status(400).render("users/edit", { user: user, errors: error.errors });
+    } else {
+      next (error);
+    }
+  });
+
+}

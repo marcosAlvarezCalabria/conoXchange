@@ -2,7 +2,7 @@
 <form method="post" action="/login">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input value="{{user.email}}" type="email" name="email" class="form-control" placeholder="Enter email">
+    <input value="{{user.email}}" type="email" name="email" class="form-control {{#if errors.password}} is-invalid{{/if}}" placeholder="Enter email">
    
   </div>
  

@@ -1,0 +1,39 @@
+<form action="/edit" method="post">
+ 
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      name="username"
+      class="form-control"
+       value="{{currentUser.username}}"
+      id="username"
+     
+    />
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">  <em>Email</em></label>
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      value="{{currentUser.email}}"
+      id="email"
+      
+    />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      name="description"
+      id="description"
+      rows="3"
+      placeholder="write a brief description about yourself"
+    >{{currentUser.description}}</textarea>
+  </div>
+  <div class="mb-3">
+   
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
