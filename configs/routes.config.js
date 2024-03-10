@@ -31,6 +31,9 @@ router.get("/skills/:id/edit",secure.isAuthenticated,skill.edit);
 router.post("/skills/:id/edit",secure.isAuthenticated,skill.doEdit)
 //skills delete
 router.get("/skills/:id/delete",secure.isAuthenticated,skill.delete)
+//*************************search_room************************** */
+//search_room
+router.get("/search",skill.show)
 
 
 

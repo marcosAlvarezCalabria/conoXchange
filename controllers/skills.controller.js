@@ -73,3 +73,11 @@ module.exports.delete = (req, res, next) => {
         })
         .catch((error) => next (error))
 }
+module.exports.show = (req, res, next) => {
+    const userId = req.params.id
+Skill.find()
+    .then ((skills) => {
+        res.render("skills/search",{skills , userId})
+    })
+    .catch((error) => next(error))
+}
