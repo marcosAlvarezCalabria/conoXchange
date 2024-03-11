@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">conXchange</a>
+    <h2 class="navbar-brand">conXchange</h2>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,14 @@
         
         {{#if currentUser}}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/search">Showcase</a>
+          <a class="nav-link active" aria-current="page" href="/search">Search skill</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+        </li>
+
         <li class="nav-item"></li>
-          <a class="nav-link active" aria-current="page" href="#">Log out</a>
+          <a class="nav-link active" aria-current="page" href="/logout/{{currentUser.id}}">Log out</a>
         </li>
         {{/if }}
         

@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const User = require("../models/user.model")
 
 
+
 module.exports.create = (req, res, next ) => res.render("skills/new") 
 module.exports.doCreate = (req, res, next) => {
     const skill = req.body ;
@@ -22,6 +23,9 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.list = (req, res, next) => {
     Skill.find({owner: req.user.id})
         .then((skills) => {
+            /*if () {
+                
+            }*/
             res.render ("users/profile", {skills});
         })
         .catch((error) => next(error))
@@ -74,10 +78,26 @@ module.exports.delete = (req, res, next) => {
         .catch((error) => next (error))
 }
 module.exports.show = (req, res, next) => {
+    const {name,category} = req.query;
+    const criterial = {};
+    if(category) criterial.category = category
+    if (name) criterial.name = new RegExp(name, "i");
     const userId = req.params.id
-Skill.find()
+   
+Skill.find(criterial)
+    .populate("owner")
     .then ((skills) => {
         res.render("skills/search",{skills , userId})
     })
     .catch((error) => next(error))
 }
+/*module.exports.GoToUserProfile = (req, res, next) => {
+    const ownerId = req.params.id
+    User.findById(ownerId)
+    .then((owner) => {
+        res.redirect(`/profile?userId=${ownerId}`)})
+    .catch((error) => next(error))
+
+    
+
+}*/

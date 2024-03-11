@@ -1,7 +1,5 @@
 
-body{
-    display: flexbox;
-}
+
 #img-card{
     width: 30px;
     height: 30px;
@@ -17,9 +15,12 @@ body{
 .form .fa-search{
 
     position: absolute;
-    top: 20px;
-    left: 20px;
-    color: #9ca3af;
+    top: 16px;
+    left: 10px;
+    color: #7b7d81;
+    border-radius: 1px;
+    border: transparent;
+
 
 }
 

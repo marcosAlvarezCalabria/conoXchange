@@ -26,6 +26,10 @@ app.use(express.urlencoded());
 const routes= require('./configs/routes.config');
 app.use('/',routes);
 app.use(express.static((`${__dirname}/public`)));
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
 const port = 3000;
 app.listen(port,() => console.info (`aplication running port ${ port }`));

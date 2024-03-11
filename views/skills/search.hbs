@@ -1,4 +1,5 @@
 <h1>search room</h1>
+<form action="/search" method="get">
 <div class="container-fluid">
 
             <div class="row ">
@@ -6,8 +7,11 @@
               <div class="col-md-10 mx-auto text-center">
 
                 <div class="form">
-                  <i class="fa fa-search"></i>
-                  <input type="text" class="form-control form-input" placeholder="Search anything...">
+
+               <button class="fa fa-search"></button>
+
+                  <input type="text" name="name" class="form-control form-input {{#if errors}}is-invalid{{/if}}" placeholder="Search anything..." value="{{query.title}}">
+                  
                   <span class="left-pan d-md-none"><i class="fa fa-microphone"></i></span>
                 </div>
                 
@@ -16,18 +20,21 @@
             </div>
             
           </div>
-
+</form>
 </div>
 <div class="row">
 {{#each skills as |skill|}}
 <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
     
-  <div class="card-header d-inline">
+ <div class="card-header d-flex">
+   <a style=" color:white ; text-decoration: none" href="/skill-owner/{{owner.id}}">
     <img id="img-card" src="https://i.pravatar.cc/150?u=iron-fake@pravatar.com" alt="Icono" class="rounded-circle d-inline">
-    {{skill.name}}
+  <p>{{skill.owner.username}}</p>
+   </a>
   </div>
+ 
   <div class="card-body">
-    <p class="card-text">Description</p>
+    <p> {{skill.name}}</p>
     <p class="card-text">{{skill.description}}</p>
     
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
