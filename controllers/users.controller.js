@@ -8,16 +8,9 @@ module.exports.doCreate = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((userFound) => {
       if (userFound) {
-        res.status(409).render("users/register", {
-          userFound,
-          errors: { email: "already exists" },
-        });
+        res.status(409).render("users/register", { userFound, errors: { email: "already exists" }});
       } else {
-        const user = {
-          email: req.body.email,
-          password: req.body.password,
-          username: req.body.username,
-        };
+        const user = { email: req.body.email,password: req.body.password,username: req.body.username};
         return User.create(user).then(() => res.redirect("/login"));
       }
     })
@@ -44,7 +37,7 @@ module.exports.doLogin = (req, res, next) => {
       } else {
         return user.checkPassword(req.body.password).then((match) => {
           if (match) {
-            req.session.userId = user.id;
+            req.session.userId = user.id;//con esto le cargamos el user.id en la req.session.id para despues poder utilizarlo
             res.redirect("/profile");
           } else {
             res.status(401).render("users/login", {
@@ -90,5 +83,5 @@ module.exports.logout = (req, res, next) => {
   req.session.destroy();
   req.session = null;
   res.clearCookie("connect.sid");
-  res.redirect("/login")
-}
+  res.redirect("/login");
+};

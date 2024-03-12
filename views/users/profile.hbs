@@ -1,7 +1,8 @@
 <h1>profile</h1>
+<div class="row">
 
 
-<div class="card" style="width: 18rem;">
+<div class="card cold-md-6" style="width: 18rem;">
   <img src="https://i.pravatar.cc/150?u=iron-fake@pravatar.com" class="card-img-top" alt="...">
 
   <!--<div class="card-body {{#if owner}}invisible{{/if}}"-->
@@ -9,6 +10,10 @@
     <h5 class="card-title">{{currentUser.username}}</h5>
     <p class="card-text">{{currentUser.email}}</p>
     <p class="card-text">{{currentUser.description}}</p>
+    
+<br>
+<a class="btn btn-primary mt-2" href="/edit">Edit profile</a>
+
     
    
   </div>
@@ -23,11 +28,8 @@
 </div>-->
 
 
-<a class="btn btn-primary mt-2" href="/skills/new">New skill</a>
-<br>
-<a class="btn btn-primary mt-2" href="/edit">Edit profile</a>
 
-<div>
+<div class="col-md-6">
    <!-- <ul>
         {{#each skills as |skill|}}
         <li>{{skill.name}}</li>
@@ -42,5 +44,6 @@
   <a href="/detail/{{skill.id}}" class="list-group-item list-group-item-action ">{{skill.category}} ,{{skill.name}}</a>
 
    {{/each}}
-  
+  <a class="btn btn-primary mt-2" href="/skills/new">New skill</a>
+</div>
 </div>
