@@ -25,7 +25,7 @@ router.post("/edit",secure.isAuthenticated,users.doEdit);
 router.get("/skills/new", skills.create);
 router.post('/skills/new', skills.doCreate);
 //skills list in profile
-router.get("/profile", secure.isAuthenticated, skills.list);
+router.get("/profile/:userId", secure.isAuthenticated, skills.list);
 router.get("/detail/:id", secure.isAuthenticated, skills.detail)
 //skills edit
 router.get("/skills/:id/edit", secure.isAuthenticated, skills.edit);
@@ -35,7 +35,7 @@ router.get("/skills/:id/delete", secure.isAuthenticated, skills.delete)
 //*************************search_room************************** */
 //search_room
 router.get("/search",skills.show)
-//router.get("/skill-owner/", skills.GoToUserProfile)
+
 
 
 

@@ -22,12 +22,12 @@
           </div>
 </form>
 </div>
-<div class="row">
+<div class="row justify-content-center">
 {{#each skills as |skill|}}
 <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
     
  <div class="card-header d-flex">
-   <a style=" color:white ; text-decoration: none" href="/skill-owner/{{owner.id}}">
+   <a style=" color:white ; text-decoration: none" href="/profile/{{skill.owner.id}}">
     <img id="img-card" src="https://i.pravatar.cc/150?u=iron-fake@pravatar.com" alt="Icono" class="rounded-circle d-inline">
   <p>{{skill.owner.username}}</p>
    </a>

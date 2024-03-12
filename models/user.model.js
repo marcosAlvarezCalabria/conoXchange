@@ -24,6 +24,7 @@ const userSchema = new Schema(
             minLength: [3,"username needs at least 6 characters"],
             maxLength: [10,"username should have less than 10 characters "]
         }
+        
     }
 );
 

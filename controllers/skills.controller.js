@@ -21,12 +21,20 @@ module.exports.doCreate = (req, res, next) => {
         });
 };
 module.exports.list = (req, res, next) => {
-    Skill.find({owner: req.user.id})
+   const criterial = {}
+   if(req.params.userId) {
+    if (req.params.userId === 'me') {
+        criterial.owner = req.user.id
+    } else {
+        criterial.owner = req.params.userId
+    }
+   }
+    Skill.find(criterial)
+        .populate("owner")
         .then((skills) => {
-            /*if () {
-                
-            }*/
-            res.render ("users/profile", {skills});
+            const user = skills[0]?.owner;
+            const isUserLogged = req.user.id == user.id;
+            res.render ("users/profile", {skills, user, isUserLogged});
         })
         .catch((error) => next(error))
 }
@@ -78,6 +86,7 @@ module.exports.delete = (req, res, next) => {
         .catch((error) => next (error))
 }
 module.exports.show = (req, res, next) => {
+
     const {name,category} = req.query;
     const criterial = {};
     if(category) criterial.category = category
@@ -91,13 +100,17 @@ Skill.find(criterial)
     })
     .catch((error) => next(error))
 }
-/*module.exports.GoToUserProfile = (req, res, next) => {
+module.exports.GoToOwnerProfile = (req, res, next) => {
+
     const ownerId = req.params.id
-    User.findById(ownerId)
+    const user = req.session.id
+    console.debug (`este es el req.session ${ownerId}`)
+
+    User.findById(ownerId)   
     .then((owner) => {
-        res.redirect(`/profile?userId=${ownerId}`)})
+        res.redirect(`/profile/${ownerId}`)})
     .catch((error) => next(error))
 
     
 
-}*/
+}

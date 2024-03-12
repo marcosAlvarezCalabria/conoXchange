@@ -37,8 +37,10 @@ module.exports.doLogin = (req, res, next) => {
       } else {
         return user.checkPassword(req.body.password).then((match) => {
           if (match) {
-            req.session.userId = user.id;//con esto le cargamos el user.id en la req.session.id para despues poder utilizarlo
-            res.redirect("/profile");
+            req.session.userId = user.id;
+            console.debug(`esto es ${user}`)
+
+            res.redirect(`/profile/${user.id}`);
           } else {
             res.status(401).render("users/login", {
               user: req.body,
@@ -60,13 +62,14 @@ module.exports.doEdit = (req, res, next) => {
   const userId = req.user.id;
 
   const user = req.body;
+  console.debug(user)
 
   User.findByIdAndUpdate(userId, req.body, { runValidators: true })
     .then((user) => {
       if (!user) {
         return res.status(400).send("user not found");
       } else {
-        res.redirect(`/profile`);
+        res.redirect(`/profile/me`);
       }
     })
     .catch((error) => {

@@ -7,12 +7,13 @@
 
   <!--<div class="card-body {{#if owner}}invisible{{/if}}"-->
     
-    <h5 class="card-title">{{currentUser.username}}</h5>
-    <p class="card-text">{{currentUser.email}}</p>
-    <p class="card-text">{{currentUser.description}}</p>
+    <h5 class="card-title">{{user.username}}</h5>
+    <p class="card-text">{{user.email}}</p>
+    
+   
     
 <br>
-<a class="btn btn-primary mt-2" href="/edit">Edit profile</a>
+{{#if isUserLogged }}<a class="btn btn-primary mt-2" href="/edit">Edit profile</a>{{/if}}
 
     
    
@@ -44,6 +45,6 @@
   <a href="/detail/{{skill.id}}" class="list-group-item list-group-item-action ">{{skill.category}} ,{{skill.name}}</a>
 
    {{/each}}
-  <a class="btn btn-primary mt-2" href="/skills/new">New skill</a>
+  {{#if isUserLogged}}<a class="btn btn-primary mt-2" href="/skills/new">New skill</a>{{/if}}
 </div>
 </div>
