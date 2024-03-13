@@ -11,7 +11,7 @@ module.exports.doCreate = (req, res, next) => {
     skill.owner = req.user;
 
     Skill.create(skill)
-        .then((skill) => res.redirect("/profile"))
+        .then((skill) => res.redirect(`/profile/${skill.owner.id}`))
         .catch((error) => {
             if( error instanceof mongoose.Error.ValidationError) {
                 res.status(400).render("skills/new", { skill: skill, errors: error.errors})
@@ -21,35 +21,43 @@ module.exports.doCreate = (req, res, next) => {
         });
 };
 module.exports.list = (req, res, next) => {
-   const criterial = {}
-   if(req.params.userId) {
-    if (req.params.userId === 'me') {
-        criterial.owner = req.user.id
-    } else {
-        criterial.owner = req.params.userId
+    const criterial = {}
+    if (req.params.userId) {
+        if (req.params.userId === "me") {
+            criterial.owner = req.user.id
+        } else {
+            criterial.owner = req.params.userId
+        }
     }
-   }
-    Skill.find(criterial)
-        .populate("owner")
-        .then((skills) => {
-            const user = skills[0]?.owner;
-            const isUserLogged = req.user.id == user.id;
-            res.render ("users/profile", {skills, user, isUserLogged});
-        })
-        .catch((error) => next(error))
-}
+    User.findById(criterial.owner)
+        .then(user => {
+            Skill.find(criterial)
+            .populate("owner")
+            .then((skills) => {
+                const isUserLogged = req.user?.id == criterial.owner;
+                res.render("users/profile", { skills, user, isUserLogged })
+            }).catch((error) => next(error))
+    })
+};
 module.exports.detail = (req, res, next) => {
     const { id }= req.params
+    const owner = req.params.userId
+
     Skill.findById(id)
         .then((skill) =>{
-            res.render("skills/detail", {skill})
+            const isUserLogged= req.user == skill.owner
+            res.render("skills/detail", { skill,isUserLogged })
+
+            console.debug (`*******esto es id ${req.user}`)
+            console.debug (`*********esto  ${skill.owner}`)
+            console.debug (`*********esto  ${isUserLogged}`)
         } )
         .catch((error) => next(error))
 }
 module.exports.edit = (req, res, next) => {
     const { id } = req.params
     Skill.findById(id)
-        .then((skill) => res.render("skills/edit", {skill}))
+        .then((skill) => res.render("skills/edit", { skill }))
         .catch((error) => next (error))
 }
 module.exports.doEdit = (req, res, next) => {
@@ -61,7 +69,8 @@ module.exports.doEdit = (req, res, next) => {
             if(!skill) {
                 next (createError(400,"Skill not found"));
             } else {
-                res.redirect(`/profile`);
+                res.redirect(res.redirect(`/profile/${req.session.userId}`));
+                //******************************************esta linea fue cambiada********* */
             }
         })
         .catch((error) => {
@@ -75,12 +84,18 @@ module.exports.doEdit = (req, res, next) => {
 }
 module.exports.delete = (req, res, next) => {
     const { id } = req.params
+    const user = req.session.userId
     Skill.findByIdAndDelete(id)
         .then ((skill) => {
             if(!skill) { 
+                
                 next(createError(404, "Skill not found"))
+                
             } else {
-                res.redirect("/profile")
+                console.debug(`**********este es el Id de la skill ${id}`)
+                console.debug(`este es el id de la sesssion ${req.session.userId}`)
+                res.redirect(`/profile/${req.session.userId}`)
+                
             }
         })
         .catch((error) => next (error))

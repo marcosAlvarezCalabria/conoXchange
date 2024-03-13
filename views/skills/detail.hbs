@@ -12,6 +12,8 @@
     <h3>Description:</h3><p>{{skill.description}}</p>
 
 </div>
-
+{{#if isUserLogged}}
 <a href="/skills/{{skill.id}}/edit">Edit</a>
 <a href="/skills/{{skill.id}}/delete">Delete</a>
+{{/if}}
+
