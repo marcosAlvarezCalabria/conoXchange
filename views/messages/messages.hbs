@@ -1,16 +1,21 @@
 <div class="container">
+  
   <h3>Name of the skill: {{skill.name}}</h3>
-  <h3>Name of de expert: {{skill.owner.username}}</h3>
+  <h3>Name of the expert: </h3>
   <h3>Name of solicitor: {{currentUser.username}}</h3>
 
   <form action="/messages/{{skill.id}}" method="post">
     <input name="content" type="text" />
     <button type="submit">send</button>
   </form>
-  {{messages}}
+  
 
   {{#each messages as |message|}}
-  <p>{{message.description}}</p>
+  <ul>
+    <li>Mensaje de {{message.sender.username}}:{{message.content}} </li>
+    <small>{{message.createdAt}}</small>
+  </ul>
+  
   {{/each}}
 
   <!-- <form action="/messages/{{skill.id}}" method="post">

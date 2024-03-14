@@ -48,7 +48,10 @@ module.exports.detail = (req, res, next) => {
         .then((skill) =>{
 
             const owner = skill.owner
-            const isUserLogged= req.user.id == skill.owner
+            const isUserLogged= req.user.id == skill.owner.id
+            console.debug(req.user.id)
+            console.debug(skill.owner)
+            console.debug(isUserLogged)
             res.render("skills/detail", { skill, isUserLogged, owner})
            
         
@@ -73,7 +76,7 @@ module.exports.doEdit = (req, res, next) => {
                 next (createError(400,"Skill not found"));
             } else {
                 res.redirect(res.redirect(`/profile/${req.session.userId}`));
-                //******************************************esta linea fue cambiada********* */
+               
             }
         })
         .catch((error) => {

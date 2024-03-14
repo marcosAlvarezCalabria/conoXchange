@@ -16,6 +16,7 @@ module.exports.create = (req, res, next) => {
 };
 module.exports.doCreate = (req, res, next) => {
   const { id } = req.params;
+
   Skill.findById(id).then((skill) => {
     if (!skill) {
       next(createError(404, "skill not found"));
@@ -27,14 +28,21 @@ module.exports.doCreate = (req, res, next) => {
 
       Message.create(message)
         .then((createdMessage) => {
-          //search all messages
-          Message.find({ receiver: skill.owner })
+          return Message.find({
+            $or: [
+              { receiver: skill.owner, sender: req.user.id },
+              { sender: skill.owner, receiver: req.user.id },
+            ],
+          })
             .populate("sender")
             .populate("receiver");
         })
-        .then((messages) => {
+        .then((retrievedMessages) => {
+          messages = retrievedMessages;
+
           res.render("messages/messages", { skill, messages });
-          console.debug(`this is messages ${skill}`);
+          console.debug(`this is messages ${messages}`);
+          //console.debug(`this is skill ${messages[0].receiver.username}`)
         })
         .catch((error) => next(error));
     }

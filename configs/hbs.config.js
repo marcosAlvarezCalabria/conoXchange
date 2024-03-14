@@ -23,3 +23,11 @@ hbs.registerHelper("categoryImage", function(category) {
             return "/img/icons/others.png"        
     }
 })
+
+/*hbs.registerHelper('ifEq', function (category1, category2, options) {
+    if (left === right) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  })*/

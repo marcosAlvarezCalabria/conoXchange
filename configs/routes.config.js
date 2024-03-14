@@ -24,8 +24,8 @@ router.get("/edit",secure.isAuthenticated,users.edit);
 router.post("/edit",secure.isAuthenticated,users.doEdit);
 //*****************************skills************************* */
 // skills
-router.get("/skills/new", skills.create);
-router.post('/skills/new', skills.doCreate);
+router.get("/skills/new",secure.isAuthenticated, skills.create);
+router.post('/skills/new',secure.isAuthenticated, skills.doCreate);
 //skills list in profile
 router.get("/profile/:userId", secure.isAuthenticated, skills.list);
 router.get("/detail/:id", secure.isAuthenticated, skills.detail)
@@ -39,8 +39,8 @@ router.get("/skills/:id/delete", secure.isAuthenticated, skills.delete)
 router.get("/search",skills.show)
 
 //**********************messages*********************** */
-router.get("/messages/:id", messages.create)
-router.post("/messages/:id", messages.doCreate)
+router.get("/messages/:id",secure.isAuthenticated, messages.create)
+router.post("/messages/:id",secure.isAuthenticated, messages.doCreate)
 
 
 
