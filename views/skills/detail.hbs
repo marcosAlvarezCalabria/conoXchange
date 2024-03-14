@@ -1,8 +1,16 @@
-{{editForm}}
+
 <h1>skills detail</h1>
 <div>
+    <p>Expert:{{owner.username}}</p>
+   
+   
     <h1>Category:</h1>
-    <P>{{skill.category}}</P>
+    {{skill.category}}
+    {{skill.owner.name}}
+   
+    {{#if skill.category}}
+    <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1">
+    {{/if}}
     
 </div>
 <div>
@@ -16,4 +24,6 @@
 <a href="/skills/{{skill.id}}/edit">Edit</a>
 <a href="/skills/{{skill.id}}/delete">Delete</a>
 {{/if}}
+
+<a href="/messages/{{skill.id}}">Chat</a>
 

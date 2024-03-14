@@ -2,8 +2,10 @@ const express = require('express');
 const misc = require('../controllers/misc.controller');
 const users = require('../controllers/users.controller');
 const skills = require('../controllers/skills.controller');
+const messages = require('../controllers/messages.controller');
 const secure = require('../middlewares/auth.middleware');
 const router = express.Router();
+
 
 
 router.get("/",misc.home);
@@ -35,6 +37,10 @@ router.get("/skills/:id/delete", secure.isAuthenticated, skills.delete)
 //*************************search_room************************** */
 //search_room
 router.get("/search",skills.show)
+
+//**********************messages*********************** */
+router.get("/messages/:id", messages.create)
+router.post("/messages/:id", messages.doCreate)
 
 
 

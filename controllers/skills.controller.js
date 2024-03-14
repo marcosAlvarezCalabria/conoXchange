@@ -41,16 +41,19 @@ module.exports.list = (req, res, next) => {
 };
 module.exports.detail = (req, res, next) => {
     const { id }= req.params
-    const owner = req.params.userId
+   
 
     Skill.findById(id)
+        .populate("owner")
         .then((skill) =>{
-            const isUserLogged= req.user == skill.owner
-            res.render("skills/detail", { skill,isUserLogged })
 
-            console.debug (`*******esto es id ${req.user}`)
-            console.debug (`*********esto  ${skill.owner}`)
-            console.debug (`*********esto  ${isUserLogged}`)
+            const owner = skill.owner
+            const isUserLogged= req.user.id == skill.owner
+            res.render("skills/detail", { skill, isUserLogged, owner})
+           
+        
+
+            
         } )
         .catch((error) => next(error))
 }
@@ -84,7 +87,7 @@ module.exports.doEdit = (req, res, next) => {
 }
 module.exports.delete = (req, res, next) => {
     const { id } = req.params
-    const user = req.session.userId
+    
     Skill.findByIdAndDelete(id)
         .then ((skill) => {
             if(!skill) { 

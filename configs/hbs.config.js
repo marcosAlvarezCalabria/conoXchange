@@ -4,22 +4,22 @@ hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("categoryImage", function(category) {
     switch(category) {
         case "Crafts":
-            return "img/icons/crafts.png";
+            return "/img/icons/crafts.png";
         case  "Cooking":
-            return "img/icons/cooking.png";
+            return "/img/icons/cooking.png";
         case "Gardening and Horticulture":
-            return "img/icons/Gardening and Horticulture.png";
+            return "/img/icons/Gardening and Horticulture.png";
         case "Everyday Life skills" :
-            return  "img/icons/EverydayLifeSkills.png";
+            return  "/img/icons/EverydayLifeSkills.png";
         case "Music":
-            return "img/icons/music.png";
+            return "/img/icons/music.png";
         case "Sports":
-            return "img/icons/sports.png";
+            return "/img/icons/sports.png";
         case "Technology":
-            return "img/icons/technology.png";
+            return "/img/icons/technology.png";
         case "Languages and Culture":
-            return "img/icons/Languages and Culture";
+            return "/img/icons/Languages and Culture";
         case "Others":
-            return "img/icons/others.png"        
+            return "/img/icons/others.png"        
     }
 })
