@@ -44,7 +44,7 @@ module.exports.detail = (req, res, next) => {
    
 
     Skill.findById(id)
-        .populate("owner ratings")
+        .populate("owner ratings")//ratings width virtual 
         .then((skill) =>{
 
             const owner = skill.owner
@@ -111,7 +111,7 @@ module.exports.show = (req, res, next) => {
     const {name,category} = req.query;
     const criterial = {};
     if(category) criterial.category = category
-    if (name) criterial.name = new RegExp(name, "i");
+    if (name) criterial.name = new RegExp(name, "i");//i insensible lowercase and capital letters
     const userId = req.params.id
    
 Skill.find(criterial)

@@ -24,10 +24,10 @@ hbs.registerHelper("categoryImage", function(category) {
     }
 })
 
-/*hbs.registerHelper('ifEq', function (category1, category2, options) {
-    if (left === right) {
+hbs.registerHelper('ifEq', function (category1, category2, options) {
+    if (category1 === category2) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  })*/
+  })

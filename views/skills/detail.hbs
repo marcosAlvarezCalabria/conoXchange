@@ -27,7 +27,7 @@
 {{/if}}
 
 <a href="/messages/{{skill.id}}">Chat</a>
-
+{{#unless isUserLogged}}
 <form action="/detail/{{skill.id}}" method="post" >
 <textarea  name="comment" id="" cols="30" rows="10" placeholder="Right your comment"></textarea>
 <div class="rate">
@@ -44,6 +44,7 @@
     <button type="submit" value="" >Send</button>
 
 </form>
+{{/unless}}
 
 {{#each skill.ratings as |rating|}}
 <ul><li>{{rating.comment}}</li></ul>
