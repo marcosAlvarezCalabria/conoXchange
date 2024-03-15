@@ -4,7 +4,9 @@ const users = require('../controllers/users.controller');
 const skills = require('../controllers/skills.controller');
 const messages = require('../controllers/messages.controller');
 const secure = require('../middlewares/auth.middleware');
+const ratings = require('../controllers/ratings.controllers');
 const router = express.Router();
+
 
 
 
@@ -42,6 +44,8 @@ router.get("/search",skills.show)
 router.get("/messages/:id",secure.isAuthenticated, messages.create)
 router.post("/messages/:id",secure.isAuthenticated, messages.doCreate)
 
+/************************ratings******************** */
+router.post("/detail/:id",secure.isAuthenticated, ratings.doCreate)
 
 
 

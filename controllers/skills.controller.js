@@ -44,14 +44,14 @@ module.exports.detail = (req, res, next) => {
    
 
     Skill.findById(id)
-        .populate("owner")
+        .populate("owner ratings")
         .then((skill) =>{
 
             const owner = skill.owner
             const isUserLogged= req.user.id == skill.owner.id
-            console.debug(req.user.id)
-            console.debug(skill.owner)
-            console.debug(isUserLogged)
+           // console.debug(req.user.id)
+           // console.debug(skill.owner)
+           // console.debug(isUserLogged)
             res.render("skills/detail", { skill, isUserLogged, owner})
            
         
@@ -98,8 +98,8 @@ module.exports.delete = (req, res, next) => {
                 next(createError(404, "Skill not found"))
                 
             } else {
-                console.debug(`**********este es el Id de la skill ${id}`)
-                console.debug(`este es el id de la sesssion ${req.session.userId}`)
+                //console.debug(`**********este es el Id de la skill ${id}`)
+                //console.debug(`este es el id de la sesssion ${req.session.userId}`)
                 res.redirect(`/profile/${req.session.userId}`)
                 
             }
@@ -125,7 +125,7 @@ module.exports.GoToOwnerProfile = (req, res, next) => {
 
     const ownerId = req.params.id
     const user = req.session.id
-    console.debug (`este es el req.session ${ownerId}`)
+    //console.debug (`este es el req.session ${ownerId}`)
 
     User.findById(ownerId)   
     .then((owner) => {

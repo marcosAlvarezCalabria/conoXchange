@@ -28,6 +28,14 @@ const skillSchema = new Schema(
 },
 // { timestamps: true }
 );
+skillSchema.virtual("ratings",{
+    ref: "Rating",
+    localField: "_id",
+    foreignField: "skill",
+    justOne: false
+
+})
+
 
 const Skill = mongoose.model("Skill", skillSchema);
 module.exports = Skill
