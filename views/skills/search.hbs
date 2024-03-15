@@ -2,9 +2,9 @@
 <form action="/search" method="get">
 <div class="container-fluid">
 
-            <div class="row ">
+            <div class=" d-flex">
 
-              <div class="col-md-10 mx-auto text-center">
+              <div class="col-md-6 mx-auto text-center">
 
                 <div class="form">
                  <select class="form-select" name="category">
@@ -12,7 +12,7 @@
       <option value="Crafts" {{#ifEq query.category 'Crafts'}}selected{{/ifEq}}>Crafts</option>
       <option value="Cooking" {{#ifEq query.category 'Cooking'}}selected{{/ifEq}}>Cooking</option>
       <option value="Gardening and Horticulture" {{#ifEq query.category 'Gardening and Horticulture'}}selected{{/ifEq}}>Gardening and Horticulture</option>
-      <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills'}}selected{{/ifEq}}>Everyday Life skills</option>
+      <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills'}}selected{{/ifEq}}>Everyday Life skills <img src="{{categoryImage skill.category}}" alt="" srcset=""></option>
       <option value="Music" {{#ifEq query.category 'Music'}}selected{{/ifEq}}>Music</option>
       <option value="Sports" {{#ifEq query.category 'Sports'}}selected{{/ifEq}}>Sports</option>
       <option value="Technology" {{#ifEq query.category 'Technology'}}selected{{/ifEq}}>Technology</option>

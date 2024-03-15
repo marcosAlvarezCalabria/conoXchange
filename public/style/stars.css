@@ -37,3 +37,21 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+/******************** stars average ******************/
+.rate {
+    display: inline-block;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.star {
+    cursor: default; /* Evita que el cursor cambie a un puntero */
+}
+
+[data-rate="1"] .star:nth-child(-n+1),
+[data-rate="2"] .star:nth-child(-n+2),
+[data-rate="3"] .star:nth-child(-n+3),
+[data-rate="4"] .star:nth-child(-n+4),
+[data-rate="5"] .star:nth-child(-n+5) {
+    color: #ffc700; /* Cambia el color de las estrellas según la calificación media */
+}

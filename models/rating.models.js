@@ -16,7 +16,7 @@ const ratingSchema = new mongoose.Schema(
             type: Number,
             min: 1,
             max: 5,
-            required: true,
+            required: [true, "Rate is required"]
         },
         comment: {
             type: String

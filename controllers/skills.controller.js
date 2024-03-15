@@ -44,7 +44,15 @@ module.exports.detail = (req, res, next) => {
    
 
     Skill.findById(id)
-        .populate("owner ratings")//ratings width virtual 
+        .populate("owner")
+        .populate({ 
+            path:"ratings",
+            populate:{
+                path:"sender",
+                select:"username"
+            }
+         })
+        //ratings width virtual 
         .then((skill) =>{
 
             const owner = skill.owner
