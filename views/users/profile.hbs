@@ -9,6 +9,11 @@
     
     <h5 class="card-title">{{user.username}}</h5>
     <p class="card-text">{{user.email}}</p>
+    <p>{{user.description}}</p>
+    <h5>My interests are</h5>
+    <p>{{#each user.interests as |interest|}}
+      <ul><li>{{interest}} <img src="{{categoryImage interest}}" style="height: 43px; width: 36px" alt="" srcset=""></li></ul>
+      {{/each}}</p>
     
    
     

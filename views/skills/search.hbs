@@ -12,7 +12,7 @@
       <option value="Crafts" {{#ifEq query.category 'Crafts'}}selected{{/ifEq}}>Crafts</option>
       <option value="Cooking" {{#ifEq query.category 'Cooking'}}selected{{/ifEq}}>Cooking</option>
       <option value="Gardening and Horticulture" {{#ifEq query.category 'Gardening and Horticulture'}}selected{{/ifEq}}>Gardening and Horticulture</option>
-      <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills'}}selected{{/ifEq}}>Everyday Life skills <img src="{{categoryImage skill.category}}" alt="" srcset=""></option>
+      <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills'}}selected{{/ifEq}}>Everyday Life skills </option>
       <option value="Music" {{#ifEq query.category 'Music'}}selected{{/ifEq}}>Music</option>
       <option value="Sports" {{#ifEq query.category 'Sports'}}selected{{/ifEq}}>Sports</option>
       <option value="Technology" {{#ifEq query.category 'Technology'}}selected{{/ifEq}}>Technology</option>
@@ -34,8 +34,44 @@
           </div>
 </form>
 </div>
+<div>
+  <p>Interests:</p>
+  {{#each skillsByInterests as |skill|}}
+    <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
+      <div class="card-header d-flex">
+        <a style="color:white; text-decoration: none" href="/profile/{{skill.owner.id}}">
+          <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon" class="rounded-circle d-inline">
+          <p>{{skill.owner.username}}</p>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="row d-flex align-items-center">
+          <div class="col-8"> 
+            <h5>{{skill.category}}</h5>
+          </div>
+          <div class="col-4 text-right"> 
+            <div class="">
+              {{#if skill.category}}
+                <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1"> 
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      <a class="text-decoration-none" href="/detail/{{skill.id}}">
+        <div class="additional-content">
+        <p>{{skill.name}}</p>
+        <p class="card-text">{{skill.description}}</p>
+        </div>
+      </a>
+        
+      </div>
+    </div>
+  {{/each}}
+ 
+</div>
+<hr>
 <div class="row justify-content-center">
-  {{#each skills as |skill|}}
+  {{#each skillsByFinder as |skill|}}
     <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
       <div class="card-header d-flex">
         <a style="color:white; text-decoration: none" href="/profile/{{skill.owner.id}}">

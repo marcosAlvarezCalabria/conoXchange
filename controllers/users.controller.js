@@ -8,18 +8,33 @@ module.exports.doCreate = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((userFound) => {
       if (userFound) {
-        res.status(409).render("users/register", { userFound, errors: { email: "already exists" }});
+        res
+          .status(409)
+          .render("users/register", {
+            userFound,
+            errors: { email: "already exists" },
+          });
       } else {
-        const user = { email: req.body.email,password: req.body.password,username: req.body.username};
-        return User.create(user).then(() => res.redirect("/login"));
+        const user = {
+          email: req.body.email,
+          password: req.body.password,
+          username: req.body.username,
+          interests: req.body.interests
+        };
+        return User.create(user).then(() => {
+          
+          res.redirect("/login");
+        });
       }
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
+        
         res
           .status(400)
           .render("users/register", { user, errors: error.errors });
       } else {
+        
         next(error);
       }
     });
@@ -38,7 +53,7 @@ module.exports.doLogin = (req, res, next) => {
         return user.checkPassword(req.body.password).then((match) => {
           if (match) {
             req.session.userId = user.id;
-            console.debug(`esto es ${user}`)
+            console.debug(`esto es ${user.interests}`);
 
             res.redirect(`/profile/${user.id}`);
           } else {
@@ -62,13 +77,14 @@ module.exports.doEdit = (req, res, next) => {
   const userId = req.user.id;
 
   const user = req.body;
-  console.debug(user)
+  console.debug(user);
 
   User.findByIdAndUpdate(userId, req.body, { runValidators: true })
     .then((user) => {
       if (!user) {
         return res.status(400).send("user not found");
       } else {
+        //console.debug(`esto es req.body ${currentUser.description}`)
         res.redirect(`/profile/me`);
       }
     })

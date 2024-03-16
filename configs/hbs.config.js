@@ -1,7 +1,9 @@
-const hbs = require('hbs')
+const hbs = require('hbs');
+const { options } = require('./routes.config');
 
 hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("categoryImage", function(category) {
+    
     switch(category) {
         case "Crafts":
             return "/img/icons/crafts.png";
@@ -32,4 +34,9 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
     }
   })
 
+
+hbs.registerHelper("pullApart", function(str, options) {
+    let arrayOfString = str.split(",");
+    return arrayOfString;
+});
    

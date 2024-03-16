@@ -26,7 +26,9 @@ const skillSchema = new Schema(
 
     }
 },
-// { timestamps: true }
+
+{ timestamps: true }
+
 );
 skillSchema.virtual("ratings",{
     ref: "Rating",
