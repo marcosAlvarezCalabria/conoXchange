@@ -5,8 +5,8 @@ const skills = require('../controllers/skills.controller');
 const messages = require('../controllers/messages.controller');
 const secure = require('../middlewares/auth.middleware');
 const ratings = require('../controllers/ratings.controllers');
+const petition = require('../controllers/petition.controllers');
 const router = express.Router();
-
 
 
 
@@ -37,7 +37,7 @@ router.post("/skills/:id/edit", secure.isAuthenticated, skills.doEdit)
 //skills delete
 router.get("/skills/:id/delete", secure.isAuthenticated, skills.delete)
 //*************************search_room************************** */
-//search_room
+
 router.get("/search",skills.show)
 
 //**********************messages*********************** */
@@ -47,7 +47,10 @@ router.post("/messages/:id",secure.isAuthenticated, messages.doCreate)
 /************************ratings******************** */
 router.post("/detail/:id",secure.isAuthenticated, ratings.doCreate)
 
+/**********************petition*************************** */
 
+router.get("/petitions/show", secure.isAuthenticated, petition.show)
+router.post("/petitions/show", secure.isAuthenticated, petition.doCreate)
 
 
 

@@ -55,9 +55,6 @@ module.exports.detail = (req, res, next) => {
     .then((skill) => {
       const owner = skill.owner;
       const isUserLogged = req.user.id == skill.owner.id;
-      // console.debug(req.user.id)
-      // console.debug(skill.owner)
-      // console.debug(isUserLogged)
       res.render("skills/detail", { skill, isUserLogged, owner });
     })
     .catch((error) => next(error));
@@ -97,8 +94,7 @@ module.exports.delete = (req, res, next) => {
       if (!skill) {
         next(createError(404, "Skill not found"));
       } else {
-        //console.debug(`**********este es el Id de la skill ${id}`)
-        //console.debug(`este es el id de la sesssion ${req.session.userId}`)
+        
         res.redirect(`/profile/${req.session.userId}`);
       }
     })
@@ -121,15 +117,4 @@ module.exports.show = (req, res, next) => {
     })
     .catch((error) => next(error))
 
-};
-module.exports.GoToOwnerProfile = (req, res, next) => {
-  const ownerId = req.params.id;
-
-  //console.debug (`este es el req.session ${ownerId}`)
-
-  User.findById(ownerId)
-    .then((owner) => {
-      res.redirect(`/profile/${ownerId}`);
-    })
-    .catch((error) => next(error));
 };

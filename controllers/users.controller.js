@@ -22,7 +22,7 @@ module.exports.doCreate = (req, res, next) => {
           interests: req.body.interests
         };
         return User.create(user).then(() => {
-          
+
           res.redirect("/login");
         });
       }
@@ -53,7 +53,7 @@ module.exports.doLogin = (req, res, next) => {
         return user.checkPassword(req.body.password).then((match) => {
           if (match) {
             req.session.userId = user.id;
-            console.debug(`esto es ${user.interests}`);
+            
 
             res.redirect(`/profile/${user.id}`);
           } else {
@@ -77,14 +77,13 @@ module.exports.doEdit = (req, res, next) => {
   const userId = req.user.id;
 
   const user = req.body;
-  console.debug(user);
-
+  
   User.findByIdAndUpdate(userId, req.body, { runValidators: true })
     .then((user) => {
       if (!user) {
         return res.status(400).send("user not found");
       } else {
-        //console.debug(`esto es req.body ${currentUser.description}`)
+        
         res.redirect(`/profile/me`);
       }
     })

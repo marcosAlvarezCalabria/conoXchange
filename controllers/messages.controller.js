@@ -41,8 +41,7 @@ module.exports.doCreate = (req, res, next) => {
           messages = retrievedMessages;
 
           res.render("messages/messages", { skill, messages });
-          //console.debug(`this is messages ${messages}`);
-          //console.debug(`this is skill ${messages[0].receiver.username}`)
+          
         })
         .catch((error) => next(error));
     }

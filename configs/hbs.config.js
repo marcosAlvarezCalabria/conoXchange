@@ -35,8 +35,3 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
   })
 
 
-hbs.registerHelper("pullApart", function(str, options) {
-    let arrayOfString = str.split(",");
-    return arrayOfString;
-});
-   

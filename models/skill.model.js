@@ -24,6 +24,10 @@ const skillSchema = new Schema(
         ref: "User",
         required: true
 
+    },
+    averageRate: {
+        type:Number,
+        default: 0
     }
 },
 

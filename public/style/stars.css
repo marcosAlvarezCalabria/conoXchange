@@ -37,7 +37,7 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
-/******************** stars average ******************/
+/******************** stars view ******************/
 .rate {
     display: inline-block;
     font-size: 30px;
