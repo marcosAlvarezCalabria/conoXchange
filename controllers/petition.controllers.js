@@ -4,17 +4,31 @@ const mongoose = require("mongoose");
 
 
 module.exports.show = (req, res, next) => {
-    res.render("petitions/show");
+    Petition.find() 
+        .populate("requester")
+        .then ((petitions) => {
+            console.debug(`esto es req.body.name ${petitions}`)
+             res.render("petitions/show", { petitions });
+        })
+        .catch((error) => next(error));
+    
+   ;
 }
 module.exports.doCreate = (req, res, next) => {
    const petition = req.body;
    petition.name = req.body.name;
    petition.description = req.body.description;
-   petition.requester = req.body.id;
+   petition.requester = req.user.id;
    petition.category = req.body.category;
-   console.debug(petition)
+   
 
    Petition.create(petition)
-    .then((petitionCreated) => res.redirect("/show"))
+    .then((petitionCreated) => res.redirect("/petitions/show"))
     .catch((error) => next (error))
+}
+module.exports.delete = (req, res, next) => {
+    const { id } = req.params;
+    Petition.findByIdAndDelete(id)
+    .then(() => res.redirect("/petitions/show"))
+    .catch((error) => next(error))
 }

@@ -79,5 +79,25 @@
   
 </form>
 <h1>List petitions</h1>
-<ul><li></li></ul>
+<div class="list-group">
+ 
+<ul>
+  {{#each petitions as |petition|}}
+  <div>
+    <li class="list-group-item">{{petition.description}}, {{petition.requester.username}}
+      <form method="post" action="/petitions/show/{{petition.id}}/delete">
+      <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
+      </form>
+       <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
+      <!--{{#ifRequesterIsLogged currentUser.username petition.requester.username}}
+        <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
+      {{else}}
+        <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
+      {{/ifRequesterIsLogged}}--> 
+    </li>
+  </div>
+  {{/each}}
+</ul>
+</div>
+
 </div>

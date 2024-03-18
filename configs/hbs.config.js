@@ -33,5 +33,12 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
       return options.inverse(this);
     }
   })
+hbs.registerHelper("ifRequesterIsLogged",function (requester, userLogged, options){
+    if (requester == userLogged){
+         return options.fn(this);
+    } else {
+        return options.inverse(this)
+    }
+})
 
 

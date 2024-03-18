@@ -51,7 +51,7 @@ router.post("/detail/:id",secure.isAuthenticated, ratings.doCreate)
 
 router.get("/petitions/show", secure.isAuthenticated, petition.show)
 router.post("/petitions/show", secure.isAuthenticated, petition.doCreate)
-
+router.post("/petitions/show/:id/delete",secure.isAuthenticated, petition.delete)
 
 
 module.exports = router
