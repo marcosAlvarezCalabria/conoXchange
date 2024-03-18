@@ -85,15 +85,25 @@
   {{#each petitions as |petition|}}
   <div>
     <li class="list-group-item">{{petition.description}}, {{petition.requester.username}}
-      <form method="post" action="/petitions/show/{{petition.id}}/delete">
-      <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
-      </form>
-       <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
-      <!--{{#ifRequesterIsLogged currentUser.username petition.requester.username}}
+      
+
+       {{#ifRequesterIsLogged  petition.requester.username currentUser.username}}
         <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
       {{else}}
         <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
-      {{/ifRequesterIsLogged}}--> 
+      {{/ifRequesterIsLogged}}
+      <!--<form method="post" action="/petitions/show/delete">
+
+      <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
+      </form>
+
+       <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
+
+      {{#ifRequesterIsLogged currentUser.username petition.requester.username}}
+        <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
+      {{else}}
+        <button class="badge status-badge fw-lighter text-bg-success primary" type="submit">Contact</button>
+      {{/ifRequesterIsLogged}}-->
     </li>
   </div>
   {{/each}}

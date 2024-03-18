@@ -34,11 +34,18 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
     }
   })
 hbs.registerHelper("ifRequesterIsLogged",function (requester, userLogged, options){
-    if (requester == userLogged){
+    if (requester === userLogged){
          return options.fn(this);
     } else {
         return options.inverse(this)
     }
 })
-
+hbs.registerHelper("ifUserRated", function(skillsRatings, currentUser, options) {
+    for (let i = 0; i < skillsRatings.length; i++) {
+        if (skillsRatings[i].id == currentUser.id) {
+            return options.fn(this);
+        }
+    }
+    return options.inverse(this);
+});
 

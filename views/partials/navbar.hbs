@@ -8,14 +8,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+
         
         {{#unless currentUser}}
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/register">Register</a>
-        </li>  
-        <li class="nav-item"> 
-          <a class="nav-link active" aria-current="page" href="/login">Login</a>
-        </li>
+        <div class="dropdown" >
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+    Login
+  </button>
+  <form method="post" action="/login"class="dropdown-menu p-0">
+    <div class="mb-3">
+      <label for="" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="email" placeholder="email@example.com">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="mb-3">
+      <div class="form-check">
+        
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+</div>
+          
+       
         {{/unless}}
         
         {{#if currentUser}}
@@ -35,9 +53,13 @@
         
         {{/if }}
         
+
+        
+        
         
       </ul>
     </div>
   </div>
+  
   
 </nav>

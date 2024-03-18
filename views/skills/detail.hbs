@@ -1,5 +1,6 @@
 
 <div class="container">
+    
     <div class="row">
         <!-- Columna de habilidad (skill) -->
         <div class="col-md-6 my-4">
@@ -15,7 +16,16 @@
             </div>
             <div>
                 <h3>Name</h3>
-                <p>{{skill.name}}</p> <p>{{skill.averageRate}}</p>
+                <p>{{skill.averageRate}}</p>
+                <p>{{skill.name}}</p>
+                 <div class="rate" data-rate="{{skill.averageRate}}">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+
             </div>
             <div>
                 <h3>Description:</h3>
@@ -27,7 +37,8 @@
             {{/if}}
             <a href="/messages/{{skill.id}}" class="btn btn-info">Chat</a>
         </div>
-
+        
+        
         {{#unless isUserLogged}}
         <div class="col-md-6 my-4">
             
@@ -76,6 +87,5 @@
         </div>
       </div>  
 </div>
-
 
 

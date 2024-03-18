@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const Rating = require('../models/rating.models');
 const Skill = require('../models/skill.model');
 const mongoose = require('mongoose');
+
 module.exports.doCreate = (req, res, next) => {
     const skillId = req.params.id;
     Skill.findById(skillId)
@@ -27,7 +28,7 @@ module.exports.doCreate = (req, res, next) => {
                   }
                 ])
                 .then((result) => {
-                  skill.averageRate = result[0].averageRate;
+                  skill.averageRate =Math.round(result[0].averageRate);
                   return skill.save()
                     .then (() => {
                       res.redirect(`/detail/${skillId}`)
