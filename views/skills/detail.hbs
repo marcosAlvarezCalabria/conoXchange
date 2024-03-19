@@ -39,30 +39,31 @@
         </div>
         
         {{#ifUserRated skill.ratings currentUser}}
-        {{#unless isUserLogged}}
-        <div class="col-md-6 my-4">
-            
-            <form action="/detail/{{skill.id}}" method="post" class="mb-4">
-                <textarea name="comment" id="" cols="30" rows="10" placeholder="Write your comment" class="form-control mb-2"></textarea>
-                <div class="rate {{#if errors.rate}}is-invalid{{/if}}">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                    <button type="submit" value="" class="btn btn-primary">Send</button>
-                </div>
-                {{#if errors.rate}} <small class="invalid-feedback">{{errors.rate}}</small>{{/if}}
-            </form>
-        </div>
-        {{/unless}}
-    </div>
+            {{#unless isUserLogged}}
+            <div class="col-md-6 my-4">
+                
+                <form action="/detail/{{skill.id}}" method="post" class="mb-4">
+                    <textarea name="comment" id="" cols="30" rows="10" placeholder="Write your comment" class="form-control mb-2"></textarea>
+                    <div class="rate {{#if errors.rate}}is-invalid{{/if}}">
+                        <input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                        <button type="submit" value="" class="btn btn-primary">Send</button>
+                    </div>
+                    {{#if errors.rate}} <small class="invalid-feedback">{{errors.rate}}</small>{{/if}}
+                </form>
+            </div>
+            {{/unless}}
+    
     {{/ifUserRated}}
+    </div>
 
     <div class="col-md-6 my-4">
         <div class="">

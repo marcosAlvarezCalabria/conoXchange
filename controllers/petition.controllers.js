@@ -11,7 +11,9 @@ module.exports.show = (req, res, next) => {
         .then ((petitions) => {
             
              res.render("petitions/show", { petitions, username   });
-             console.debug(`esto es petetions.requester ${username}`)
+             console.debug(`esto es petetions.requester ${petitions[0].requester}`)
+             console.debug(`esto es username ${username}`)
+
              
         })
         .catch((error) => next(error));
@@ -33,6 +35,7 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.delete = (req, res, next) => {
     const { id } = req.params;
     Petition.findByIdAndDelete(id)
-    .then(() => res.redirect("/petitions/show"))
+    .then(() => {
+        res.redirect("/petitions/show")})
     .catch((error) => next(error))
 }

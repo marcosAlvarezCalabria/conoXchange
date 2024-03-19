@@ -60,8 +60,8 @@ module.exports.detail = (req, res, next) => {
 
      res.render("skills/detail", { skill, isUserLogged, owner });
 
-      // console.debug ( `this is skills.ratings ${skill.ratings[0].sender.username}`)
-        //console.debug ( `this is user ${username}`)
+      console.debug ( `this is skills.ratings ${skill.ratings}`)
+        
         console.debug ( `this is  ISuSERlOGGED ${isUserLogged}`)
        
       

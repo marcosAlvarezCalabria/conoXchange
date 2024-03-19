@@ -4,6 +4,7 @@ const Skill = require('../models/skill.model');
 const mongoose = require('mongoose');
 
 module.exports.doCreate = (req, res, next) => {
+  console.log('´creando rating')
     const skillId = req.params.id;
     Skill.findById(skillId)
     .then((skill) => {
@@ -15,6 +16,7 @@ module.exports.doCreate = (req, res, next) => {
           rating.skill = skillId;
           return Rating.create(rating)
             .then(() => {
+              console.log('´rating creado')
                return Rating.aggregate([
                   {
                     $match: { skill: new mongoose.Types.ObjectId(skillId) }

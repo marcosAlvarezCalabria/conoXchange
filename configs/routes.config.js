@@ -6,6 +6,7 @@ const messages = require('../controllers/messages.controller');
 const secure = require('../middlewares/auth.middleware');
 const ratings = require('../controllers/ratings.controllers');
 const petition = require('../controllers/petition.controllers');
+
 const router = express.Router();
 
 
@@ -51,7 +52,6 @@ router.post("/detail/:id",secure.isAuthenticated, ratings.doCreate)
 
 router.get("/petitions/show", secure.isAuthenticated, petition.show)
 router.post("/petitions/show", secure.isAuthenticated, petition.doCreate)
-router.post("/petitions/show/:id/delete",secure.isAuthenticated, petition.delete)
-
+router.get("/petitions/show/:id/delete",secure.isAuthenticated, petition.delete)
 
 module.exports = router

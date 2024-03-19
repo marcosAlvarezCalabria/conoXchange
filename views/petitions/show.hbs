@@ -1,6 +1,7 @@
 <div class="container fluid d-flex">
-<h1>New Petition</h1>
+
   <div class=" card form-group col-md-4 " style="max-width: 28rem; padding: 4px;">
+    <h1>New Petition</h1>
     <form method="POST" action="/petitions/show">
 
   <div class="form-group">
@@ -41,7 +42,7 @@
 </div>
 <div class="form-check form-check-inline">
   <img src="/img/icons/EverydayLifeSkills.png" alt="Everyday Life skills icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Everyday Life skills">
+  <input class="form-check-input" name="category" type="checkbox" value="Everyday Life Skills">
   <label class="form-check-label" >Everyday Life skills</label>
 </div>
 <div class="form-check form-check-inline">
@@ -78,25 +79,30 @@
   
   
 </form>
-<h1>List petitions</h1>
+
 <div class="list-group">
- 
+ <h1>List petitions</h1>
 <ul>
   {{#each petitions as |petition|}}
   <div>
     <li class="list-group-item">{{petition.description}}, {{petition.requester.username}} <small>{{dateFormat date=petition.createdAt}}</small> 
       
-
-       {{#ifRequesterIsLogged  petition.requester.username username }}
+       {{#ifRequesterIsLogged  petition.requester.username ../username }}
        
-        <button class="badge status-badge fw-lighter text-bg-danger primary" type="submit">Delete</button>
-      
+        
+        
+          <a href="/petitions/show/{{petition.id}}/delete" class="badge status-badge fw-lighter text-bg-danger primary" type="button">Delete</a>   
+          {{else}}
+          <a class="badge status-badge fw-lighter text-bg-primary" href="mailto:{{currentUser.email}}?Subject=Aquí%20el%20asunto%20del%20mail">Aquí el texto que quieras</a>
+
       {{/ifRequesterIsLogged}}
-      <!--<form method="post" action="/petitions/show/delete">-->
+
+     
 {{petition.requester.username}}
     </li>
-  </div>
+   </div>
   {{/each}}
+ 
   {{username}}
   
 </ul>
