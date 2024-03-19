@@ -34,12 +34,11 @@
           </div>
 </form>
 </div>
-<div>
   <p>Interests:</p>
   {{#each skillsByInterests as |skill|}}
-    <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
+    <div class="card text-black  m-2 col-4" style="max-width: 18rem;">
       <div class="card-header d-flex">
-        <a style="color:white; text-decoration: none" href="/profile/{{skill.owner.id}}">
+        <a style="color:rgb(65, 55, 55); text-decoration: none" href="/profile/{{skill.owner.id}}">
           <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon" class="rounded-circle d-inline">
           <p>{{skill.owner.username}}</p>
           <p>{{skill.averageRate}}</p>
@@ -81,9 +80,9 @@
 <hr>
 <div class="row justify-content-center">
   {{#each skillsByFinder as |skill|}}
-    <div class="card text-white bg-primary m-2 col-4" style="max-width: 18rem;">
+    <div class="card text-black  m-2 col-4" style="max-width: 18rem;">
       <div class="card-header d-flex">
-        <a style="color:white; text-decoration: none" href="/profile/{{skill.owner.id}}">
+        <a style="color:rgb(72, 66, 66); text-decoration: none" href="/profile/{{skill.owner.id}}">
           <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon" class="rounded-circle d-inline">
           <p>{{skill.owner.username}}</p>
           <div class="rate" data-rate="{{skill.averageRate}}">

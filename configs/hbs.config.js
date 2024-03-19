@@ -1,5 +1,6 @@
 const hbs = require('hbs');
 const { options } = require('./routes.config');
+const daysJs = require("../configs/dayjs");
 
 hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("categoryImage", function(category) {
@@ -33,7 +34,17 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
       return options.inverse(this);
     }
   })
+hbs.registerHelper("dateFormat", function (options) {
+const { date, format } = options.hash;
+return daysJs(date).format(format || "YYYY-MM-DD HH:mm:ss")
+
+})
+
+
+
+
 hbs.registerHelper("ifRequesterIsLogged",function (requester, userLogged, options){
+    
     if (requester === userLogged){
          return options.fn(this);
     } else {
@@ -42,10 +53,13 @@ hbs.registerHelper("ifRequesterIsLogged",function (requester, userLogged, option
 })
 hbs.registerHelper("ifUserRated", function(skillsRatings, currentUser, options) {
     for (let i = 0; i < skillsRatings.length; i++) {
-        if (skillsRatings[i].id == currentUser.id) {
+        if (skillsRatings[i].sender.username === currentUser) {
             return options.fn(this);
         }
     }
     return options.inverse(this);
 });
+
+
+
 

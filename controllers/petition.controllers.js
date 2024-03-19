@@ -4,11 +4,15 @@ const mongoose = require("mongoose");
 
 
 module.exports.show = (req, res, next) => {
+    const username = req.user.username
+
     Petition.find() 
         .populate("requester")
         .then ((petitions) => {
-            console.debug(`esto es req.body.name ${petitions}`)
-             res.render("petitions/show", { petitions });
+            
+             res.render("petitions/show", { petitions, username   });
+             console.debug(`esto es petetions.requester ${username}`)
+             
         })
         .catch((error) => next(error));
     

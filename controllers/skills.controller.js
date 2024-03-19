@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const Skill = require("../models/skill.model");
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
+const Rating = require("../models/rating.models")
 
 module.exports.create = (req, res, next) => res.render("skills/new");
 module.exports.doCreate = (req, res, next) => {
@@ -55,12 +56,15 @@ module.exports.detail = (req, res, next) => {
     .then((skill) => {
       const owner = skill.owner;
       const isUserLogged = req.user.id == skill.owner.id;
-      const {username} = skill.ratings;
+      //const username = skill.ratings[0].sender.username;
 
-     
-      console.debug(`this is ratings ${username}`)
+     res.render("skills/detail", { skill, isUserLogged, owner });
+
+      // console.debug ( `this is skills.ratings ${skill.ratings[0].sender.username}`)
+        //console.debug ( `this is user ${username}`)
+        console.debug ( `this is  ISuSERlOGGED ${isUserLogged}`)
        
-      res.render("skills/detail", { skill, isUserLogged, owner });
+      
     })
     .catch((error) => next(error));
 };

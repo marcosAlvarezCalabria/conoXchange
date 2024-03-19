@@ -28,7 +28,7 @@ module.exports.loadUserSession = (req, res, next) => {
             .then((user) => {
                 req.user = user;
                 res.locals.currentUser = user;
-                console.debug(`esto es currentUser ${user.username}`)
+                //console.debug(`esto es currentUser ${user.username}`)
                 next();
             })
             .catch(next)
