@@ -1,65 +1,74 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <h2 class="navbar-brand">conXchange</h2>
-    <p>{{currentUser.username}}</p>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img id="img-logo" src="/img/logo3.png" alt="Logo" style="width: 50px; height: auto; border-radius: 20px">
+    </a>
+    {{#if currentUser}}
+    <div class="navbar-user">
+      <a class="navbar-brand " href="/profile/{{currentUser.id}}">
+        <img id="img-logo" src="https://i.pravatar.cc/150?u={{currentUser.email}}" alt="Logo"
+          style="width: 50px; height: auto; border-radius: 20px;">
+      </a>
+      <a href="/profile/{{currentUser.id}}">
+        <p>{{currentUser.username}}</p>
+      </a>
+    </div>
+    {{/if}}
+
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-
-        
+      <ul class="navbar-nav ml-auto"> <!-- Alineación a la derecha -->
         {{#unless currentUser}}
-        <div class="dropdown" >
-  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-    Login
-  </button>
-  <form method="post" action="/login"class="dropdown-menu p-0">
-    <div class="mb-3">
-      <label for="" class="form-label">Email address</label>
-      <input type="email" class="form-control" name="email" placeholder="email@example.com">
-    </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="mb-3">
-      <div class="form-check">
-        
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
-</div>
-          
-       
+        <li class="nav-item">
+          <div class="dropdown">
+            <button type="button" class="btn btn-warning dropdown-toggle" style="color: white;"
+              data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              Login
+            </button>
+            <form method="post" action="/login" class="dropdown-menu p-0">
+              <div class="mb-3">
+                <label for="" class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="email@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password">
+              </div>
+              <div class="mb-3">
+                <div class="form-check"></div>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a id="button-register" href="/register" type="button" class="btn btn-warning"
+            style="color: white;">Register</a>
+        </li>
         {{/unless}}
-        
+
         {{#if currentUser}}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/search">Search skill</a>
+          <a class="nav-link active" style="color: white;" aria-current="page" href="/search">Search skill</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/petitions/show">Petitions board</a>
+          <a class="nav-link active" style="color: white;" aria-current="page" href="/petitions/show">Petitions
+            board</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/profile/me">Profile</a>
+          <a class="nav-link active" style="color: white;" aria-current="page" href="/profile/me">Profile</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/logout/{{currentUser.id}}">Log out</a>
+          <a class="nav-link active" style="color: white;" aria-current="page" href="/logout/{{currentUser.id}}">Log
+            out</a>
         </li>
-        
-        {{/if }}
-        
-
-        
-        
-        
+        {{/if}}
       </ul>
     </div>
-  </div>
-  
-  
+    </div>
 </nav>
