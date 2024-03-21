@@ -1,121 +1,132 @@
 <h1>search room</h1>
 <form action="/search" method="get">
-<div class="container-fluid">
+  <div class="container-fluid">
 
-            <div class=" d-flex">
+    <div class=" d-flex">
 
-              <div class="col-md-6 mx-auto text-center">
+      <div class="col-md-4 mx-auto text-center">
 
-                <div class="form">
-                 <select class="form-select" name="category">
-      <option value="all">Categories</option>
-      <option value="Crafts" {{#ifEq query.category 'Crafts'}}selected{{/ifEq}}>Crafts</option>
-      <option value="Cooking" {{#ifEq query.category 'Cooking'}}selected{{/ifEq}}>Cooking</option>
-      <option value="Gardening and Horticulture" {{#ifEq query.category 'Gardening and Horticulture'}}selected{{/ifEq}}>Gardening and Horticulture</option>
-      <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills'}}selected{{/ifEq}}>Everyday Life skills </option>
-      <option value="Music" {{#ifEq query.category 'Music'}}selected{{/ifEq}}>Music</option>
-      <option value="Sports" {{#ifEq query.category 'Sports'}}selected{{/ifEq}}>Sports</option>
-      <option value="Technology" {{#ifEq query.category 'Technology'}}selected{{/ifEq}}>Technology</option>
-      <option value="Languages and Culture" {{#ifEq query.category 'Languages and Culture'}}selected{{/ifEq}}>Languages and Culture</option>
-      <option value="Others" {{#ifEq query.category 'Others'}}selected{{/ifEq}}>Others</option>
-    </select>
+        <div class="form">
+          <select class="form-select" name="category">
+            <option value="all">Categories</option>
+            <option value="Crafts" {{#ifEq query.category 'Crafts' }}selected{{/ifEq}}>Crafts</option>
+            <option value="Cooking" {{#ifEq query.category 'Cooking' }}selected{{/ifEq}}>Cooking</option>
+            <option value="Gardening and Horticulture" {{#ifEq query.category 'Gardening and Horticulture'
+              }}selected{{/ifEq}}>Gardening and Horticulture</option>
+            <option value="Everyday Life skills" {{#ifEq query.category 'Everyday Life skills' }}selected{{/ifEq}}>
+              Everyday Life skills </option>
+            <option value="Music" {{#ifEq query.category 'Music' }}selected{{/ifEq}}>Music</option>
+            <option value="Sports" {{#ifEq query.category 'Sports' }}selected{{/ifEq}}>Sports</option>
+            <option value="Technology" {{#ifEq query.category 'Technology' }}selected{{/ifEq}}>Technology</option>
+            <option value="Languages and Culture" {{#ifEq query.category 'Languages and Culture' }}selected{{/ifEq}}>
+              Languages and Culture</option>
+            <option value="Others" {{#ifEq query.category 'Others' }}selected{{/ifEq}}>Others</option>
+          </select>
 
-               
 
-                  <input type="text" name="name" class="form-control form-input {{#if errors}}is-invalid{{/if}}" placeholder="Search anything..." value="{{query.title}}">
-                  <button class="fa fa-search"></button>
-                  <span class="left-pan d-md-none"><i class="fa fa-microphone"></i></span>
-                </div>
-                
-              </div>
-              
-            </div>
-            
-          </div>
+
+          <input type="text" name="name" class="form-control form-input {{#if errors}}is-invalid{{/if}}"
+            placeholder="Search anything..." value="{{query.title}}">
+          <button class="fa fa-search"></button>
+          <span class="left-pan d-md-none"><i class="fa fa-microphone"></i></span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 </form>
 </div>
-  <p>Interests:</p>
+<p>Interests:</p>
+
+<div class="d-flex align-items-center justify-content-center" style="background-color: aquamarine;">
   {{#each skillsByInterests as |skill|}}
-    <div class="card text-black  m-2 col-4" style="max-width: 18rem;">
-      <div class="card-header d-flex">
-        <a style="color:rgb(65, 55, 55); text-decoration: none" href="/profile/{{skill.owner.id}}">
-          <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon" class="rounded-circle d-inline">
-          <p>{{skill.owner.username}}</p>
-          <p>{{skill.averageRate}}</p>
-          <div class="rate" data-rate="{{skill.averageRate}}">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                        </div>
-        </a>
+   <div class="card text-black  m-2 col-4" style="max-width: 20rem;">
+    <div class="card-header d-flex" style="background-color: rgb(130, 130, 100);">
+      <a style="; text-decoration: none" href="/profile/{{skill.owner.id}}">
+        <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon"
+          class="rounded-circle d-inline">
+        <p>{{skill.owner.username}}</p>
+      </a>
+      <div class="rate" data-rate="{{skill.averageRate}}">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
       </div>
-      <div class="card-body">
-        <div class="row d-flex align-items-center">
-          <div class="col-8"> 
-            <h5>{{skill.category}}</h5>
-          </div>
-          <div class="col-4 text-right"> 
-            <div class="">
-              {{#if skill.category}}
-                <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1"> 
-              {{/if}}
-            </div>
+      
+    </div>
+    <div class="card-body">
+      <div class="row d-flex align-items-center">
+        <div class="col-8">
+          <h5>{{skill.category}}</h5>
+        </div>
+        <div class="col-4 text-right">
+          <div class="">
+            {{#if skill.category}}
+            <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1">
+            {{/if}}
           </div>
         </div>
+      </div>
       <a class="text-decoration-none" href="/detail/{{skill.id}}">
         <div class="additional-content">
-        <p>{{skill.name}}</p>
-        <p class="card-text">{{skill.description}}</p>
+          <p>{{skill.name}}</p>
+          <p class="card-text">{{skill.description}}</p>
         </div>
       </a>
-        
-      </div>
+
     </div>
+  </div>
   {{/each}}
- 
+</div>  
+  
+
+
 </div>
 <p>{{skill.averageRate}}</p>
 <hr>
 <div class="row justify-content-center">
   {{#each skillsByFinder as |skill|}}
-    <div class="card text-black  m-2 col-4" style="max-width: 18rem;">
-      <div class="card-header d-flex">
-        <a style="color:rgb(72, 66, 66); text-decoration: none" href="/profile/{{skill.owner.id}}">
-          <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon" class="rounded-circle d-inline">
-          <p>{{skill.owner.username}}</p>
-          <div class="rate" data-rate="{{skill.averageRate}}">
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                            <span class="star">&#9733;</span>
-                        </div>
-          
-        </a>
-      </div>
-      <div class="card-body">
-        <div class="row d-flex align-items-center">
-          <div class="col-8"> 
-            <h5>{{skill.category}}</h5>
-          </div>
-          <div class="col-4 text-right"> 
-            <div class="">
-              {{#if skill.category}}
-                <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1"> 
-              {{/if}}
-            </div>
+  <div class="card text-black  m-2 col-4" style="max-width: 18rem;">
+    <div class="card-header d-flex">
+      <a style="color:rgb(72, 66, 66); text-decoration: none" href="/profile/{{skill.owner.id}}">
+        <img id="img-card" src="https://i.pravatar.cc/150?u={{skill.owner.email}}" alt="Icon"
+          class="rounded-circle d-inline">
+        <p>{{skill.owner.username}}</p>
+        <div class="rate" data-rate="{{skill.averageRate}}">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="row d-flex align-items-center">
+        <div class="col-8">
+          <h5>{{skill.category}}</h5>
+        </div>
+        <div class="col-4 text-right">
+          <div class="">
+            {{#if skill.category}}
+            <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1">
+            {{/if}}
           </div>
         </div>
+      </div>
       <a class="text-decoration-none" href="/detail/{{skill.id}}">
         <div class="additional-content">
-        <p>{{skill.name}}</p>
-        <p class="card-text">{{skill.description}}</p>
+          <p>{{skill.name}}</p>
+          <p class="card-text">{{skill.description}}</p>
         </div>
       </a>
-        
-      </div>
+
     </div>
+  </div>
   {{/each}}
 </div>
