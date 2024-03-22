@@ -10,7 +10,7 @@
 	align-items: center;
 }
 .img-card:hover{
-border:	1px solid green;
+border:	1px solid rgb(16, 18, 16);
 border-radius: 10px;
 
 }
@@ -38,7 +38,7 @@ border-radius: 10px;
 
 }
 .middle-container:hover {
-	border: 1px solid green;
+	border: 1px solid darkgray;
 }
 .category -div{
 	background-color: #5957f9;
@@ -112,3 +112,15 @@ border-radius: 10px;
 .fashion-studio-border:hover {
 	border-bottom: 1px solid #dee2e6!important;
 }
+/************carousel***********/
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+    margin: auto;
+  }
+
+  .carousel {
+    display: flex;
+    transition: transform 0.1s ease-in-out;
+  }
+/***********************buscador********************/

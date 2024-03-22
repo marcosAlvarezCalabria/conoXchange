@@ -14,54 +14,22 @@
     height: 30px;
     padding-top: 3px;
 }
-
-.form{
-
-    position: relative;
-   margin: 20px;
-}
-
-.form .fa-search{
-
-    position: absolute;
-    top: 55px;
-    left: 10px;
-    color: #7b7d81;
-    border-radius: 1px;
-    border: transparent;
-
-
-}
-
-.form span{
-
-        position: absolute;
-    right: 19px;
-    top: 52px;
-    padding: 3px;
-    border-left: 1px solid #d1d5db;
-
-}
-
-.left-pan{
-    padding-left: 7px;
-}
-
-.left-pan i{
+.button-search{
    
-   padding-left: 10px;
+
+
+        padding: 10px 20px;
+        background-color: #007bff;
+        border: 1px solid #007bff;
+        color: #ffffff;
+        font-size: 16px;
+        border-radius: 20px 0 0 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+
+
 }
-
-.form-input{
-    width: 180px;
-
-    height: 55px;
-    text-indent: 33px;
-    border-radius: 10px;
-}
-
-.form-input:focus{
-
-    box-shadow: none;
-    border:none;
+.nav-item :hover{
+    background-color:rgb(234, 189, 55) ;
+    color: #007bff!important;
 }

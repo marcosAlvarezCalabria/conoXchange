@@ -3,19 +3,20 @@
     <div class="left-nav row  ">
       <div class="logo col ml-3 p-0">
       <a class="navbar-brand" href="/">
-        <img id="img-logo" src="/img/logo3.png" alt="Logo" style="width: 40px; height: auto; border-radius: 20px">
+        <img id="img-logo" src="/img/logo3.png" alt="Logo" style="margin-top:7px;width: 40px; height: auto; border-radius: 20px">
       </a>
       </div>
       {{#if currentUser}}
       <div class="user flex-start col p-0 ">
 
-      <a class="navbar-user m-0" href="/profile/{{currentUser.id}}">
+      <a class="navbar-user  m-0" href="/profile/{{currentUser.id}}">
         <img id="img-logo" src="https://i.pravatar.cc/150?u={{currentUser.email}}" alt="Logo"
           style="width: 
-          40px; height: auto; padding:0; border-radius: 20px;">
+          40px; height: auto; padding:0; border-radius: 10px; hover:height: 20px;">
+          
 
 
-        <p>{{currentUser.username}}</p>
+        <p class="m-3">{{currentUser.username}}</p>
       </a>
 
       {{/if}}
@@ -28,10 +29,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto"> <!-- Alineación a la derecha -->
+      <ul class="navbar-nav ml-auto"> 
         {{#unless currentUser}}
         <li class="nav-item">
-          <div class="dropdown justify-content-star">
+          <div class="dropdown justify-content-star" style="color: aqua;">
             <button type="button" class="btn btn-warning dropdown-toggle" style="color: white;"
               data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
               Login
