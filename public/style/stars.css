@@ -17,7 +17,7 @@
     overflow:hidden;
     white-space:nowrap;
     cursor:pointer;
-    font-size:30px;
+    font-size:auto;
     color:#ccc;
 }
 .rate:not(:checked) > label:before {
@@ -40,7 +40,7 @@
 /******************** stars view ******************/
 .rate {
     display: inline-block;
-    font-size: 30px;
+    font-size: auto;
     color: #ccc;
 }
 

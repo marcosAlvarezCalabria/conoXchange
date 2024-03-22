@@ -1,111 +1,71 @@
-<div class="container fluid d-flex">
+<div class="container mt-2 fluid d-flex">
+  
+  <div class="row">
 
-  <div class=" card form-group col-md-4 " style="max-width: 28rem; padding: 4px;">
-    <h1>New Petition</h1>
-    <form method="POST" action="/petitions/show">
+    <div class="col-md-6">
+        <div class="card form-group" style="padding: 20px;">
+            <h1 class="mb-4">New Petition</h1>
+            <form method="POST" action="/petitions/show">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" value="{{currentUser.username}}" name="requester" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">What you need</label>
+                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Right what you need">
+                    {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control {{#if errors.description}}is-invalid{{/if}}" id="description" rows="3" name="description" placeholder="write a brief description about your skill"></textarea>
+                    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
+                </div>
 
-  <div class="form-group">
-    <label >Username</label>
-    <input type="text" value="{{currentUser.username}}"  name="requester" class="form-control {{#if errors.requester}}is-invalid{{/if}} " placeholder="Username">
-     {{#if errors.requester}}<small class="invalid-feedback">{{errors.requester}}</small>{{/if}}
+                <h3>Category</h3>
+                    {{>icons}}
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-warning btn-lg mt-2 me-2"><i class="fas fa-plus-circle me-1"></i>Create Petition</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card" style="padding: 20px;">
+            <h1>List of petitions</h1>
+                
+                <ul class="list-group list-group-light">
+                {{#each petitions as |petition|}}
+                
+                    <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
+                            <div class="d-flex align-items-center">
+                            <img src="https://i.pravatar.cc/150?u={{petition.requester.email}}" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{petition.description}}</p>
+                                    <p class="text-muted mb-0">{{petition.requester.username}} </p>
+                                    <small>{{dateFormat date=petition.createdAt}}</small>
+                                </div>
+                            </div>
+                    
+                    <div class="d-inline-block align-middle">
+                        {{#ifRequesterIsLogged petition.requester.username ../username}}
+                            <a class="btn btn-sm btn-danger mx-1 text-decoration-none" href="/petitions/show/{{petition.id}}/delete">Delete</a>
+                            {{else}}
+                            <a class="btn btn-link m-0 text-reset text-decoration-none" href="mailto:{{currentUser.email}}?Subject=Request%20petition%20">Send a message<i class="fas fa-envelope ms-2"></i></a>
+                        {{/ifRequesterIsLogged}}
+                    </div>
+
+                    </li>
+                
+                {{/each}}
+
+                </ul>
+            
+        </div>
+    </div>
+
   </div>
-  <label >What you need</label>
-    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Right what you need">
-    {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
-  
-  <div class="mb-3">
-    <label for="description"  class="form-label">Description</label>
-    <textarea
-      class="form-control {{#if errors.description}}is-invalid{{/if}} "
-      id="description"
-      rows="3"
-      name="description"
-      placeholder="write a brief description about your skill"
-    ></textarea>
-   {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
-  </div>
-<h3>Category</h3>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/crafts.png" alt="Crafts icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Crafts">
-  <label class="form-check-label" >Crafts</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/cooking.png" alt="Cooking icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Cooking">
-  <label class="form-check-label" >Cooking</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/Gardening and Horticulture.png" alt="Gardening and Horticulture icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Gardening and Horticulture">
-  <label class="form-check-label">Gardening and Horticulture</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/EverydayLifeSkills.png" alt="Everyday Life skills icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Everyday Life Skills">
-  <label class="form-check-label" >Everyday Life skills</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/music.png" alt="Music icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Music">
-  <label class="form-check-label" >Music</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/sports.png" alt="Sports icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Sports">
-  <label class="form-check-label" >Sports</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/technology.png" alt="Technology icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Technology">
-  <label class="form-check-label" >Technology</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/Languages and Culture.png" alt="Languages and Culture icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Languages and Culture">
-  <label class="form-check-label">Languages and Culture</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/others.png" alt="Others icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="category" type="checkbox" value="Others">
-  <label class="form-check-label" >Others</label>
-</div>
-<button type="submit" class="btn btn-primary mt-2">Submit</button>
-</div>
-
-
-
-  
-  
-  
-</form>
-
-<div class="list-group">
- <h1>List petitions</h1>
-<ul>
-  {{#each petitions as |petition|}}
-  <div>
-    <li class="list-group-item">{{petition.description}}, {{petition.requester.username}} <small>{{dateFormat date=petition.createdAt}}</small> 
-      
-       {{#ifRequesterIsLogged  petition.requester.username ../username }}
-       
-        
-        
-          <a href="/petitions/show/{{petition.id}}/delete" class="badge status-badge fw-lighter text-bg-danger primary" type="button">Delete</a>   
-          {{else}}
-          <a class="badge status-badge fw-lighter text-bg-primary" href="mailto:{{currentUser.email}}?Subject=Aquí%20el%20asunto%20del%20mail">Aquí el texto que quieras</a>
-
-      {{/ifRequesterIsLogged}}
-
-     
-{{petition.requester.username}}
-    </li>
-   </div>
-  {{/each}}
- 
-  {{username}}
-  
-</ul>
-</div>
 
 </div>
