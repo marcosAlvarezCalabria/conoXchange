@@ -1,88 +1,145 @@
-
-<h1>skills detail</h1>
-
-<div>
-    <h1>Category:</h1>
-    <p>{{skill.category}}</p>
-    <p>Expert: {{skill.owner.name}}</p>
-    
-    {{#if skill.category}}
-    <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1">
-    {{/if}}
-</div>
-
-<div>
-    <h3>Name</h3>
-    <p>{{skill.name}}</p>
-    <p>{{skill.averageRate}}</p>
-    <div class="rate" data-rate="{{skill.averageRate}}">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-    </div>
-</div>
-
-<div>
-    <h3>Description:</h3>
-    <p>{{skill.description}}</p>
-</div>
-
-{{#if isUserLogged}}
-    <a href="/skills/{{skill.id}}/edit">Edit</a>
-    <a href="/skills/{{skill.id}}/delete">Delete</a>
-{{/if}}
-
-
-<a href="/messages/{{skill.id}}">Chat</a>
-
-{{#ifUserRated skill.ratings currentUser}}
-    {{#unless isUserLogged}}
-    <form action="/detail/{{skill.id}}" method="post" class="mt-3">
-        <textarea class="form-control" name="comment" placeholder="Write your comment..."></textarea>
-        
-        <div class="rate {{#if errors.rate}}is-invalid{{/if}}">
-            <input type="radio" id="star5" name="rate" value="5" />
-            <label for="star5" title="text">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4" />
-            <label for="star4" title="text">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3" />
-            <label for="star3" title="text">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2" />
-            <label for="star2" title="text">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1" />
-            <label for="star1" title="text">1 star</label>
+<div class="container">
+    <div class="row justify-content-center" style="">
+        <div class="title text-center mt-4">
+            <h1>Skill Details</h1>
         </div>
+        <div class="body row d-flex mt-5  justify-content-around">
 
-        {{#if errors.rate}}<small class="invalid-feedback">{{errors.rate}}</small>{{/if}}
+            <div class="card row col-md-6 mt-2 p-2 no-wrap " style="height: 450px; ">
+                <div class="row d-flex justify-content-start" style="">
 
-        <button class="btn btn-outline-secondary" type="submit" value="{{rating.comment}}"><i class="fa fa-send"></i></button>
+                    <div class=" row d-flex container-fluid   " >
+                      
+                            <img style="margin-bottom:5px ;" src="https://i.pravatar.cc/150?u={{skill.owner.email}}"
+                                class="col-md-2  rounded-circle">
+                       
+                        <div class="col-md-8 mt-4"  style="margin-right:97px ;">
+                           <strong><p  class="">{{skill.owner.username}}</p></strong> 
+                        </div>
 
-    </form>
-    {{/unless}}
-{{/ifUserRated}}
 
-<div class=" row gap-3">
-    <div class="comment-list rounded p-6">
-        {{#each skill.ratings as |rating|}}
-        
-        <div class="comment-box border rounded border-info mb-3 p-5">
-            <div class="card">
-            <div class="card-body">
-                <div class="card-text">{{rating.sender.username}}</div>
-                <div class="card-text">{{rating.comment}}</div>
-                <div class="rate" data-rate="{{rating.rate}}">
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
+                    </div>
+
+
+
+
+
+
+
+
+                    <hr>
+                    <div class="category row" style="">
+                        <div style="" class="category row col-md-12 align-items-center">
+                            <h3 class="col-md-6">Category:</h3>
+                            <p style="" class="col-md-4 mt-3">{{skill.category}}</p>
+                            <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}"
+                                style="width: 70px;" class="col-md-2  d-block">
+                        </div>
+                        <hr>
+                        <div style="" class="category row col-md-12 align-items-center">
+                            <h3 class="col-md-6">Nombre:</h3>
+                            <p style="" class="col-md-6 mt-3">{{skill.name}}</p>
+                        </div>
+                        <hr>
+                        <div style="" class="category row col-md-12 align-items-center">
+                            <h4 class="col-md-6">Description:</h4>
+                            <p style="" class="col-md-6 mt-3">{{skill.description}}</p>
+                        </div>
+                        <hr>
+                        <div class="container  row">
+                            <div class="col-md-6">
+                                <h4>Rate:</h4>
+                            </div>
+
+                            <div class="rate col-md-6" style=" font-size: 30px;" data-rate="{{skill.averageRate}}">
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
                 </div>
             </div>
+            <div class="card row  col-md-4 mt-2 text-center " style="height: 400px; overflow-y: auto;">
+                <div class="col-md-12">
+                    <h3>Comments & Ratings</h3>
+
+                    {{#ifUserRated skill.ratings currentUser}}
+                    {{#unless isUserLogged}}
+                    <form action="/detail/{{skill.id}}" method="post" class="mt-3">
+                        <textarea class="form-control" name="comment" placeholder="Write your comment..."></textarea>
+                        <div style="font-size: 30px;" class="rate {{#if errors.rate}}is-invalid{{/if}}">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                        {{#if errors.rate}}<small class="invalid-feedback">{{errors.rate}}</small>{{/if}}
+                        <button class="btn btn-outline-secondary mt-2" type="submit"><i class="fa fa-send"></i>
+                            Submit</button>
+                    </form>
+                    {{/unless}}
+                    {{/ifUserRated}}
+                    <div class="comment-list mt-4 rounded p-6">
+                        <ul class="testimonial-list">
+                            {{#each skill.ratings as |rating|}}
+
+
+
+                            <div class="card p-3 mb-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                aria-controls="collapseOne">
+
+                                <div style="" class="d-flex flex-row  justify-content-start ">
+                                    <div class=" m-2 img">
+                                        <img src="https://i.pravatar.cc/150?u={{rating.sender.email}}" width="50"
+                                            class="rounded-circle">
+                                    </div>
+
+
+
+                                    <div style="" class="col-md-3 d-flex flex-column pt-2">
+
+                                        <span class="font-weight-normal">
+                                            <strong>{{rating.sender.username}}</strong></span>
+                                    </div>
+                                    <div style="" class="rate col-md-4 pt-2" style="font-size: 20px;"
+                                        data-rate="{{rating.rate}}">
+                                        <span class="star">&#9733;</span>
+                                        <span class="star">&#9733;</span>
+                                        <span class="star">&#9733;</span>
+                                        <span class="star">&#9733;</span>
+                                        <span class="star">&#9733;</span>
+                                    </div>
+
+
+
+
+                                </div>
+                                <div>
+                                    <p> <span>{{rating.comment}}</span></p>
+                                </div>
+                            </div>
+
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
-        
-        {{/each}}
+
     </div>
-</div> 
+</div>

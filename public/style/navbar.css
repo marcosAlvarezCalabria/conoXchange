@@ -32,6 +32,9 @@
 
 .dropdown-menu {
   width: 300px; 
+  margin-right: 100px!important;
+  position:absolute!important;
+  right: 20px!important;
 }
 
 .navbar-nav {

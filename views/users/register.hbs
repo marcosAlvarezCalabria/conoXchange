@@ -1,74 +1,99 @@
 
-<h1>Register</h1>
-<form method="POST" action="/register">
 
-  <div class="form-group">
-    <label >Email address</label>
-    <input type="email" value="{{user.email}}" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" placeholder="Enter email">
-    {{#if errors.email}}<small class="invalid-feedback">{{errors.email}}</small>{{/if}}
+<main class="form-register container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-2 row justify-content-center text-center">
+      <form method="post" action="/register">
+        <div class="text-center mb-4 ">
+          <img class="mb-4" src="/img/logo3.png" alt="Logo" width="122" height="97">
+          <h1 class="mb-3 fw-normal">Register</h1>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Email address</label>
+          <input type="email" value="{{user.email}}" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" placeholder="Enter email">
+          {{#if errors.email}}<small class="invalid-feedback">{{errors.email}}</small>{{/if}}
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Username</label>
+          <div class="input-group">
+            <span class="input-group-text">@</span>
+            <input type="text" value="{{user.username}}" name="username" class="form-control {{#if errors.username}}is-invalid{{/if}}" placeholder="Username">
+            {{#if errors.username}}<small class="invalid-feedback">{{errors.username}}</small>{{/if}}
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Password">
+          {{#if errors.password}}<small class="invalid-feedback">{{errors.password}}</small>{{/if}}
+        </div>
+
+        <hr class="my-3">
+
+        <div class="form-group mt-3">
+          <label for="category" class="form-label">My interests</label>
+          <div class="my-2">
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Crafts.png" alt="Crafts icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Crafts">
+            <label class="form-check-label">Crafts</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Cooking.png" alt="Cooking icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Cooking">
+            <label class="form-check-label">Cooking</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Gardening and Horticulture.png" alt="Gardening and Horticulture icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Gardening and Horticulture">
+            <label class="form-check-label">Gardening and Horticulture</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Everyday Life Skills.png" alt="Everyday Life skills icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Everyday Life Skills">
+            <label class="form-check-label">Everyday Life Skills</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Music.png" alt="Music icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Music">
+            <label class="form-check-label">Music</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Sports.png" alt="Sports icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Sports">
+            <label class="form-check-label">Sports</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Technology.png" alt="Technology icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Technology">
+            <label class="form-check-label">Technology</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Languages and Culture.png" alt="Languages and Culture icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Languages and Culture">
+            <label class="form-check-label">Languages and Culture</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <img src="/img/icons/Others.png" alt="Others icon" style="width: 20px; height: 20px;">
+            <input class="form-check-input" type="checkbox" name="interests" value="Others">
+            <label class="form-check-label">Others</label>
+            
+          </div>
+           
+        </div>
+       
+    
+        </div>
+        <button type="submit" class="btn btn-primary col-md-6 ml-5 mt-2">Register</button>
+        </div>
+
+        
+      </form>
+      
+    </div>
   </div>
-
-  <div class="form-group">
-    <label >Username</label>
-    <input type="text" value="{{user.username}}"  name="username" class="form-control {{#if errors.username}}is-invalid{{/if}} " placeholder="Username">
-     {{#if errors.username}}<small class="invalid-feedback">{{errors.username}}</small>{{/if}}
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Password">
-     {{#if errors.password}}<small class="invalid-feedback">{{errors.password}}</small>{{/if}}
-  </div>
-
-<h3>Interests</h3>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/crafts.png" alt="Crafts icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Crafts">
-  <label class="form-check-label" >Crafts</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/cooking.png" alt="Cooking icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Cooking">
-  <label class="form-check-label" >Cooking</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/Gardening and Horticulture.png" alt="Gardening and Horticulture icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Gardening and Horticulture">
-  <label class="form-check-label">Gardening and Horticulture</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/EverydayLifeSkills.png" alt="Everyday Life skills icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Everyday Life Skills">
-  <label class="form-check-label" >Everyday Life skills</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/music.png" alt="Music icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Music">
-  <label class="form-check-label" >Music</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/sports.png" alt="Sports icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Sports">
-  <label class="form-check-label" >Sports</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/technology.png" alt="Technology icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Technology">
-  <label class="form-check-label" >Technology</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/Languages and Culture.png" alt="Languages and Culture icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Languages and Culture">
-  <label class="form-check-label">Languages and Culture</label>
-</div>
-<div class="form-check form-check-inline">
-  <img src="/img/icons/others.png" alt="Others icon" style="width: 20px; height: 20px;">
-  <input class="form-check-input" name="interests" type="checkbox" value="Others">
-  <label class="form-check-label" >Others</label>
-</div>
+</main>
 
 
-
-  
-  
-  <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>

@@ -2,24 +2,24 @@
   <div class="container-fluid pl-2">
     <div class="left-nav row  ">
       <div class="logo col ml-3 p-0">
-      <a class="navbar-brand" href="/">
-        <img id="img-logo" src="/img/logo3.png" alt="Logo" style="margin-top:7px;width: 40px; height: auto; border-radius: 20px">
-      </a>
+        <a class="navbar-brand" href="/">
+          <img id="img-logo" src="/img/logo3.png" alt="Logo"
+            style="margin-top:7px;width: 40px; height: auto; border-radius: 20px">
+        </a>
       </div>
       {{#if currentUser}}
       <div class="user flex-start col p-0 ">
 
-      <a class="navbar-user  m-0" href="/profile/{{currentUser.id}}">
-        <img id="img-logo" src="https://i.pravatar.cc/150?u={{currentUser.email}}" alt="Logo"
-          style="width: 
+        <a class="navbar-user  m-0" href="/profile/{{currentUser.id}}">
+          <img id="img-logo" src="https://i.pravatar.cc/150?u={{currentUser.email}}" alt="Logo" style="width: 
           40px; height: auto; padding:0; border-radius: 10px; hover:height: 20px;">
-          
 
 
-        <p class="m-3">{{currentUser.username}}</p>
-      </a>
 
-      {{/if}}
+          <p class="m-3">{{currentUser.username}}</p>
+        </a>
+
+        {{/if}}
       </div>
 
     </div>
@@ -28,21 +28,22 @@
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto"> 
+    <div class="collapse navbar-collapse m-3"  id="navbarNav">
+      <ul class="navbar-nav ml-auto">
         {{#unless currentUser}}
         <li class="nav-item">
-          <div class="dropdown justify-content-star" style="color: aqua;">
-            <button type="button" class="btn btn-warning dropdown-toggle" style="color: white;"
-              data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-              Login
-            </button>
-            <form method="post" action="/login" class="dropdown-menu p-2">
-              <div class="mb-3">
+
+          <button type="button" class="btn btn-warning dropdown-toggle" style="color: rgb(255, 255, 255);"
+            data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+            Login
+          </button>
+          <div class="dropdown">
+            <form method="post" action="/login" class="dropdown-menu p-2" style="background-color: burlywood; margin-left:3px;">
+              <div style="background-color: rgb(83, 95, 91);">
                 <label for="" class="form-label">Email address</label>
                 <input type="email" class="form-control" name="email" placeholder="email@example.com">
               </div>
-              <div class="mb-3">
+              <div>
                 <label for="" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Password">
               </div>
@@ -64,17 +65,16 @@
 
         {{#if currentUser}}
         <li class="nav-item">
-          <a class="nav-link active" style="color: white;" aria-current="page" href="/search">Search skill</a>
+          <a class="nav-link active" style="color: white;  border-radius:10px;" aria-current="page" href="/search">Skills</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" style="color: white;" aria-current="page" href="/petitions/show">Petitions
-            board</a>
+          <a class="nav-link active" style="color: white;  border-radius:10px;" aria-current="page" href="/petitions/show">Petitions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" style="color: white;" aria-current="page" href="/profile/me">Profile</a>
+          <a class="nav-link active" style="color: white;  border-radius:10px;" aria-current="page" href="/profile/me">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" style="color: white;" aria-current="page" href="/logout/{{currentUser.id}}">Log
+          <a class="nav-link active" style="color: white;  border-radius:10px;" aria-current="page" href="/logout/{{currentUser.id}}">Log
             out</a>
         </li>
         {{/if}}

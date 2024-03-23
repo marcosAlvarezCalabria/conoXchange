@@ -1,5 +1,5 @@
 .custom-background{
-    background-image: radial-gradient(circle at 118.3% 31.7%, #EEEB73 0, #F2E064 12.5%, #F5D454 25%, #F7C744 37.5%, #F9B834 50%, #FBA925 62.5%, #FD991A 75%, #FF8A15 87.5%, #FF7A17 100%);
+    background-image: radial-gradient(circle at 118.3% 31.7%, #EEEB73 0, #F2E064 12.5%, #F5D454 25%, #F7C744 37.5%, #F9B834 50%, #FBA925 62.5%, #FD991A 75%, #FF8A15 87.5%, #e4af86da 100%);
 }
 .additional-content {
     border: 2px solid #f5f5f5; 

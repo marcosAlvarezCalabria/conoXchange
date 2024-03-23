@@ -1,11 +1,10 @@
 <h1>Skills</h1>
 <form action="/skills/new" method="post">
- 
-  
-  
-   <div class="mb-3">
-    <label for="avatar" class="form-label">Category</label>
-    <select name="category" class="form-select {{#if errors.category}}is-invalid{{/if}}" id="avatar">
+<div class="container d-flex flex-column align-items-center">
+
+  <div class="mb-3 col-md-6" ">
+    <label class="form-label"><h4>Category</h4></label>
+    <select name="category" class="form-select {{#if errors.category}}is-invalid{{/if}}">
       <option selected>Select a category</option>
       <option>Crafts</option>
       <option>Cooking</option>
@@ -16,29 +15,25 @@
       <option>Technology</option>
       <option>Languages and Culture</option>
       <option>Others</option>
-     
+
     </select>
-   
-  {{#if errors.category}} <div class="invalid-feedback">{{errors.category}}</div>{{/if}}
+
+    {{#if errors.category}} <div class="invalid-feedback">{{errors.category}}</div>{{/if}}
 
 
   </div>
-  <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}"name="name">
+  <div class="mb-3 col-md-6">
+    <label for="name" class="form-label"><h4>Name</h4></label>
+    <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" name="name">
     {{#if errors.name}}<div class="invalid-feedback">{{errors.name}} </div>{{/if}}
   </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea
-      class="form-control {{#if errors.description}}is-invalid{{/if}} "
-      id="description"
-      rows="3"
-      name="description"
-      placeholder="write a brief description about your skill"
-    ></textarea>
-   {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
+  <div class="mb-3 col-md-6">
+    <label for="description" class="form-label"><h4>Description</h4></label>
+    <textarea class="form-control {{#if errors.description}}is-invalid{{/if}} " id="description" rows="3"
+      name="description" placeholder="write a brief description about your skill"></textarea>
+    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
   </div>
- 
-  <button type="submit" class="btn btn-primary">Send</button>
+
+  <button type="submit" class="btn btn-primary col-md-2">Send</button>
 </form>
+</div>
