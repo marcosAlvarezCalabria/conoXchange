@@ -1,6 +1,7 @@
 const Petition = require("../models/petition.model");
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
+const createError= ("http-errors")
 
 
 module.exports.show = (req, res, next) => {
@@ -27,11 +28,19 @@ module.exports.doCreate = (req, res, next) => {
     petition.requester = req.user.id;
     petition.category = req.body.category;
 
-
     Petition.create(petition)
-        .then((petitionCreated) => res.redirect("/petitions/show"))
-        .catch((error) => next(error))
-}
+        .then((petitionCreated) => {
+            res.redirect("/petitions/show");
+        })
+        .catch((error) => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                // Renderiza la misma vista con los errores en caso de validación fallida
+                return res.render("petitions/show", { errors: error.errors, currentUser: req.user });
+            } else {
+                next(error);
+            }
+        });
+};
 module.exports.delete = (req, res, next) => {
     const { id } = req.params;
     Petition.findByIdAndDelete(id)

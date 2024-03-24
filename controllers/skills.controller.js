@@ -110,18 +110,22 @@ module.exports.delete = (req, res, next) => {
     .catch((error) => next(error));
 };
 module.exports.show = (req, res, next) => {
-  const { name, category, interests } = req.query;
+  const { name, category, interests, /*description */} = req.query;
   const criterial = {};
   if (interests) criterial.interests = interests;
-  if (category) criterial.category = category;
-  if (name) criterial.name = new RegExp(name, "i"); //i insensible lowercase and capital letters
+  if (category && category !== "all") criterial.category = category;
+  if (name) criterial.name = {$regex: new RegExp(name, "i")};
+  //if(description) criterial.description = {$regex: new RegExp(description, i)} //i insensible lowercase and capital letters
   const userId = req.params.id;
+  console.log(criterial)
 
   Promise.all([
     Skill.find(criterial).populate("owner"),
     Skill.find({category: { $in:req.user.interests } }).populate("owner").sort({_id: -1 }).limit(2)
     ])
     .then(([skillsByFinder,skillsByInterests]) => {
+      console.log("Paráme", skillsByFinder);
+      console.log("Parámetro category:", req.query.category);
         res.render("skills/search",{skillsByFinder,skillsByInterests})
     })
     .catch((error) => next(error))
