@@ -34,9 +34,9 @@
 </form>
 
 <hr>
-<div class="container d-flex justify-content-center">
+<div class="container-fluid  row justify-content-center">
   {{#each skillsByInterests as |skill|}}
-  <div class="card m-3">
+  <div class="card col- col-sm-6 col-md-4 col-lg-4  m-3 ">
     <div class="top-container">
       <a class="img-card" href="/profile/{{skill.owner.id}}"><img
           src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="img-fluid profile-image" width="70"></a>
@@ -66,7 +66,7 @@
 <hr>
 <div class="container-fluid row justify-content-center">
   {{#each skillsByFinder as |skill|}}
-  <div class="card col-md-2 m-3">
+  <div class="card col-12  col-sm-4 col-md-4 col-lg-2 col-xl-2 m-3">
     <div class="top-container">
       <a class="img-card" href="/profile/{{skill.owner.id}}"><img
           src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="img-fluid profile-image" width="70"></a>

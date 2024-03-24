@@ -24,6 +24,7 @@ const userSchema = new Schema({
   },
   description: {
     type: String,
+    minLength: [3, "username needs at least 6 characters"],
     require: false,
   },
   interests: {

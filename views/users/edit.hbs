@@ -11,7 +11,8 @@
 
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" class="form-control text-muted" value="{{currentUser.username}}" readonly/>
+                <input type="text" name="username" class="form-control {{#if errors.username}}is-invalid{{/if}} text-muted " value="{{currentUser.username}}" readonly/>
+                {{#if errors.username}} <small class="invalid-feedback">{{errors.username}}</small>{{/if}}
               </div>
 
               <div class="mb-3">
@@ -21,7 +22,8 @@
 
               <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="write a brief description about yourself">{{currentUser.description}}</textarea>
+                <textarea class="form-control {{#if errors.description}}is-invalid{{/if}}" name="description" rows="3" placeholder="write a brief description about yourself">{{currentUser.description}}</textarea>
+                {{#if errors.description}} <small class="invalid-feedback"> {{errors.description}}</small>{{/if}}
               </div>
 
               <div>
