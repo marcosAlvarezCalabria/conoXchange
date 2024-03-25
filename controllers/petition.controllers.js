@@ -12,8 +12,7 @@ module.exports.show = (req, res, next) => {
         .then((petitions) => {
 
             res.render("petitions/show", { petitions, username });
-            console.debug(`esto es petetions.requester ${petitions[0].requester}`)
-            console.debug(`esto es username ${username}`)
+            
 
 
         })

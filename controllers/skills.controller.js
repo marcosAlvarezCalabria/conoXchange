@@ -49,7 +49,7 @@ module.exports.detail = (req, res, next) => {
       path: "ratings",
       populate: {
         path: "sender",
-        select: "username",
+        select: "username email",
       },
     })
     //ratings width virtual
@@ -59,12 +59,7 @@ module.exports.detail = (req, res, next) => {
       //const username = skill.ratings[0].sender.username;
 
      res.render("skills/detail", { skill, isUserLogged, owner });
-
-      console.debug ( `this is skills.ratings ${skill.ratings}`)
-        
-        console.debug ( `this is  ISuSERlOGGED ${isUserLogged}`)
-       
-      
+ 
     })
     .catch((error) => next(error));
 };
@@ -117,15 +112,13 @@ module.exports.show = (req, res, next) => {
   if (name) criterial.name = {$regex: new RegExp(name, "i")};
   //if(description) criterial.description = {$regex: new RegExp(description, i)} //i insensible lowercase and capital letters
   const userId = req.params.id;
-  console.log(criterial)
+  
 
   Promise.all([
     Skill.find(criterial).populate("owner"),
     Skill.find({category: { $in:req.user.interests } }).populate("owner").sort({_id: -1 }).limit(2)
     ])
     .then(([skillsByFinder,skillsByInterests]) => {
-      console.log("Paráme", skillsByFinder);
-      console.log("Parámetro category:", req.query.category);
         res.render("skills/search",{skillsByFinder,skillsByInterests})
     })
     .catch((error) => next(error))

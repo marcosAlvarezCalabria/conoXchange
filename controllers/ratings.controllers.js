@@ -1,55 +1,55 @@
-const createError = require('http-errors');
-const Rating = require('../models/rating.models');
-const Skill = require('../models/skill.model');
-const mongoose = require('mongoose');
-
 module.exports.doCreate = (req, res, next) => {
-    const skillId = req.params.id;
-    Skill.findById(skillId)
-    .then((skill) => {
-        if (!skill) {
-          next(createError(404, 'Skill not found'));
-        } else {
-          const rating = req.body;
-          rating.sender = req.user.id;
-          rating.sender.email= req.user.email;
-          rating.skill = skillId;
-          return Rating.create(rating)
-            .then(() => {
-              console.debug(`esto es rating${rating}`)
-               return Rating.aggregate([
-                  {
-                    $match: { skill: new mongoose.Types.ObjectId(skillId) }
-                  },
-                  {
-                    $group: {
-                      _id: '$skill',
-                      averageRate: { $avg: '$rate' }
+  const skillId = req.params.id;
+  const rating = req.body;
 
-                    }
+  Skill.findById(skillId)
+      .then((skill) => {
+          if (!skill) {
+              return next(createError(404, 'Skill not found'));
+          }
+
+          rating.sender = req.user.id;
+          rating.skill = skillId;
+
+          // Agregar el correo electrónico del remitente al rating
+          rating.senderEmail = req.user.email;
+
+          // Crear la calificación
+          return Rating.create(rating)
+              .then(() => {
+                  // Calcular el promedio de calificación
+                  return Rating.aggregate([
+                      {
+                          $match: { skill: new mongoose.Types.ObjectId(skillId) }
+                      },
+                      {
+                          $group: {
+                              _id: '$skill',
+                              averageRate: { $avg: '$rate' }
+                          }
+                      }
+                  ])
+                      .then((result) => {
+                          // Actualizar el promedio de calificación en la habilidad
+                          skill.averageRate = Math.round(result[0].averageRate);
+                          return skill.save();
+                      })
+                      .then(() => {
+                          // Redirigir a la vista de detalle con el ID de habilidad
+                          res.redirect(`/detail/${skillId}`);
+                      });
+              })
+              .catch((error) => {
+                  if (error instanceof mongoose.Error.ValidationError) {
+                      // Manejar errores de validación
+                      res.status(400).render('skills/detail', { skill, errors: error.errors, rating: req.body });
+                  } else {
+                      // Pasar el error al siguiente middleware
+                      next(error);
                   }
-                ])
-                .then((result) => {
-                  skill.averageRate =Math.round(result[0].averageRate);
-                  return skill.save()
-                    .then (() => {
-                      console.log(`this is result ${result}`)
-                      res.redirect(`/detail/${skillId}`)
-                    })
-                  
-                })
-                
-            })
-            .catch((error) => {
-              if (error instanceof mongoose.Error.ValidationError) {
-                res.status(400).render('skills/detail', { skill, errors: error.errors, rating: req.body })
-              } else {
-                next(error);
-              }
-            });
-        }
-    })
-    .catch(next);
-  }
+              });
+      })
+      .catch(next);
+};
 
 
