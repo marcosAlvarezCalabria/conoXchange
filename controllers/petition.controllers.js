@@ -18,7 +18,7 @@ module.exports.show = (req, res, next) => {
         })
         .catch((error) => next(error));
 
-    ;
+   
 }
 module.exports.doCreate = (req, res, next) => {
     const petition = req.body;

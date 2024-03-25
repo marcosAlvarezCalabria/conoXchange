@@ -6,7 +6,7 @@ const skillSchema = new Schema(
      name: {
         type: String,
         required : [true, "Name of the skill is required"],
-        maxLength : [50, "Name required lest than 50 characters"]
+        maxLength : [50, "Name required less than 50 characters"]
 
      },
      category: {

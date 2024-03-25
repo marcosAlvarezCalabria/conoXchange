@@ -28,7 +28,7 @@ const routes= require('./configs/routes.config');
 app.use('/',routes);
 app.use(express.static((`${__dirname}/public`)));
 
-//app.use((req, res, next) => next(createError(404, " Router not found")));
+app.use((req, res, next) => next(createError(404, " Router not found")));
 app.use((error, req, res, next) => {
     if (
       error instanceof mongoose.Error.CastError &&

@@ -1,6 +1,4 @@
-<section class="vh-100" style="background-color: #f1e7d5;">
-
-  <div class="container py-5">
+<div class="container">
 
     <div class="row">
       <div class="col-lg-6 mx-auto">
@@ -11,9 +9,9 @@
     <div class="row">
         
         <div class="col">
-          <div class="card mb-4">
+          <div class="card mb-4 shadow-sm">
             <div class="card-body text-center">
-              <img src="https://i.pravatar.cc/150?u={{user.email}}" class="img-fluid my-3"alt="user image"/>
+              <img src="https://i.pravatar.cc/150?u={{user.email}}" class="img-fluid rounded-circle my-3"alt="user image"/>
 
               <h3 class="card-title my-3">{{user.username}}</h3>
               {{#if isUserLogged}}
@@ -49,40 +47,49 @@
 
         </div>
 
-        <div class="col-6 mx-3">
-          <h3 class="my-3"> {{user.username}} Skills </h3>
+        <div class="col">
+          <h3 class="my-3 text-center"> {{user.username}} Skills </h3>
           
-          <div class="list-group">
+          <ul class="list-group list-group-light">
             {{#each skills as |skill|}}
-
-              <a href="/detail/{{skill.id}}" class="text-decoration-none text-dark">
-                <div class="row align-items-center mb-3">
-                  <div class="col-sm-3">
-                    <p class="mb-0">{{skill.category}}</p>
-                  </div>
-                  <div class="col-sm-3">
-                    <p class="text-muted mb-0">{{skill.name}}</p>
-                  </div>
-                  <div class="col-sm-5">
-                    <p class="rate" data-rate="{{skill.averageRate}}">
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                    </p>
-                  </div>
-
+              <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
+                
+                <div class="d-flex align-items-center">
+                  <a href="/detail/{{skill.id}}" class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
+                      <div class="ms-3 flex-grow-1">
+                        <p class="fw-bold mb-0">{{skill.category}}:</p>
+                      </div>
+                      <div class="ms-5 flex-grow-1">
+                        <p class="fw-bold mb-0">{{skill.name}}</p>
+                      </div>
+                      <div class="col-sm-5">
+                        <p class="rate mb-0" data-rate="{{skill.averageRate}}">
+                          <span class="star">&#9733;</span>
+                          <span class="star">&#9733;</span>
+                          <span class="star">&#9733;</span>
+                          <span class="star">&#9733;</span>
+                          <span class="star">&#9733;</span>
+                        </p>
+                      </div>
+                  </a>
                 </div>
 
-              </a>
-              <hr />
+                <div class="d-inline-block align-middle">
+                  {{#if ../isUserLogged}}
+                     <a class="btn btn-sm btn-danger me-1 text-decoration-none" href="/skills/{{skill.id}}/delete">Delete</a>
+                     <a class="btn btn-sm btn-primary text-decoration-none" href="/skills/{{skill.id}}/edit">Edit</a>
+                  {{/if}}
+                </div>
+                
+              </li>
+
             {{/each}}
-          </div>
+
+          </ul>
 
           <div class="d-flex justify-content-center">
             {{#if isUserLogged}}
-            <a class="btn btn-outline-warning btn-lg mt-2 me-2" href="/skills/new"><i class="fas fa-plus-circle me-1"></i>New skill</a>
+            <a class="btn btn-outline-light btn-lg mt-2 me-2" href="/skills/new"><i class="fas fa-plus-circle me-1"></i>New skill</a>
             {{/if}}
           </div>
 
@@ -90,6 +97,4 @@
 
     </div>
     
-  </div>
-
-</section>
+</div>

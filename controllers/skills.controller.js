@@ -56,7 +56,7 @@ module.exports.detail = (req, res, next) => {
     .then((skill) => {
       const owner = skill.owner;
       const isUserLogged = req.user.id == skill.owner.id;
-      //const username = skill.ratings[0].sender.username;
+    
 
      res.render("skills/detail", { skill, isUserLogged, owner });
  

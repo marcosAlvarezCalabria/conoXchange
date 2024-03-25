@@ -39,7 +39,7 @@ router.post("/skills/:id/edit", secure.isAuthenticated, skills.doEdit)
 router.get("/skills/:id/delete", secure.isAuthenticated, skills.delete)
 //*************************search_room************************** */
 
-router.get("/search",skills.show)
+router.get("/search",secure.isAuthenticated,skills.show)
 
 //**********************messages*********************** */
 router.get("/messages/:id",secure.isAuthenticated, messages.create)
