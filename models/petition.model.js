@@ -11,7 +11,7 @@ const petitionSchema = new Schema(
         category: {
             type: String,
             required: [false, "Category is required"],
-            enum: ['Crafts', 'Cooking', 'Gardening and Horticulture', 'Everyday Life Skills', 'Music', 'Sports', 'Technology', 'Languages and Culture','Others'],
+            enum: ['crafts', 'cooking', 'gardening and horticulture', 'everyday life skills', 'music', 'sports', 'technology', 'languages and culture','others'],
         
         },
         description: {

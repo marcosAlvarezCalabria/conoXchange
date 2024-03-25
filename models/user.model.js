@@ -17,30 +17,20 @@ const userSchema = new Schema({
   },
   username: {
     type: String,
-    required: [true, "username is required"],
+    required: [true, "Username is required"],
     unique: true,
-    minLength: [3, "username needs at least 6 characters"],
-    maxLength: [10, "username should have less than 10 characters "],
+    minLength: [3, "Username needs at least 6 characters"],
+    maxLength: [10, "Username should have less than 10 characters "],
   },
   description: {
     type: String,
-    minLength: [3, "username needs at least 6 characters"],
+    minLength: [6, "Description needs at least 6 characters"],
     require: false,
   },
   interests: {
     type: [String],
     required: false,
-    enum: [
-      "Crafts",
-      "Cooking",
-      "Gardening and Horticulture",
-      "Everyday Life skills",
-      "Music",
-      "Sports",
-      "Technology",
-      "Languages and Culture",
-      "Others",
-    ],
+    enum:  ['crafts', 'cooking', 'gardening and horticulture', 'everyday life skills', 'music', 'sports', 'technology', 'languages and culture','others'],
   },
 });
 

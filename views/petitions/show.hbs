@@ -11,8 +11,8 @@
                     <input type="text" value="{{currentUser.username}}" name="requester" class="form-control" readonly>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">What you need</label>
-                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Right what you need">
+                    <label class="form-label">What do you need?</label>
+                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Write what you need">
                     {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
                 </div>
                 <div class="mb-3">
