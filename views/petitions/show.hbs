@@ -11,8 +11,8 @@
                     <input type="text" value="{{currentUser.username}}" name="requester" class="form-control" readonly>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">What do you need?</label>
-                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Write what you need">
+                    <label class="form-label">What you need</label>
+                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Right what you need">
                     {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
                 </div>
                 <div class="mb-3">
@@ -25,7 +25,7 @@
                     {{>icons}}
 
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-warning btn-lg mt-2 me-2"><i class="fas fa-plus-circle me-1"></i>Create Petition</button>
+                    <button type="submit" class="btn btn-outline-light btn-lg mt-4 me-2"><i class="fas fa-plus-circle me-1"></i>Create Petition</button>
                 </div>
                 
             </form>
@@ -34,18 +34,26 @@
 
     <div class="col-md-6">
         <div class="card border-0 bg-transparent" style="padding: 20px;">
-            <h1>List of petitions</h1>
+            <h1 class="mb-4">List of petitions</h1>
                 
                 <ul class="list-group list-group-light">
                 {{#each petitions as |petition|}}
                 
                     <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
                             <div class="d-flex align-items-center">
-                            <img src="https://i.pravatar.cc/150?u={{petition.requester.email}}" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                <a class="img-card" href="/profile/{{petition.requester.id}}">
+                                    <img src="https://i.pravatar.cc/150?u={{petition.requester.email}}" class="img-fluid profile-image" width="70"/>
+                                </a>
+                
                                 <div class="ms-3">
-                                    <p class="fw-bold mb-1">{{petition.description}}</p>
-                                    <p class="text-muted mb-0">{{petition.requester.username}} </p>
-                                    <small>{{dateFormat date=petition.createdAt}}</small>
+                                    <div>
+                                        <p class="fw-bold mb-1">{{petition.name}}</p>
+                                        <p class="text-muted mb-0">{{petition.description}}</p>
+                                        <small>{{dateFormat date=petition.createdAt}}</small>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-muted mb-0">Requester: {{petition.requester.username}}</p>
+                                    </div>
                                 </div>
                             </div>
                     
