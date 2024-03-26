@@ -46,54 +46,42 @@
           </div>
 
         </div>
-
         <div class="col">
-          <h3 class="my-3 text-center"> {{user.username}} Skills </h3>
-          
-          <ul class="list-group list-group-light">
-            {{#each skills as |skill|}}
-              <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
-                
-                <div class="d-flex align-items-center">
-                  <a href="/detail/{{skill.id}}" class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
-                      <div class="ms-3 flex-grow-1">
-                        <p class="fw-bold mb-0">{{skill.category}}:</p>
-                      </div>
-                      <div class="ms-5 flex-grow-1">
-                        <p class="fw-bold mb-0">{{skill.name}}</p>
-                      </div>
-                      <div class="col-sm-5">
-                        <p class="rate mb-0" data-rate="{{skill.averageRate}}">
-                          <span class="star">&#9733;</span>
-                          <span class="star">&#9733;</span>
-                          <span class="star">&#9733;</span>
-                          <span class="star">&#9733;</span>
-                          <span class="star">&#9733;</span>
-                        </p>
-                      </div>
-                  </a>
-                </div>
+    <h3 class="my-3 text-center">{{user.username}} Skills</h3>
 
-                <div class="d-inline-block align-middle">
-                  {{#if ../isUserLogged}}
-                     <a class="btn btn-sm btn-danger me-1 text-decoration-none" href="/skills/{{skill.id}}/delete">Delete</a>
-                     <a class="btn btn-sm btn-primary text-decoration-none" href="/skills/{{skill.id}}/edit">Edit</a>
-                  {{/if}}
-                </div>
-                
-              </li>
+    <ul class="list-group list-group-light">
+        {{#each skills as |skill|}}
+        <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
+            <div class="ms-3 flex-grow-1">
+                <p class="fw-bold mb-0">{{skill.name}}</p>
+                <p class="mb-0">{{skill.category}}</p>
+            </div>
+            <div class="col-sm-5">
+                <p class="rate mb-0" data-rate="{{skill.averageRate}}">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </p>
+                <div class="d-inline-block align-middle " style="margin-left: 30%;">
+                {{#if ../isUserLogged}}
+                <a class="btn btn-sm btn-danger mt-2 me-1 text-decoration-none" href="/skills/{{skill.id}}/delete">Delete</a>
+                <a class="btn btn-sm btn-primary mt-2 text-decoration-none" href="/skills/{{skill.id}}/edit">Edit</a>
+                {{/if}}
+            </div>
+            </div>
+            
+        </li>
+        {{/each}}
+    </ul>
 
-            {{/each}}
-
-          </ul>
-
-          <div class="d-flex justify-content-center">
-            {{#if isUserLogged}}
-            <a class="btn btn-outline-light btn-lg mt-2 me-2" href="/skills/new"><i class="fas fa-plus-circle me-1"></i>New skill</a>
-            {{/if}}
-          </div>
-
-        </div>
+    <div class="d-flex justify-content-center">
+        {{#if isUserLogged}}
+        <a class="btn btn-outline-light btn-lg mt-2 me-2" href="/skills/new"><i class="fas fa-plus-circle me-1"></i>New skill</a>
+        {{/if}}
+    </div>
+</div>
 
     </div>
     
