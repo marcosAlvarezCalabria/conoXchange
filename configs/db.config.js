@@ -9,3 +9,4 @@ mongoose.connect(MONGODB_URI)
     .catch((error) => 
         console.info(`An error ocurred trying to connect to the database ${MONGODB_URI}`,error)
     )
+    

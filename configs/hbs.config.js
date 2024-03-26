@@ -69,6 +69,8 @@ hbs.registerHelper("ifUserRated", function (skillsRatings, currentUser, options)
 
 
 
+hbs.registerHelper("random", function(){
+    return  Math.floor(Math.random() * 5) + 1;
 
 
-
+})
