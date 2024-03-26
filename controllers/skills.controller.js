@@ -57,7 +57,7 @@ module.exports.detail = (req, res, next) => {
       const owner = skill.owner;
       const isUserLogged = req.user.id == skill.owner.id;
     
-
+      console.debug(`esto es skill.owner ${skill}`)
      res.render("skills/detail", { skill, isUserLogged, owner });
  
     })
