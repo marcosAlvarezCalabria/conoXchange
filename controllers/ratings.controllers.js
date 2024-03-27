@@ -1,33 +1,40 @@
-const Skill = require("../models/skill.model");
-const Rating = require("../models/rating.models");
-const createError = require("http-errors");
+const createError = require('http-errors');
+const Rating = require('../models/rating.models');
+const Skill = require('../models/skill.model');
+const mongoose = require('mongoose');
 
 module.exports.doCreate = async (req, res, next) => {
+  const skillId = req.params.id;
+  
   try {
-    const skillId = req.params.id;
-    const ratingData = req.body;
-
     const skill = await Skill.findById(skillId);
     if (!skill) {
       return next(createError(404, 'Skill not found'));
     }
 
-    ratingData.sender = req.user.id;
-    ratingData.skill = skillId;
-    ratingData.senderEmail = req.user.email;
+    const rating = req.body;
+    rating.sender = req.user.id;
+    rating.skill = skillId;
 
-    await Rating.create(ratingData);
+    await Rating.create(rating);
 
-    const updatedSkill = await Skill.findById(skillId).populate('owner');
-    if (!updatedSkill) {
-      return next(createError(404, 'Skill not found after rating creation'));
-    }
+    const averageRatingResult = await Rating.aggregate([
+      {
+        $match: { skill: new mongoose.Types.ObjectId(skillId) }
+      },
+      {
+        $group: {
+          _id: '$skill',
+          averageRate: { $avg: '$rate' }
+        }
+      }
+    ]);
+
+    skill.averageRate = averageRatingResult.length > 0 ? Math.round(averageRatingResult[0].averageRate) : 0;
+    await skill.save();
 
     res.redirect(`/detail/${skillId}`);
   } catch (error) {
     next(error);
   }
 };
-
-
-

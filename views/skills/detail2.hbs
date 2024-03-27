@@ -1,0 +1,90 @@
+<div class="container">
+    
+    <div class="row">
+        <!-- Columna de habilidad (skill) -->
+        <div class="col-md-6 my-4">
+            <h1>skills detail</h1>
+            <div>
+                <p>Expert: {{owner.username}}</p>
+                <h1>Category:</h1>
+                {{skill.category}}
+                {{skill.owner.name}}
+                {{#if skill.category}}
+                <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 40px;" class="mx-1">
+                {{/if}}
+            </div>
+            <div>
+                <h3>Name</h3>
+                <p>{{skill.averageRate}}</p>
+                <p>{{skill.name}}</p>
+                 <div class="rate" data-rate="{{skill.averageRate}}">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+
+            </div>
+            <div>
+                <h3>Description:</h3>
+                <p>{{skill.description}}</p>
+            </div>
+            {{#if isUserLogged}}
+            <a href="/skills/{{skill.id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="/skills/{{skill.id}}/delete" class="btn btn-danger">Delete</a>
+            {{/if}}
+            <a href="/messages/{{skill.id}}" class="btn btn-info">Chat</a>
+        </div>
+        
+        {{#ifUserRated skill.ratings currentUser}}
+            {{#unless isUserLogged}}
+            <div class="col-md-6 my-4">
+                
+                <form action="/detail/{{skill.id}}" method="post" class="mb-4">
+                    <textarea name="comment" id="" cols="30" rows="10" placeholder="Write your comment" class="form-control mb-2"></textarea>
+                    <div class="rate {{#if errors.rate}}is-invalid{{/if}}">
+                        <input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                        <button type="submit" value="" class="btn btn-primary">Send</button>
+                    </div>
+                    {{#if errors.rate}} <small class="invalid-feedback">{{errors.rate}}</small>{{/if}}
+                </form>
+            </div>
+            {{/unless}}
+    
+    {{/ifUserRated}}
+    </div>
+
+    <div class="col-md-6 my-4">
+        <div class="">
+            <div class="">
+                <div class="comment-list rounded p-6">
+
+                    {{#each skill.ratings as |rating|}}
+                    <div class="comment-box border rounded border-info mb-3 p-5">
+                        <h5>{{rating.sender.username}}</h5>
+                        <p>{{rating.comment}}</p>
+                        
+                        <div class="rate" data-rate="{{rating.rate}}">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+      </div>  
+</div>
