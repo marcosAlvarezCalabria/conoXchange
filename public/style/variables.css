@@ -1,0 +1,254 @@
+:root {
+    /* ========================================
+       PRIMARY COLORS (Inspired by Venice/Burano)
+       ======================================== */
+    --primary-50: #e6f2ff;
+    --primary-100: #b3d9ff;
+    --primary-200: #80c0ff;
+    --primary-300: #4da7ff;
+    --primary-400: #1a8eff;
+    --primary-500: #048ABF;  /* Main brand - Bright Blue */
+    --primary-600: #037299;
+    --primary-700: #025a73;
+    --primary-800: #033E8C;  /* Deep Blue */
+    --primary-900: #022952;
+
+    /* ========================================
+       ACCENT COLORS (Warm Mediterranean)
+       ======================================== */
+    --accent-50: #fff9e6;
+    --accent-100: #fff0b3;
+    --accent-200: #ffe680;
+    --accent-300: #ffdd4d;
+    --accent-400: #ffd31a;
+    --accent-500: #F2B705;  /* Golden Yellow */
+    --accent-600: #D96704;  /* Warm Orange */
+    --accent-700: #bf5904;
+    --accent-800: #a64c03;
+    --accent-900: #8c3f03;
+
+    /* ========================================
+       NEUTRAL COLORS (Modern Grays)
+       ======================================== */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+
+    /* ========================================
+       SEMANTIC COLORS
+       ======================================== */
+    --success-light: #d1fae5;
+    --success: #10b981;
+    --success-dark: #047857;
+
+    --warning-light: #fed7aa;
+    --warning: #f59e0b;
+    --warning-dark: #d97706;
+
+    --error-light: #fee2e2;
+    --error: #ef4444;
+    --error-dark: #dc2626;
+
+    --info-light: #dbeafe;
+    --info: #3b82f6;
+    --info-dark: #1d4ed8;
+
+    /* ========================================
+       BACKGROUND & SURFACE
+       ======================================== */
+    --bg-primary: #ffffff;
+    --bg-secondary: var(--gray-50);
+    --bg-tertiary: var(--gray-100);
+    --surface: #ffffff;
+    --surface-hover: var(--gray-50);
+
+    /* ========================================
+       TEXT COLORS
+       ======================================== */
+    --text-primary: var(--gray-900);
+    --text-secondary: var(--gray-600);
+    --text-tertiary: var(--gray-500);
+    --text-inverse: #ffffff;
+    --text-link: var(--primary-600);
+    --text-link-hover: var(--primary-700);
+
+    /* ========================================
+       BORDER COLORS
+       ======================================== */
+    --border-light: var(--gray-200);
+    --border-medium: var(--gray-300);
+    --border-dark: var(--gray-400);
+
+    /* ========================================
+       GLASSMORPHISM (Modern Frosted Glass)
+       ======================================== */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-bg-dark: rgba(255, 255, 255, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --glass-blur: 12px;
+
+    /* ========================================
+       GRADIENTS
+       ======================================== */
+    --gradient-primary: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
+    --gradient-sunset: linear-gradient(135deg, #EEEB73 0%, #F2E064 12.5%, #F5D454 25%, #F7C744 37.5%, #F9B834 50%, #FBA925 62.5%, #FD991A 75%, #FF8A15 87.5%, #e4af86 100%);
+    --gradient-hero: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 50%, var(--accent-600) 100%);
+    --gradient-card: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.03) 100%);
+
+    /* ========================================
+       SHADOWS (Elevation System)
+       ======================================== */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+    /* Colored Shadows */
+    --shadow-primary: 0 10px 25px -5px rgba(4, 138, 191, 0.3);
+    --shadow-accent: 0 10px 25px -5px rgba(242, 183, 5, 0.3);
+
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-full: 9999px;
+
+    /* ========================================
+       SPACING SCALE (Based on 4px/0.25rem)
+       ======================================== */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+    --space-16: 4rem;     /* 64px */
+    --space-20: 5rem;     /* 80px */
+    --space-24: 6rem;     /* 96px */
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+
+    /* Font Sizes */
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.875rem;    /* 14px */
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-3xl: 1.875rem;   /* 30px */
+    --text-4xl: 2.25rem;    /* 36px */
+    --text-5xl: 3rem;       /* 48px */
+    --text-6xl: 3.75rem;    /* 60px */
+
+    /* Font Weights */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+
+    /* ========================================
+       TRANSITIONS & ANIMATIONS
+       ======================================== */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ========================================
+       Z-INDEX SCALE
+       ======================================== */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+
+    /* ========================================
+       CONTAINER & LAYOUT
+       ======================================== */
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1280px;
+    --container-2xl: 1536px;
+
+    /* ========================================
+       LEGACY SUPPORT (Backwards Compatibility)
+       ======================================== */
+    --accent-color-1: var(--primary-800);
+    --accent-color-2: var(--primary-500);
+    --warm-yellow-1: #EEEB73;
+    --warm-yellow-2: #F2E064;
+    --warm-orange-1: #F5D454;
+    --warm-orange-2: #F7C744;
+    --warm-orange-3: #FD991A;
+    --warm-red: #BF1304;
+}
+
+/* ========================================
+   GLOBAL RESETS & BASE STYLES
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus Styles for Accessibility */
+:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}

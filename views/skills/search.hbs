@@ -1,99 +1,113 @@
 
 
-<form action="/search" method="get">
-  <div class="container d-flex justify-content-center mt-4">
-    <div class=" container-fluid justify-content-center form row d-flex align-items-center"> 
-      <div class="col-md-6"> 
-        <div class="input-group"> 
-          <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary button-search" style="padding: 10px 20px;background-color: #007bff;border: 1px solid #78afe9;color: #ffffff;font-size: 16px;
-          border-radius: 10px 0 0 10px;" type="submit"><i class="fas fa-search"></i></button>
-          </div>
-          
-          <input type="text" class="form-control" name="name" placeholder="Search anything..." value="{{query.name}}">
+<!-- Search Section -->
+<section class="search-section">
+  <div class="container">
+    <form action="/search" method="get" class="search-form">
+      <div class="search-input-group">
+        <div class="search-wrapper">
+          <button class="search-btn" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+          <input type="text" class="search-input" name="name" placeholder="Search for skills..." value="{{query.name}}">
         </div>
-      </div>
-      <div class="col-md-2"> 
-        <select class="form-select" name="category">
-          <option value="all">Categories</option>
-          <option value="crafts" {{#ifEq query.category 'crafts' }}selected{{/ifEq}}>crafts</option>
-          <option value="cooking" {{#ifEq query.category 'cooking' }}selected{{/ifEq}}>cooking</option>
-          <option value="gardening and horticulture" {{#ifEq query.category 'gardening and horticulture'}}selected{{/ifEq}}>gardening and horticulture</option>
-          <option value="everyday life skills" {{#ifEq query.category 'everyday life skills' }}selected{{/ifEq}}>everyday live skills</option>
-          <option value="music" {{#ifEq query.category 'music' }}selected{{/ifEq}}>music</option>
-          <option value="sports" {{#ifEq query.category 'sports' }}selected{{/ifEq}}>sports</option>
-          <option value="technology" {{#ifEq query.category 'technology' }}selected{{/ifEq}}>technology</option>
-          <option value="languages and culture" {{#ifEq query.category 'languages and culture' }}selected{{/ifEq}}>languages and culture</option>
-          <option value="others" {{#ifEq query.category 'others' }}selected{{/ifEq}}>others</option>
+        <select class="category-select" name="category">
+          <option value="all">All Categories</option>
+          <option value="crafts" {{#ifEq query.category 'crafts'}}selected{{/ifEq}}>Crafts</option>
+          <option value="cooking" {{#ifEq query.category 'cooking'}}selected{{/ifEq}}>Cooking</option>
+          <option value="gardening and horticulture" {{#ifEq query.category 'gardening and horticulture'}}selected{{/ifEq}}>Gardening & Horticulture</option>
+          <option value="everyday life skills" {{#ifEq query.category 'everyday life skills'}}selected{{/ifEq}}>Everyday Life Skills</option>
+          <option value="music" {{#ifEq query.category 'music'}}selected{{/ifEq}}>Music</option>
+          <option value="sports" {{#ifEq query.category 'sports'}}selected{{/ifEq}}>Sports</option>
+          <option value="technology" {{#ifEq query.category 'technology'}}selected{{/ifEq}}>Technology</option>
+          <option value="languages and culture" {{#ifEq query.category 'languages and culture'}}selected{{/ifEq}}>Languages & Culture</option>
+          <option value="others" {{#ifEq query.category 'others'}}selected{{/ifEq}}>Others</option>
         </select>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+</section>
 
 
-<hr>
-<div class="container-fluid  row justify-content-center">
-  <div class="title text-center"><h1>Suggestions</h1></div>
-  {{#each skillsByInterests as |skill|}}
-  <div class="card col- col-sm-6 col-md-4 col-lg-4  m-3 ">
-    <div class="top-container">
-      <a class="img-card" href="/profile/{{skill.owner.id}}"><img
-          src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="img-fluid profile-image" width="70"></a>
-      <div class="rate" style="max-width: 15rem;" data-rate="{{skill.averageRate}}">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <p class="name">{{skill.owner.username}}</p>
+<!-- Suggestions Section -->
+<section class="skills-section">
+  <div class="container">
+    <h2 class="skills-title">Suggested For You</h2>
+    <div class="skills-grid">
+      {{#each skillsByInterests as |skill|}}
+      <div class="card">
+        <div class="top-container">
+          <a class="img-card" href="/profile/{{skill.owner.id}}">
+            <img src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="profile-image" alt="{{skill.owner.username}}">
+          </a>
+          <div class="rate" data-rate="{{skill.averageRate}}">
+            <div class="stars">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+            </div>
+            <p class="name">{{skill.owner.username}}</p>
+          </div>
+        </div>
+        <a class="card-link" href="/detail/{{skill.id}}">
+          <div class="middle-container">
+            <div class="category-badge">
+              <img src="{{categoryImage skill.category}}" alt="{{skill.category}}">
+              <span class="current-balance">{{skill.category}}</span>
+            </div>
+            <div class="description">
+              <p>{{skill.name}}</p>
+            </div>
+          </div>
+        </a>
       </div>
+      {{/each}}
     </div>
-    <a class="text-decoration-none" style="color: black;" href="/detail/{{skill.id}}">
-      <div class="middle-container d-flex row justify-content-between align-items-center mt-3 p-2">
-        <div class="d-flex flex-row col-md-12 mr-1">
-          <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 20px;" class="mx-1">
-          <span class="current-balance">{{skill.category}}</span>
-        </div>
-        <div class="description">
-          <p>{{skill.name}}</p>
-        </div>
-      </div>
-    </a>
   </div>
-  {{/each}}
-</div>
-<hr>
-<div class="container-fluid row justify-content-center">
-  <div class="title text-center"><h1>Skills</h1></div>
-  {{#each skillsByFinder as |skill|}}
-  <div class="card col-12  col-sm-4 col-md-4 col-lg-2 col-xl-2 m-3">
-    <div class="top-container">
-      <a class="img-card" href="/profile/{{skill.owner.id}}"><img
-          src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="img-fluid profile-image" width="70"></a>
-      <div class="rate" style="max-width: 15rem;" data-rate="{{skill.averageRate}}">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <p class="name">{{skill.owner.username}}</p>
+</section>
+
+<hr class="section-divider">
+
+<!-- All Skills Section -->
+<section class="skills-section">
+  <div class="container">
+    <h2 class="skills-title">All Skills</h2>
+    <div class="skills-grid">
+      {{#each skillsByFinder as |skill|}}
+      <div class="card">
+        <div class="top-container">
+          <a class="img-card" href="/profile/{{skill.owner.id}}">
+            <img src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="profile-image" alt="{{skill.owner.username}}">
+          </a>
+          <div class="rate" data-rate="{{skill.averageRate}}">
+            <div class="stars">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+            </div>
+            <p class="name">{{skill.owner.username}}</p>
+          </div>
+        </div>
+        <a class="card-link" href="/detail/{{skill.id}}">
+          <div class="middle-container">
+            <div class="category-badge">
+              <img src="{{categoryImage skill.category}}" alt="{{skill.category}}">
+              <span class="current-balance">{{skill.category}}</span>
+            </div>
+            <div class="description">
+              <p>{{skill.name}}</p>
+            </div>
+          </div>
+        </a>
       </div>
+      {{/each}}
     </div>
-    <a class="text-decoration-none" style="color: black;" href="/detail/{{skill.id}}">
-      <div class="middle-container d-flex row justify-content-between align-items-center mt-3 p-2">
-        <div class="d-flex flex-row col-md-12 mr-1">
-          <img src="{{categoryImage skill.category}}" alt="Img {{skill.category}}" style="width: 20px;" class="mx-1">
-          <span class="current-balance">{{skill.category}}</span>
-        </div>
-        <div class="description">
-          <p>{{skill.name}}</p>
-        </div>
-      </div>
-    </a>
   </div>
-  {{/each}}
-</div>
+</section>
 
 
 
