@@ -1,39 +1,93 @@
-<h1>Skills</h1>
-<form action="/skills/new" method="post">
-<div class="container d-flex flex-column align-items-center">
+<div class="form-page">
+  <div class="container">
+    <div class="form-container">
+      <div class="form-header">
+        <h1>Create New Skill</h1>
+        <p>Share your knowledge with the community</p>
+      </div>
 
-  <div class="mb-3 col-md-6">
-    <label class="form-label"><h4>Category</h4></label>
-    <select name="category" class="form-select {{#if errors.category}}is-invalid{{/if}}">
-      <option selected>Select a category</option>
-      <option>crafts</option>
-      <option>cooking</option>
-      <option>gardening and horticulture</option>
-      <option>everyday life skills</option>
-      <option>music</option>
-      <option>sports</option>
-      <option>technology</option>
-      <option>languages and culture</option>
-      <option>others</option>
+      <form action="/skills/new" method="post">
+        <!-- Category -->
+        <div class="form-group">
+          <label for="category">
+            <i class="bi bi-tag"></i>
+            Category
+          </label>
+          <select
+            name="category"
+            id="category"
+            class="modern-select {{#if errors.category}}is-invalid{{/if}}"
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="crafts">Crafts</option>
+            <option value="cooking">Cooking</option>
+            <option value="gardening and horticulture">Gardening and Horticulture</option>
+            <option value="everyday life skills">Everyday Life Skills</option>
+            <option value="music">Music</option>
+            <option value="sports">Sports</option>
+            <option value="technology">Technology</option>
+            <option value="languages and culture">Languages and Culture</option>
+            <option value="others">Others</option>
+          </select>
+          {{#if errors.category}}
+            <div class="invalid-feedback">{{errors.category}}</div>
+          {{/if}}
+        </div>
 
-    </select>
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">
+            <i class="bi bi-pencil"></i>
+            Skill Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="modern-input {{#if errors.name}}is-invalid{{/if}}"
+            placeholder="e.g., Advanced JavaScript, Guitar Lessons, Italian Cooking..."
+            required
+          >
+          {{#if errors.name}}
+            <div class="invalid-feedback">{{errors.name}}</div>
+          {{/if}}
+        </div>
 
-    {{#if errors.category}} <div class="invalid-feedback">{{errors.category}}</div>{{/if}}
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">
+            <i class="bi bi-file-text"></i>
+            Description
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            class="modern-textarea {{#if errors.description}}is-invalid{{/if}}"
+            placeholder="Describe your skill, what you'll teach, and what others can learn from you..."
+            required
+          ></textarea>
+          {{#if errors.description}}
+            <div class="invalid-feedback">{{errors.description}}</div>
+          {{/if}}
+          <div class="form-help">
+            <i class="bi bi-info-circle"></i>
+            <span>Write a detailed description to help others understand your skill</span>
+          </div>
+        </div>
 
-
+        <!-- Actions -->
+        <div class="form-actions">
+          <a href="/search" class="btn-cancel">
+            <i class="bi bi-x-circle"></i>
+            Cancel
+          </a>
+          <button type="submit" class="btn-submit">
+            <i class="bi bi-check-circle"></i>
+            Create Skill
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="mb-3 col-md-6">
-    <label for="name" class="form-label"><h4>Name</h4></label>
-    <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" name="name">
-    {{#if errors.name}}<div class="invalid-feedback">{{errors.name}} </div>{{/if}}
-  </div>
-  <div class="mb-3 col-md-6">
-    <label for="description" class="form-label"><h4>Description</h4></label>
-    <textarea class="form-control {{#if errors.description}}is-invalid{{/if}} " id="description" rows="3"
-      name="description" placeholder="write a brief description about your skill"></textarea>
-    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
-  </div>
-
-  <button type="submit" class="btn btn-primary col-md-2">Send</button>
-</form>
 </div>
