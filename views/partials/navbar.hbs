@@ -1,76 +1,114 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-  <div class="container pl-2">
-    <div class="left-nav row  ">
-      <div class="logo col ml-3 p-0">
-        <a class="navbar-brand" href="/">
-          <img id="img-logo" src="/img/logo3.png" alt="conoXchange Logo">
-        </a>
+<nav
+  class="main-navbar fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-100 dark:border-white/5"
+  id="navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Brand/Logo -->
+      <a class="flex-shrink-0 flex items-center gap-2 group" href="/">
+        <div
+          class="relative w-10 h-10 flex items-center justify-center bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors">
+          <img src="/img/logo3.png" alt="conoXchange Logo" class="w-8 h-8 object-contain">
+        </div>
+        <span
+          class="text-xl font-bold tracking-tight text-primary dark:text-white group-hover:text-accent transition-colors font-heading">
+          conoXchange
+        </span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex md:hidden">
+        <button
+          class="navbar-toggle w-12 h-12 flex items-center justify-center rounded-full text-primary dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors focus:outline-none"
+          aria-label="Menu">
+          <span class="hamburger-box relative w-6 h-5 block">
+            <span
+              class="hamburger-inner block absolute w-full h-0.5 bg-current transition-all duration-300 top-0"></span>
+            <span
+              class="hamburger-inner block absolute w-full h-0.5 bg-current transition-all duration-300 top-1/2 -translate-y-1/2"></span>
+            <span
+              class="hamburger-inner block absolute w-full h-0.5 bg-current transition-all duration-300 bottom-0"></span>
+          </span>
+        </button>
       </div>
-      {{#if currentUser}}
-      <div class="user flex-start col p-0 ">
 
-        <a class="navbar-user  m-0" href="/profile/{{currentUser.id}}">
-          <img src="https://i.pravatar.cc/150?u={{currentUser.email}}" alt="{{currentUser.username}}">
-          <p>{{currentUser.username}}</p>
-        </a>
-
-        {{/if}}
-      </div>
-
-    </div>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse m-3"  id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        {{#unless currentUser}}
-        <li class="nav-item">
-          <button type="button" class="btn btn-warning dropdown-toggle"
-            data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-            Login
-          </button>
-          <div class="dropdown " >
-            <form method="post" action="/login" class="dropdown-menu p-2" >
-              <div >
-                <label for="" class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email" placeholder="email@example.com">
-              </div>
-              <div>
-                <label for="" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password">
-              </div>
-              <div class="mb-3">
-                <div class="form-check"></div>
-              </div>
-              <div class="text-center mb-3">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-              </div>
-
-            </form>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a id="button-register" href="/register" class="btn btn-warning">Register</a>
-        </li>
-        {{/unless}}
-
+      <!-- Desktop Menu -->
+      <div class="navbar-menu hidden md:flex items-center gap-6">
         {{#if currentUser}}
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/search">Skills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/petitions/show">Petitions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/profile/me">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/logout/{{currentUser.id}}">Logout</a>
-        </li>
+        <div
+          class="flex items-center gap-1 bg-gray-50 dark:bg-white/5 rounded-full p-1 pr-6 border border-gray-100 dark:border-white/10">
+          <a href="/search"
+            class="px-5 py-2 text-sm font-semibold text-text-muted hover:text-primary dark:hover:text-white transition-colors rounded-full hover:bg-white dark:hover:bg-white/10">Skills</a>
+          <a href="/petitions/show"
+            class="px-5 py-2 text-sm font-semibold text-text-muted hover:text-primary dark:hover:text-white transition-colors rounded-full hover:bg-white dark:hover:bg-white/10">Petitions</a>
+        </div>
+
+        <div class="relative group user-dropdown">
+          <a href="/profile/me"
+            class="user-avatar-trigger flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-full hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100 dark:hover:border-white/10 text-decoration-none">
+            <img src="{{currentUser.avatar}}" onerror="this.src='https://i.pravatar.cc/150?u={{currentUser.email}}'"
+              alt="{{currentUser.username}}"
+              class="w-8 h-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-800 shadow-sm" />
+            <span
+              class="text-sm font-bold text-primary dark:text-white group-hover:text-accent transition-colors">{{currentUser.username}}</span>
+          </a>
+        </div>
+
+        <a href="/logout"
+          class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all"
+          title="Logout">
+          <span class="material-symbols-outlined text-[20px]">logout</span>
+        </a>
+
+        {{else}}
+        <div class="flex items-center gap-4">
+          <a href="/login"
+            class="text-sm font-bold text-primary dark:text-white hover:text-accent transition-colors">Log In</a>
+          <a href="/register"
+            class="px-6 py-2.5 bg-primary text-white text-sm font-bold rounded-full shadow-lg shadow-primary/20 hover:bg-primary/90 hover:-translate-y-0.5 transition-all">Get
+            Started</a>
+        </div>
         {{/if}}
-      </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Dropdown (Controlled by JS) -->
+  <div
+    class="mobile-menu md:hidden fixed top-20 left-0 w-full bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-white/5 shadow-xl transition-all duration-300 origin-top scale-y-0 opacity-0 invisible"
+    id="mobile-menu-dropdown">
+    <div class="flex flex-col p-6 gap-4">
+      {{#if currentUser}}
+      <a href="/search"
+        class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+        <span class="material-symbols-outlined text-accent">search</span>
+        <span class="font-bold text-primary dark:text-white">Explore Skills</span>
+      </a>
+      <a href="/petitions/show"
+        class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+        <span class="material-symbols-outlined text-accent">campaign</span>
+        <span class="font-bold text-primary dark:text-white">Community Petitions</span>
+      </a>
+      <div class="h-px bg-gray-100 dark:bg-white/5 my-2"></div>
+      <a href="/profile/me"
+        class="flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+        <img src="{{currentUser.avatar}}" onerror="this.src='https://i.pravatar.cc/150?u={{currentUser.email}}'"
+          class="w-8 h-8 rounded-full">
+        <span class="font-bold text-primary dark:text-white">My Profile</span>
+      </a>
+      <a href="/logout"
+        class="flex items-center gap-3 p-3 rounded-2xl hover:bg-red-50 dark:hover:bg-red-500/10 text-red-500 transition-colors">
+        <span class="material-symbols-outlined">logout</span>
+        <span class="font-bold">Sign Out</span>
+      </a>
+      {{else}}
+      <a href="/login"
+        class="w-full py-4 text-center font-bold text-primary dark:text-white border border-gray-200 dark:border-white/10 rounded-full hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">Log
+        In</a>
+      <a href="/register"
+        class="w-full py-4 text-center font-bold text-white bg-primary rounded-full shadow-lg hover:bg-primary/90 transition-colors">Create
+        Account</a>
+      {{/if}}
     </div>
   </div>
 </nav>

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Define these here if not using variables.css, 
+       BUT we arguably want to keep variables.css as the source of truth 
+       and just import it. However, Tailwind usually wants to be the source of truth.
+       For now, we successfully mapped them in tailwind.config.js so we can keep 
+       variables.css loaded separately OR import it here. 
+       Let's keep variables.css separate in layout to avoid breaking everything at once, 
+       but ideally we eventually move them here.
+    */
+    }
+}
+
+@layer components {
+
+    /* Floating Label Styles */
+    .floating-label-group {
+        @apply relative mb-4;
+    }
+
+    .floating-label-input:placeholder-shown+.floating-label {
+        @apply top-1/2 -translate-y-1/2 left-6 text-slate-400 text-base scale-100;
+    }
+
+    .floating-label-input:focus+.floating-label,
+    .floating-label-input:not(:placeholder-shown)+.floating-label {
+        @apply top-2 left-6 text-xs text-slate-500 scale-90;
+    }
+
+    .floating-label {
+        @apply absolute pointer-events-none transition-all duration-200 transform origin-left;
+    }
+}

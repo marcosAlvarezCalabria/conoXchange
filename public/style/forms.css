@@ -75,8 +75,8 @@
 .modern-select:focus,
 .modern-textarea:focus {
   outline: none;
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 4px var(--primary-50);
+  border-color: var(--accent-500);
+  box-shadow: 0 0 0 4px var(--accent-100);
 }
 
 .modern-input::placeholder,

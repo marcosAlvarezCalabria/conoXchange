@@ -3,30 +3,125 @@
 <!-- Search Section -->
 <section class="search-section">
   <div class="container">
+    <div class="search-header">
+      <h1 class="search-title">Discover Skills</h1>
+      <p class="search-subtitle">Find the perfect skill to learn or share your expertise</p>
+    </div>
+
     <form action="/search" method="get" class="search-form">
-      <div class="search-input-group">
-        <div class="search-wrapper">
-          <button class="search-btn" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-          <input type="text" class="search-input" name="name" placeholder="Search for skills..." value="{{query.name}}">
-        </div>
-        <select class="category-select" name="category">
-          <option value="all">All Categories</option>
-          <option value="crafts" {{#ifEq query.category 'crafts'}}selected{{/ifEq}}>Crafts</option>
-          <option value="cooking" {{#ifEq query.category 'cooking'}}selected{{/ifEq}}>Cooking</option>
-          <option value="gardening and horticulture" {{#ifEq query.category 'gardening and horticulture'}}selected{{/ifEq}}>Gardening & Horticulture</option>
-          <option value="everyday life skills" {{#ifEq query.category 'everyday life skills'}}selected{{/ifEq}}>Everyday Life Skills</option>
-          <option value="music" {{#ifEq query.category 'music'}}selected{{/ifEq}}>Music</option>
-          <option value="sports" {{#ifEq query.category 'sports'}}selected{{/ifEq}}>Sports</option>
-          <option value="technology" {{#ifEq query.category 'technology'}}selected{{/ifEq}}>Technology</option>
-          <option value="languages and culture" {{#ifEq query.category 'languages and culture'}}selected{{/ifEq}}>Languages & Culture</option>
-          <option value="others" {{#ifEq query.category 'others'}}selected{{/ifEq}}>Others</option>
-        </select>
+      <!-- Main Search Bar -->
+      <div class="search-bar-wrapper">
+        <i class="bi bi-search search-icon"></i>
+        <input
+          type="text"
+          class="search-bar"
+          name="name"
+          placeholder="Search for skills, topics, or keywords..."
+          value="{{query.name}}"
+        >
+        <button class="search-submit-btn" type="submit">
+          Search
+        </button>
+      </div>
+
+      <!-- Category Chips -->
+      <div class="category-chips">
+        <input type="hidden" name="category" id="selectedCategory" value="{{query.category}}">
+
+        <button type="button" class="category-chip {{#unless query.category}}active{{/unless}}" data-category="all">
+          <i class="bi bi-grid"></i>
+          All
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'technology'}}active{{/ifEq}}" data-category="technology">
+          <i class="bi bi-code-slash"></i>
+          Technology
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'cooking'}}active{{/ifEq}}" data-category="cooking">
+          <i class="bi bi-cup-hot"></i>
+          Cooking
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'music'}}active{{/ifEq}}" data-category="music">
+          <i class="bi bi-music-note"></i>
+          Music
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'sports'}}active{{/ifEq}}" data-category="sports">
+          <i class="bi bi-trophy"></i>
+          Sports
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'languages and culture'}}active{{/ifEq}}" data-category="languages and culture">
+          <i class="bi bi-translate"></i>
+          Languages
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'crafts'}}active{{/ifEq}}" data-category="crafts">
+          <i class="bi bi-brush"></i>
+          Crafts
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'gardening and horticulture'}}active{{/ifEq}}" data-category="gardening and horticulture">
+          <i class="bi bi-flower1"></i>
+          Gardening
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'everyday life skills'}}active{{/ifEq}}" data-category="everyday life skills">
+          <i class="bi bi-house"></i>
+          Life Skills
+        </button>
+
+        <button type="button" class="category-chip {{#ifEq query.category 'others'}}active{{/ifEq}}" data-category="others">
+          <i class="bi bi-three-dots"></i>
+          Others
+        </button>
       </div>
     </form>
   </div>
 </section>
+
+<script>
+  // Category chip selection
+  document.querySelectorAll('.category-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      // Remove active class from all chips
+      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+
+      // Add active class to clicked chip
+      this.classList.add('active');
+
+      // Update hidden input
+      const category = this.dataset.category;
+      document.getElementById('selectedCategory').value = category === 'all' ? '' : category;
+
+      // Save scroll position before submit
+      sessionStorage.setItem('searchScrollPos', window.pageYOffset);
+      sessionStorage.setItem('shouldScroll', 'true');
+
+      // Auto-submit form
+      this.closest('form').submit();
+    });
+  });
+
+  // Restore scroll position after page load
+  window.addEventListener('load', function() {
+    if (sessionStorage.getItem('shouldScroll') === 'true') {
+      const scrollPos = sessionStorage.getItem('searchScrollPos');
+      if (scrollPos) {
+        // Wait a bit for page to render, then scroll
+        setTimeout(() => {
+          window.scrollTo({
+            top: parseInt(scrollPos),
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+      sessionStorage.removeItem('shouldScroll');
+    }
+  });
+</script>
 
 
 <!-- Suggestions Section -->
@@ -35,7 +130,7 @@
     <h2 class="skills-title">Suggested For You</h2>
     <div class="skills-grid">
       {{#each skillsByInterests as |skill|}}
-      <div class="card">
+      <div class="card" data-category="{{skill.category}}">
         <div class="top-container">
           <a class="img-card" href="/profile/{{skill.owner.id}}">
             <img src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="profile-image" alt="{{skill.owner.username}}">
@@ -76,7 +171,7 @@
     <h2 class="skills-title">All Skills</h2>
     <div class="skills-grid">
       {{#each skillsByFinder as |skill|}}
-      <div class="card">
+      <div class="card" data-category="{{skill.category}}">
         <div class="top-container">
           <a class="img-card" href="/profile/{{skill.owner.id}}">
             <img src="https://i.pravatar.cc/150?u={{skill.owner.email}}" class="profile-image" alt="{{skill.owner.username}}">

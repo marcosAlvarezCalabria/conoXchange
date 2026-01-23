@@ -1,55 +1,54 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>conoXchange - Exchange Skills, Learn Together</title>
-    <meta name="description" content="Connect with people to share knowledge and learn new skills through conoXchange skill exchange platform.">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>conoXchange - Exchange Skills, Learn Together</title>
+  <meta name="description"
+    content="Connect with people to share knowledge and learn new skills through conoXchange skill exchange platform.">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/390f84f7f4.js" crossorigin="anonymous"></script>
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-    <!-- Google Fonts - Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="/style/output.css">
 
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/style/variables.css">
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/navbar.css">
-    <link rel="stylesheet" href="/style/home.css">
-    <link rel="stylesheet" href="/style/cardSearch.css">
-    <link rel="stylesheet" href="/style/skillDetail.css">
-    <link rel="stylesheet" href="/style/forms.css">
-    <link rel="stylesheet" href="/style/stars.css">
+  <!-- Custom Styles (Legacy/Specific) -->
+  <link rel="stylesheet" href="/style/variables.css">
+  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/navbar.css">
+  <link rel="stylesheet" href="/style/home.css">
+  <link rel="stylesheet" href="/style/cardSearch.css">
+  <link rel="stylesheet" href="/style/skillDetail.css">
+  <link rel="stylesheet" href="/style/forms.css">
+  <link rel="stylesheet" href="/style/auth.css">
+  <link rel="stylesheet" href="/style/stars.css">
 
-    <!-- Favicon -->
-    <link rel="icon" href="/img/logo3.png" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="icon" href="/img/logo3.png" type="image/x-icon">
 
-  </head>
-  
-  <body>
-    <header>
-      {{>navbar}}
-    </header>
+</head>
 
-    <main>
-      {{{body}}}
-    </main>
+<body>
+  <header>
+    {{>navbar}}
+  </header>
+
+  <main>
+    {{{body}}}
+  </main>
 
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    {{>footer}}
-  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  {{>footer}}
+</body>
+
 </html>

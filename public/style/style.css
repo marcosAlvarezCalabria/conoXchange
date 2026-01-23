@@ -1,38 +1,68 @@
-.custom-background{
-    background-image: radial-gradient(circle at 118.3% 31.7%, #EEEB73 0, #F2E064 12.5%, #F5D454 25%, #F7C744 37.5%, #F9B834 50%, #FBA925 62.5%, #FD991A 75%, #FF8A15 87.5%, #e4af86da 100%);
-}
-.additional-content {
-    border: 2px solid #f5f5f5; 
-    background-color:rgb(234, 189, 55);
-    border-radius: 5px;
-    padding: 10px; 
-    margin-top: 10px;
-    text-decoration: none;
-  }
-#img-card{
-    width: 30px;
-    height: 30px;
-    padding-top: 3px;
-}
-.button-search{
-   
+/* ========================================
+   GLOBAL COMPONENT STYLES
+   ======================================== */
 
-
-        padding: 10px 20px;
-        background-color: #007bff;
-        border: 1px solid #007bff;
-        color: #ffffff;
-        font-size: 16px;
-        border-radius: 20px 0 0 20px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-
-
+/* Buttons (Barterchain Style) */
+.btn {
+    border-radius: var(--radius-button) !important;
+    font-weight: var(--font-medium);
+    transition: all var(--transition-base);
+    text-transform: capitalize;
+    padding: 0.5rem 1.5rem;
 }
-.nav-item :hover{
-    background-color:rgb(234, 189, 55) ;
-    color: #007bff!important;
+
+.btn-primary {
+    background-color: var(--accent-500) !important;
+    border-color: var(--accent-500) !important;
+    color: var(--primary-900) !important;
+    box-shadow: var(--shadow-sm);
 }
-.menu-login{
-    background-color: #EEEB73;
+
+.btn-primary:hover {
+    background-color: var(--accent-400) !important;
+    border-color: var(--accent-400) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline-primary {
+    color: var(--accent-500) !important;
+    border-color: var(--accent-500) !important;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent-500) !important;
+    color: var(--primary-900) !important;
+}
+
+/* Cards (Barterchain Style) */
+.card {
+    border-radius: var(--radius-card);
+    border: none;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Utility Classes */
+.bg-midnight {
+    background-color: var(--primary-500);
+}
+
+.text-midnight {
+    color: var(--primary-500);
+}
+
+.text-turquoise {
+    color: var(--accent-500);
+}
+
+.custom-background {
+    background: var(--gradient-sunset);
+    /* Keep legacy or update if needed */
 }

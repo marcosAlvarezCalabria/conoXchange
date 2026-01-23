@@ -227,34 +227,33 @@ Transformar conoXchange en una aplicación web moderna y atractiva para destacar
 
 ---
 
-## 🎨 Paleta de Colores Propuesta (Moderna)
+## 🎨 Paleta de Colores Propuesta (Estilo Barterchain)
 
 ```css
-/* Primary Colors */
---primary-50: #f0f9ff;
---primary-100: #e0f2fe;
---primary-500: #0ea5e9;  /* Main brand color */
---primary-600: #0284c7;
---primary-700: #0369a1;
+/* Primary Colors (Dark Mode / Text / Headers) */
+--primary-900: #0A192F; /* Midnight Blue - Main Background/Header */
+--primary-800: #112240;
+--primary-700: #233554;
 
-/* Accent Colors */
---accent-500: #8b5cf6;   /* Purple accent */
---accent-600: #7c3aed;
+/* Accent Colors (Action / Highlight) */
+--accent-500: #00F5D4; /* Turquoise / Cyan - Primary Buttons */
+--accent-400: #33FFDA; /* Hover state */
+--accent-600: #00C2A8;
 
-/* Neutrals */
---gray-50: #f9fafb;
---gray-100: #f3f4f6;
---gray-200: #e5e7eb;
---gray-300: #d1d5db;
---gray-500: #6b7280;
---gray-700: #374151;
---gray-900: #111827;
+/* Neutrals & Backgrounds */
+--bg-primary: #FFFFFF;    /* Pure White */
+--bg-secondary: #F8FAFC;  /* Light Gray Section */
+--bg-cards: #FFFFFF;
 
-/* Semantic Colors */
---success: #10b981;
---warning: #f59e0b;
---error: #ef4444;
---info: #3b82f6;
+/* Text Colors */
+--text-primary: #1E293B;   /* Slate 800 - Main Text */
+--text-secondary: #64748B; /* Slate 500 - Secondary Text */
+--text-inverse: #FFFFFF;
+
+/* UI Components */
+--radius-button: 50px;
+--radius-card: 16px;
+--shadow-card: 0 4px 20px rgba(0,0,0,0.05);
 ```
 
 ---

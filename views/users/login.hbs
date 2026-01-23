@@ -1,17 +1,145 @@
-<h1>login</h1>
-<form method="post" action="/login">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input value="{{user.email}}" type="email" name="email" class="form-control {{#if errors.password}} is-invalid{{/if}}" placeholder="Enter email">
-   
-  </div>
- 
-  <div class="form-group">
-    <label>Password</label>
-    <input  type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Password">
-  {{#if errors.password}}<small class="invalid-feedback">{{errors.password}}</small>{{/if}}
+<div class="flex w-full min-h-[calc(100vh-80px)]">
 
+  <!-- Left Panel (Desktop Only) -->
+  <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-primary">
+    <img alt="People collaborating" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay"
+      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" />
+    <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"></div>
+
+    <!-- Brand on Image -->
+    <div class="absolute top-10 left-10 flex items-center gap-3">
+      <div class="bg-accent/20 backdrop-blur-sm p-2 rounded-xl border border-white/10">
+        <img src="/img/logo3.png" alt="conoXchange Logo" class="w-8 h-8 object-contain">
+      </div>
+      <span class="text-white font-heading font-bold text-2xl tracking-tight">conoXchange</span>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="absolute bottom-20 left-10 right-10 z-10">
+      <div class="max-w-md">
+        <div class="text-accent mb-4">
+          <span class="material-symbols-outlined text-5xl">format_quote</span>
+        </div>
+        <p class="text-white text-3xl font-heading font-medium leading-tight mb-8">
+          "Trading services on conoXchange helped our startup scale 3x faster without spending a dime in cash."
+        </p>
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-full border-2 border-accent p-0.5">
+            <img alt="David Chen" class="w-full h-full rounded-full object-cover"
+              src="https://i.pravatar.cc/150?u=david@example.com" />
+          </div>
+          <div>
+            <p class="text-white font-bold text-lg">David Chen</p>
+            <p class="text-slate-300 text-sm font-medium">CEO at TechFlow</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-primary mt-2">Login</button>
-</form>
+  <!-- Right Panel (Form) -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-24 bg-white dark:bg-slate-900">
+    <div class="w-full max-w-[440px]">
+
+      <!-- Mobile Logo -->
+      <div class="lg:hidden flex items-center gap-2 mb-10">
+        <div class="bg-accent/10 w-10 h-10 rounded-xl flex items-center justify-center">
+          <img src="/img/logo3.png" alt="conoXchange Logo" class="w-6 h-6 object-contain">
+        </div>
+        <span class="text-primary dark:text-white font-heading font-bold text-2xl tracking-tight">conoXchange</span>
+      </div>
+
+      <div class="mb-10">
+        <h1 class="text-[36px] font-heading font-bold text-primary dark:text-white leading-tight mb-2">Welcome Back</h1>
+        <p class="text-text-muted text-base">Enter your details to access your dashboard</p>
+      </div>
+
+      <form action="/login" method="POST" class="space-y-5">
+
+        <!-- Email -->
+        <div class="floating-label-group">
+          <input id="email" type="email" name="email" value="{{user.email}}"
+            class="floating-label-input w-full h-[64px] px-6 pt-5 pb-1 bg-gray-50 dark:bg-white/5 border-2 border-transparent rounded-[50px] text-primary dark:text-white font-medium focus:border-accent/50 focus:bg-white dark:focus:bg-slate-800 transition-all outline-none placeholder-transparent {{#if errors.email}}bg-red-50 border-red-500{{/if}}"
+            placeholder=" " autocomplete="email" required />
+          <label for="email" class="floating-label text-gray-500 font-medium">Email Address</label>
+          {{#if errors.email}}
+          <div class="absolute -bottom-5 left-6 text-red-500 text-xs font-bold">{{errors.email}}</div>
+          {{/if}}
+        </div>
+
+        <!-- Password -->
+        <div class="floating-label-group relative">
+          <input id="password" type="password" name="password"
+            class="floating-label-input w-full h-[64px] px-6 pt-5 pb-1 bg-gray-50 dark:bg-white/5 border-2 border-transparent rounded-[50px] text-primary dark:text-white font-medium focus:border-accent/50 focus:bg-white dark:focus:bg-slate-800 transition-all outline-none placeholder-transparent {{#if errors.password}}bg-red-50 border-red-500{{/if}}"
+            placeholder=" " autocomplete="current-password" required />
+          <label for="password" class="floating-label text-gray-500 font-medium">Password</label>
+
+          <button type="button"
+            class="password-toggle absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 hover:text-accent transition-colors">
+            <span class="material-symbols-outlined">visibility</span>
+          </button>
+          {{#if errors.password}}
+          <div class="absolute -bottom-5 left-6 text-red-500 text-xs font-bold">{{errors.password}}</div>
+          {{/if}}
+        </div>
+
+        <div class="flex justify-end pt-1">
+          <a class="text-sm font-bold text-gray-500 hover:text-accent transition-colors" href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit"
+          class="w-full h-[64px] mt-4 bg-accent hover:brightness-105 active:scale-[0.98] transition-all text-primary font-bold text-lg rounded-[50px] shadow-[0_10px_20px_-5px_rgba(0,245,212,0.3)]">
+          Sign In
+        </button>
+      </form>
+
+      <div class="flex items-center my-10">
+        <div class="flex-grow border-t border-gray-100 dark:border-white/10"></div>
+        <span class="mx-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Or continue with</span>
+        <div class="flex-grow border-t border-gray-100 dark:border-white/10"></div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <button
+          class="flex items-center justify-center gap-3 h-[56px] px-4 border border-gray-200 dark:border-white/10 rounded-[50px] hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group">
+          <img alt="Google" class="w-5 h-5 opacity-80 group-hover:opacity-100 transition-opacity"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiX7GqP83wpyieNyiuaoRzobqNi83fW7SnSjrfyMhjp71qw3bFIPAxW5IgsnMMOsNx8-yrOWRnQU-Pr1xT-nuu9ETohTuwCv9f-QrIsWEZ35sEpdUkSTWZmh3luiJXuS-XjTQt-5FY1UYkMu9phlDDpBM1Ioy2dqGhiWuU2EMCc5GZAnh1yxxulYXwtdVPZHeZofk5wa0PPhBPMQku9qb1TWWAW5xZKc0iINLa6_XzbvSTr66Wu3SNqY8OJN_kTtpsWa9NzJ_kaHbm" />
+          <span class="text-sm font-bold text-gray-600 dark:text-gray-300">Google</span>
+        </button>
+        <button
+          class="flex items-center justify-center gap-3 h-[56px] px-4 border border-gray-200 dark:border-white/10 rounded-[50px] hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group">
+          <svg class="w-5 h-5 text-[#1877F2] fill-current opacity-80 group-hover:opacity-100 transition-opacity"
+            viewBox="0 0 24 24">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+            </path>
+          </svg>
+          <span class="text-sm font-bold text-gray-600 dark:text-gray-300">Facebook</span>
+        </button>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-gray-500 font-medium">
+          Don't have an account?
+          <a class="text-accent font-bold hover:underline underline-offset-4 ml-1" href="/register">Join the
+            community</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple Password Toggle Logic
+  const toggleBtn = document.querySelector('.password-toggle');
+  const passwordInput = document.getElementById('password');
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      toggleBtn.querySelector('span').textContent = type === 'password' ? 'visibility' : 'visibility_off';
+    });
+  }
+</script>
