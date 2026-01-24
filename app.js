@@ -19,7 +19,7 @@ const { session ,loadUserSession} = require("./configs/session.config");
 app.use(session);
 app.use(loadUserSession);
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 //session middleware
 

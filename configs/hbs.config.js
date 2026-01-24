@@ -6,15 +6,15 @@ const daysJs = require("./dayjs.config");
 
 hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("categoryImage", function (category) {
-
-    switch (category) {
+    const normalizedCategory = category?.toLowerCase();
+    switch (normalizedCategory) {
         case "crafts":
             return "/img/icons/crafts.png";
         case "cooking":
             return "/img/icons/cooking.png";
         case "gardening and horticulture":
             return "/img/icons/gardening and horticulture.png";
-        case "Everyday life skills":
+        case "everyday life skills":
             return "/img/icons/everyday life skills.png";
         case "music":
             return "/img/icons/music.png";
@@ -23,7 +23,7 @@ hbs.registerHelper("categoryImage", function (category) {
         case "technology":
             return "/img/icons/technology.png";
         case "languages and culture":
-            return "/img/icons/languages and culture";
+            return "/img/icons/languages and culture.png";
         case "others":
             return "/img/icons/others.png"
     }
