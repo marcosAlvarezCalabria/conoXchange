@@ -54,6 +54,9 @@ module.exports.detail = (req, res, next) => {
     })
     //ratings width virtual
     .then((skill) => {
+      if (!skill) {
+        return next(createError(404, "Skill not found"));
+      }
       const owner = skill.owner;
       const isUserLogged = req.user.id == skill.owner.id;
     
@@ -114,10 +117,14 @@ module.exports.show = (req, res, next) => {
   const userId = req.params.id;
   
 
+  const userInterests = req.user?.interests || [];
   Promise.all([
     Skill.find(criterial).populate("owner"),
-    Skill.find({category: { $in:req.user.interests } }).populate("owner").sort({_id: -1 }).limit(2)
-    ])
+    Skill.find({ category: { $in: userInterests } })
+      .populate("owner")
+      .sort({ _id: -1 })
+      .limit(2),
+  ])
     .then(([skillsByFinder,skillsByInterests]) => {
         res.render("skills/search",{skillsByFinder,skillsByInterests})
     })

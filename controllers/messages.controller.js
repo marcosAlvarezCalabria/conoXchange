@@ -38,14 +38,12 @@ module.exports.doCreate = (req, res, next) => {
             .populate("receiver");
         })
         .then((retrievedMessages) => {
-          messages = retrievedMessages;
+          const messages = retrievedMessages;
 
           res.render("messages/messages", { skill, messages });
-          
         })
         .catch((error) => next(error));
     }
   });
 };
-
 
