@@ -1,16 +1,16 @@
 /* ========================================
-   MODERN SKILL CARDS STYLES
+   SEARCH + SKILL CARDS
    ======================================== */
 
-/* Search Section */
 .search-section {
   padding: var(--space-3) 0 var(--space-2);
-  background: white;
+  background: rgba(255, 251, 244, 0.9);
   border-bottom: 1px solid var(--border-light);
   position: sticky;
   top: 70px;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 24px rgba(63, 45, 32, 0.08);
+  backdrop-filter: blur(12px);
 }
 
 .search-header {
@@ -34,7 +34,6 @@
   margin: 0 auto;
 }
 
-/* Modern Search Bar */
 .search-bar-wrapper {
   display: flex;
   align-items: center;
@@ -47,8 +46,8 @@
 }
 
 .search-bar-wrapper:focus-within {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px var(--primary-50);
+  border-color: var(--accent-400);
+  box-shadow: 0 0 0 3px rgba(198, 95, 61, 0.12);
 }
 
 .search-icon {
@@ -61,7 +60,7 @@
 .search-bar {
   flex: 1;
   border: none;
-  padding: var(--space-2) var(--space-2);
+  padding: var(--space-2);
   font-size: var(--text-sm);
   background: transparent;
   color: var(--text-primary);
@@ -77,7 +76,7 @@
 
 .search-submit-btn {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-inverse);
   border: none;
   padding: var(--space-2) var(--space-6);
   border-radius: var(--radius-full);
@@ -91,7 +90,6 @@
   transform: scale(1.02);
 }
 
-/* Category Chips */
 .category-chips {
   display: flex;
   gap: var(--space-2);
@@ -117,14 +115,14 @@
 }
 
 .category-chip:hover {
-  border-color: var(--primary-300);
-  background: var(--primary-50);
-  color: var(--primary-700);
+  border-color: var(--accent-300);
+  background: var(--accent-50);
+  color: var(--accent-700);
 }
 
 .category-chip.active {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--text-inverse);
   border-color: transparent;
 }
 
@@ -132,7 +130,6 @@
   font-size: var(--text-sm);
 }
 
-/* Section Titles */
 .skills-section {
   padding: var(--space-4) 0 var(--space-2);
 }
@@ -160,9 +157,8 @@
   padding: 0 var(--space-4);
 }
 
-/* Modern Skill Card */
 .card {
-  background: white;
+  background: rgba(255, 251, 244, 0.94);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
@@ -176,7 +172,7 @@
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -190,14 +186,13 @@
 .card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
-  border-color: var(--primary-200);
+  border-color: rgba(198, 95, 61, 0.22);
 }
 
 .card:hover::before {
   transform: scaleX(1);
 }
 
-/* Card Header */
 .top-container {
   display: flex;
   align-items: center;
@@ -219,16 +214,15 @@
   height: 40px;
   border-radius: var(--radius-md);
   object-fit: cover;
-  border: 2px solid var(--primary-100);
+  border: 2px solid rgba(92, 74, 61, 0.12);
   transition: all var(--transition-base);
 }
 
 .img-card:hover .profile-image {
-  border-color: var(--primary-500);
+  border-color: var(--accent-400);
   box-shadow: var(--shadow-primary);
 }
 
-/* Rating Section */
 .rate {
   flex: 1;
   display: flex;
@@ -256,20 +250,19 @@
   color: var(--accent-500);
 }
 
-/* Card Content */
 .middle-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-3);
-  background: var(--bg-secondary);
+  background: rgba(239, 229, 216, 0.5);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
 }
 
 .middle-container:hover {
-  background: var(--bg-tertiary);
+  background: rgba(239, 229, 216, 0.74);
 }
 
 .category-badge {
@@ -296,96 +289,67 @@
   text-transform: capitalize;
 }
 
-/* Category Colors */
-
-/* Technology - Blue */
-.card[data-category="technology"] .category-badge {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  border-color: #3b82f6;
-}
+.card[data-category="technology"] .category-badge,
 .card[data-category="technology"]::before {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #627a96 0%, #4d6886 100%);
+  color: white;
+  border-color: #627a96;
 }
 
-/* Cooking - Orange */
-.card[data-category="cooking"] .category-badge {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  color: white;
-  border-color: #f97316;
-}
+.card[data-category="cooking"] .category-badge,
 .card[data-category="cooking"]::before {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #c86b42 0%, #a75232 100%);
+  color: white;
+  border-color: #c86b42;
 }
 
-/* Music - Purple */
-.card[data-category="music"] .category-badge {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
-  color: white;
-  border-color: #a855f7;
-}
+.card[data-category="music"] .category-badge,
 .card[data-category="music"]::before {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #a95f7f 0%, #8c4f69 100%);
+  color: white;
+  border-color: #a95f7f;
 }
 
-/* Sports - Green */
-.card[data-category="sports"] .category-badge {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  color: white;
-  border-color: #22c55e;
-}
+.card[data-category="sports"] .category-badge,
 .card[data-category="sports"]::before {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  background: linear-gradient(135deg, #5f8c62 0%, #4f7851 100%);
+  color: white;
+  border-color: #5f8c62;
 }
 
-/* Languages - Pink */
-.card[data-category="languages and culture"] .category-badge {
-  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-  color: white;
-  border-color: #ec4899;
-}
+.card[data-category="languages and culture"] .category-badge,
 .card[data-category="languages and culture"]::before {
-  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  background: linear-gradient(135deg, #aa6c54 0%, #895641 100%);
+  color: white;
+  border-color: #aa6c54;
 }
 
-/* Crafts - Amber */
-.card[data-category="crafts"] .category-badge {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: white;
-  border-color: #f59e0b;
-}
+.card[data-category="crafts"] .category-badge,
 .card[data-category="crafts"]::before {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, #c49a57 0%, #a78147 100%);
+  color: white;
+  border-color: #c49a57;
 }
 
-/* Gardening - Lime */
-.card[data-category="gardening and horticulture"] .category-badge {
-  background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
-  color: white;
-  border-color: #84cc16;
-}
+.card[data-category="gardening and horticulture"] .category-badge,
 .card[data-category="gardening and horticulture"]::before {
-  background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+  background: linear-gradient(135deg, #7b8b55 0%, #657246 100%);
+  color: white;
+  border-color: #7b8b55;
 }
 
-/* Everyday Life - Cyan */
-.card[data-category="everyday life skills"] .category-badge {
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-  color: white;
-  border-color: #06b6d4;
-}
+.card[data-category="everyday life skills"] .category-badge,
 .card[data-category="everyday life skills"]::before {
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  background: linear-gradient(135deg, #7a8470 0%, #606956 100%);
+  color: white;
+  border-color: #7a8470;
 }
 
-/* Others - Slate */
-.card[data-category="others"] .category-badge {
-  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
-  color: white;
-  border-color: #64748b;
-}
+.card[data-category="others"] .category-badge,
 .card[data-category="others"]::before {
-  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  background: linear-gradient(135deg, #6f665f 0%, #564e48 100%);
+  color: white;
+  border-color: #6f665f;
 }
 
 .description {
@@ -404,7 +368,6 @@
   overflow: hidden;
 }
 
-/* Card Link */
 .card-link {
   text-decoration: none;
   color: inherit;
@@ -415,7 +378,6 @@
   color: inherit;
 }
 
-/* Empty State */
 .empty-state {
   text-align: center;
   padding: var(--space-20) var(--space-4);
@@ -439,19 +401,10 @@
   color: var(--text-tertiary);
 }
 
-/* Responsive Design */
 @media (max-width: 992px) {
   .skills-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: var(--space-4);
-  }
-
-  .search-input-group {
-    flex-direction: column;
-  }
-
-  .category-select {
-    width: 100%;
   }
 }
 
@@ -473,71 +426,4 @@
     width: 50px;
     height: 50px;
   }
-}
-
-/* Legacy Support - Old classes */
-.round-div {
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.category {
-  font-size: 16px !important;
-  color: #5957f9 !important;
-  font-weight: bold !important;
-}
-
-.recent-border {
-  border-left: 2px solid #5957f9;
-  display: flex;
-  align-items: center;
-}
-
-.recent-border:hover {
-  border-bottom: 1px solid #dee2e6 !important;
-}
-
-.recent-orders {
-  font-size: 16px;
-  font-weight: 700;
-  color: #5957f9;
-  margin-left: 2px;
-}
-
-.wishlist {
-  font-size: 16px;
-  font-weight: 700;
-  color: #272727;
-}
-
-.wishlist-border:hover {
-  border-bottom: 1px solid #dee2e6 !important;
-}
-
-.fashion-studio {
-  font-size: 16px;
-  font-weight: 700;
-  color: #272727;
-}
-
-.fashion-studio-border:hover {
-  border-bottom: 1px solid #dee2e6 !important;
-}
-
-/* Carousel (if needed in future) */
-.carousel-container {
-  overflow: hidden;
-  width: 100%;
-  margin: auto;
-}
-
-.carousel {
-  display: flex;
-  transition: transform 0.1s ease-in-out;
 }

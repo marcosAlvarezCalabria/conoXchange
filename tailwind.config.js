@@ -24,8 +24,8 @@ module.exports = {
                 "2xl": "50px", // Match variables.css --radius: 50px for buttons? Or maybe just use full
             },
             fontFamily: {
-                sans: ["Inter", "sans-serif"],
-                heading: ["Outfit", "sans-serif"],
+                sans: ["Manrope", "sans-serif"],
+                heading: ["Fraunces", "serif"],
             }
         },
     },
