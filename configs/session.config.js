@@ -3,6 +3,9 @@ const MongoStore = require("connect-mongo");
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
 
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/conoXchange";
+
 module.exports.session = expressSession({
     secret: process.env.SESSION_SECRET || "top-secret",
     resave: false,
@@ -14,7 +17,7 @@ module.exports.session = expressSession({
     },
     proxy: process.env.SESSION_SECURE === "true",
     store: MongoStore.create({
-        mongoUrl:mongoose.connection._connectionString,
+        mongoUrl: MONGODB_URI,
         ttl: 14*24*60*60,
     })
 });
