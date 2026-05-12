@@ -2,60 +2,99 @@
    GLOBAL COMPONENT STYLES
    ======================================== */
 
-/* Buttons (Barterchain Style) */
+.site-main {
+    width: 100%;
+    padding-top: 5rem;
+}
+
 .btn {
     border-radius: var(--radius-button) !important;
     font-weight: var(--font-medium);
     transition: all var(--transition-base);
     text-transform: capitalize;
-    padding: 0.5rem 1.5rem;
+    padding: 0.65rem 1.5rem;
 }
 
 .btn-primary {
-    background-color: var(--accent-500) !important;
-    border-color: var(--accent-500) !important;
-    color: var(--primary-900) !important;
-    box-shadow: var(--shadow-sm);
+    background: var(--gradient-primary) !important;
+    border: none !important;
+    color: var(--text-inverse) !important;
+    box-shadow: var(--shadow-primary);
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-400) !important;
-    border-color: var(--accent-400) !important;
+    filter: brightness(1.04);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
 .btn-outline-primary {
-    color: var(--accent-500) !important;
-    border-color: var(--accent-500) !important;
-    background: transparent;
+    color: var(--accent-600) !important;
+    border-color: var(--border-medium) !important;
+    background: rgba(255, 250, 242, 0.7);
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--accent-500) !important;
-    color: var(--primary-900) !important;
+    background: var(--accent-50) !important;
+    color: var(--accent-700) !important;
 }
 
-/* Cards (Barterchain Style) */
 .card {
     border-radius: var(--radius-card);
-    border: none;
+    border: 1px solid var(--border-light);
+    background: var(--gradient-surface);
     box-shadow: var(--shadow-card);
     transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
 }
 
-/* Utility Classes */
+.app-footer {
+    margin-top: 3rem;
+    padding: 2rem 1.25rem 2.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.footer-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 251, 244, 0.72);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+}
+
+.footer-brand {
+    color: var(--accent-600);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    margin-bottom: 0.5rem;
+}
+
+.footer-copy {
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+}
+
+.footer-meta {
+    margin-top: 0.35rem;
+    font-size: var(--text-xs);
+}
+
 .bg-midnight {
-    background-color: var(--primary-500);
+    background-color: var(--primary-700);
 }
 
 .text-midnight {
-    color: var(--primary-500);
+    color: var(--primary-700);
 }
 
 .text-turquoise {
@@ -63,6 +102,5 @@
 }
 
 .custom-background {
-    background: var(--gradient-sunset);
-    /* Keep legacy or update if needed */
+    background: var(--gradient-hero);
 }
