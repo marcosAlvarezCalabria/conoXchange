@@ -1,79 +1,103 @@
-<div class="container mt-2 fluid d-flex">
-  
-  <div class="row">
+<section class="petition-page">
+  <div class="petition-grid">
+    <section class="petition-form-panel">
+      <div class="profile-section-header">
+        <h1 class="profile-section-title">New Petition</h1>
+      </div>
 
-    <div class="col-md-6">
-        <div class="card form-group border-0 bg-transparent" style="padding: 20px;">
-            <h1 class="mb-4">New Petition</h1>
-            <form method="POST" action="/petitions/show">
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" value="{{currentUser.username}}" name="requester" class="form-control" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">What you need</label>
-                    <input type="text" value="" name="name" class="form-control {{#if errors.description}}is-invalid{{/if}}" placeholder="Right what you need">
-                    {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control {{#if errors.description}}is-invalid{{/if}}" id="description" rows="3" name="description" placeholder="write a brief description about your skill"></textarea>
-                    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>{{/if}}
-                </div>
-
-                <h3>Category</h3>
-                    {{>icons}}
-
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-light btn-lg mt-4 me-2"><i class="fas fa-plus-circle me-1"></i>Create Petition</button>
-                </div>
-                
-            </form>
+      <form method="POST" action="/petitions/show" class="petition-form">
+        <div class="form-group">
+          <label for="requester" class="input-label">Username</label>
+          <input id="requester" type="text" value="{{currentUser.username}}" name="requester" class="modern-input" readonly>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        <div class="card border-0 bg-transparent" style="padding: 20px;">
-            <h1 class="mb-4">List of petitions</h1>
-                
-                <ul class="list-group list-group-light">
-                {{#each petitions as |petition|}}
-                
-                    <li class="list-group-item d-flex justify-content-between px-3 border-0 list-group-item-warning mb-2">
-                            <div class="d-flex align-items-center">
-                                <a class="img-card" href="/profile/{{petition.requester.id}}">
-                                    <img src="https://i.pravatar.cc/150?u={{petition.requester.email}}" class="img-fluid profile-image" width="70"/>
-                                </a>
-                
-                                <div class="ms-3">
-                                    <div>
-                                        <p class="fw-bold mb-1">{{petition.name}}</p>
-                                        <p class="text-muted mb-0">{{petition.description}}</p>
-                                        <small>{{dateFormat date=petition.createdAt}}</small>
-                                    </div>
-                                    <div class="mt-2">
-                                        <p class="text-muted mb-0">Requester: {{petition.requester.username}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                    
-                    <div class="d-inline-block align-middle">
-                        {{#ifRequesterIsLogged petition.requester.username ../username}}
-                            <a class="btn btn-sm btn-danger mx-1 text-decoration-none" href="/petitions/show/{{petition.id}}/delete">Delete</a>
-                            {{else}}
-                            <a class="btn btn-link m-0 text-reset text-decoration-none" href="mailto:{{currentUser.email}}?Subject=Request%20petition%20">Send a message<i class="fas fa-envelope ms-2"></i></a>
-                        {{/ifRequesterIsLogged}}
-                    </div>
-
-                    </li>
-                
-                {{/each}}
-
-                </ul>
-            
+        <div class="form-group">
+          <label for="name" class="input-label">What you need</label>
+          <input
+            id="name"
+            type="text"
+            value="{{petition.name}}"
+            name="name"
+            class="modern-input {{#if errors.name}}is-invalid{{/if}}"
+            placeholder="Describe what you need"
+            required>
+          {{#if errors.name}}<small class="invalid-feedback">{{errors.name}}</small>{{/if}}
         </div>
-    </div>
 
+        <div class="form-group">
+          <label for="description" class="input-label">Description</label>
+          <textarea
+            id="description"
+            rows="4"
+            name="description"
+            class="modern-textarea {{#if errors.description}}is-invalid{{/if}}"
+            placeholder="Write a brief description of your request"
+            required>{{petition.description}}</textarea>
+          {{#if errors.description}}<small class="invalid-feedback">{{errors.description}}</small>{{/if}}
+        </div>
+
+        <div class="form-group">
+          <label class="input-label">Category</label>
+          <div class="petition-chip-grid">
+            {{#each petitionOptions}}
+            <label class="cursor-pointer group">
+              <input type="radio" name="category" value="{{this.value}}" class="peer sr-only" {{#ifEq this.value ../petition.category}}checked{{/ifEq}}>
+              <div class="petition-chip-option">
+                <img src="{{this.icon}}" alt="{{this.label}}" class="w-5 h-5 object-contain">
+                <span>{{this.label}}</span>
+              </div>
+            </label>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="petition-actions">
+          <button type="submit" class="btn-surface petition-submit">Create Petition</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="petition-list-panel">
+      <div class="profile-section-header">
+        <h2 class="profile-section-title">Community Petitions</h2>
+      </div>
+
+      <div class="petition-list">
+        {{#each petitions as |petition|}}
+        <article class="petition-card">
+          <div class="petition-card-main">
+            <a class="img-card" href="/profile/{{petition.requester.id}}">
+              <img src="https://i.pravatar.cc/150?u={{petition.requester.email}}" class="profile-image" alt="{{petition.requester.username}}">
+            </a>
+
+            <div class="petition-card-copy">
+              <div class="petition-card-header">
+                <p class="profile-skill-name">{{petition.name}}</p>
+                <span class="petition-date">{{dateFormat date=petition.createdAt}}</span>
+              </div>
+              <div class="category-badge petition-category">
+                <img src="{{categoryImage petition.category}}" alt="{{petition.category}}">
+                <span>{{petition.category}}</span>
+              </div>
+              <p class="petition-description">{{petition.description}}</p>
+              <p class="petition-requester">Requester: {{petition.requester.username}}</p>
+            </div>
+          </div>
+
+          <div class="petition-card-actions">
+            {{#ifRequesterIsLogged petition.requester.username ../username}}
+              <a class="btn-surface btn-danger-soft" href="/petitions/show/{{petition.id}}/delete">Delete</a>
+            {{else}}
+              <a class="btn-surface" href="mailto:{{petition.requester.email}}?subject=Petition%20about%20{{petition.name}}">Send message</a>
+            {{/ifRequesterIsLogged}}
+          </div>
+        </article>
+        {{else}}
+        <div class="profile-empty">
+          <p>No petitions yet.</p>
+        </div>
+        {{/each}}
+      </div>
+    </section>
   </div>
-
-</div>
+</section>

@@ -1,11 +1,20 @@
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
 const {
+  INTEREST_OPTIONS,
   normalizeInterests,
   pickProfileUpdates,
 } = require("./users.helpers");
 
-module.exports.create = (req, res, next) => res.render("users/register");
+function renderRegister(res, overrides = {}) {
+  return res.render("users/register", {
+    user: {},
+    interestOptions: INTEREST_OPTIONS,
+    ...overrides,
+  });
+}
+
+module.exports.create = (req, res, next) => renderRegister(res);
 
 module.exports.doCreate = (req, res, next) => {
   const user = req.body;
@@ -15,7 +24,8 @@ module.exports.doCreate = (req, res, next) => {
         res
           .status(409)
           .render("users/register", {
-            userFound,
+            user: req.body,
+            interestOptions: INTEREST_OPTIONS,
             errors: { email: "already exists" },
           });
       } else {
@@ -23,7 +33,7 @@ module.exports.doCreate = (req, res, next) => {
           email: req.body.email,
           password: req.body.password,
           username: req.body.username,
-          interests: req.body.interests
+          interests: normalizeInterests(req.body.interests),
         };
         return User.create(user).then(() => {
 
@@ -36,7 +46,11 @@ module.exports.doCreate = (req, res, next) => {
         
         res
           .status(400)
-          .render("users/register", { user, errors: error.errors });
+          .render("users/register", {
+            user,
+            interestOptions: INTEREST_OPTIONS,
+            errors: error.errors,
+          });
       } else {
         
         next(error);

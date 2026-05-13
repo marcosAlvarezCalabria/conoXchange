@@ -1,50 +1,59 @@
 const Petition = require("../models/petition.model");
-const User = require("../models/user.model");
 const mongoose = require("mongoose");
-const createError= ("http-errors")
+const { INTEREST_OPTIONS } = require("./users.helpers");
 
+function renderPetitions(res, req, petitions, overrides = {}) {
+  return res.render("petitions/show", {
+    petitions,
+    username: req.user.username,
+    petition: {},
+    petitionOptions: INTEREST_OPTIONS,
+    ...overrides,
+  });
+}
 
 module.exports.show = (req, res, next) => {
-    const username = req.user.username
-
-    Petition.find()
-        .populate("requester")
-        .then((petitions) => {
-
-            res.render("petitions/show", { petitions, username });
-            
-
-
-        })
-        .catch((error) => next(error));
-
-   
-}
-module.exports.doCreate = (req, res, next) => {
-    const petition = req.body;
-    petition.name = req.body.name;
-    petition.description = req.body.description;
-    petition.requester = req.user.id;
-    petition.category = req.body.category;
-
-    Petition.create(petition)
-        .then((petitionCreated) => {
-            res.redirect("/petitions/show");
-        })
-        .catch((error) => {
-            if (error instanceof mongoose.Error.ValidationError) {
-                // Renderiza la misma vista con los errores en caso de validación fallida
-                return res.render("petitions/show", { errors: error.errors, currentUser: req.user });
-            } else {
-                next(error);
-            }
-        });
+  Petition.find()
+    .populate("requester")
+    .sort({ createdAt: -1 })
+    .then((petitions) => renderPetitions(res, req, petitions))
+    .catch((error) => next(error));
 };
+
+module.exports.doCreate = (req, res, next) => {
+  const petition = {
+    name: req.body.name,
+    description: req.body.description,
+    requester: req.user.id,
+    category: req.body.category,
+  };
+
+  Petition.create(petition)
+    .then(() => {
+      res.redirect("/petitions/show");
+    })
+    .catch((error) => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        return Petition.find()
+          .populate("requester")
+          .sort({ createdAt: -1 })
+          .then((petitions) =>
+            renderPetitions(res, req, petitions, {
+              petition: req.body,
+              errors: error.errors,
+            })
+          );
+      }
+
+      return next(error);
+    });
+};
+
 module.exports.delete = (req, res, next) => {
-    const { id } = req.params;
-    Petition.findByIdAndDelete(id)
-        .then(() => {
-            res.redirect("/petitions/show")
-        })
-        .catch((error) => next(error))
-}
+  const { id } = req.params;
+  Petition.findByIdAndDelete(id)
+    .then(() => {
+      res.redirect("/petitions/show");
+    })
+    .catch((error) => next(error));
+};

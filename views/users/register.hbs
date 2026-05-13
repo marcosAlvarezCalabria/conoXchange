@@ -1,9 +1,8 @@
 <div class="min-h-[calc(100vh-80px)] flex items-center justify-center p-4 md:p-8 bg-background">
   <div
-    class="relative w-full max-w-[500px] rounded-[3rem] shadow-2xl overflow-hidden flex flex-col border border-transparent dark:border-white/5"
+    class="relative w-full max-w-[620px] rounded-[3rem] shadow-2xl overflow-hidden flex flex-col border border-transparent dark:border-white/5"
     style="background-color: var(--surface-strong);">
 
-    <!-- Top Navigation -->
     <div class="flex items-center justify-between p-6">
       <a href="/" class="w-12 h-12 flex items-center justify-center rounded-full text-white hover:bg-white/10 transition-colors">
         <span class="material-symbols-outlined">arrow_back_ios_new</span>
@@ -12,19 +11,15 @@
         <img src="/img/logo-mark.svg" alt="conoXchange logo" class="w-6 h-6 object-contain">
         <span>conoXchange</span>
       </div>
-      <div class="w-12 h-12 invisible"></div> <!-- Spacer -->
+      <div class="w-12 h-12 invisible"></div>
     </div>
 
-    <!-- Headline -->
     <div class="px-8 pb-4 pt-4 text-center">
       <h1 class="text-4xl font-bold leading-tight tracking-tight text-white mb-2">Create Account</h1>
-      <p class="text-base text-text-muted font-normal">Join our community to share & learn</p>
+      <p class="text-base text-text-muted font-normal">Join our community to share and learn</p>
     </div>
 
-    <!-- Form Section -->
     <form action="/register" method="POST" class="flex flex-col gap-2 px-8 py-4">
-
-      <!-- Email Field -->
       <div class="flex flex-col w-full py-2">
         <label class="text-sm font-semibold text-white pb-2 pl-4">Email Address</label>
         <input type="email" name="email" value="{{user.email}}"
@@ -35,7 +30,6 @@
         {{/if}}
       </div>
 
-      <!-- Username Field -->
       <div class="flex flex-col w-full py-2">
         <label class="text-sm font-semibold text-white pb-2 pl-4">Username</label>
         <div class="relative w-full flex items-center">
@@ -49,7 +43,6 @@
         {{/if}}
       </div>
 
-      <!-- Password Field -->
       <div class="flex flex-col w-full py-2">
         <label class="text-sm font-semibold text-white pb-2 pl-4">Password</label>
         <div class="relative w-full flex items-center">
@@ -62,112 +55,36 @@
         {{/if}}
       </div>
 
-      <!-- Interests Section -->
       <div class="flex flex-col w-full py-4">
         <label class="text-sm font-semibold text-white pb-2 pl-4">My Interests</label>
-        <div class="grid grid-cols-2 gap-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
-          {{#each interestsList}}
-          <!-- Assuming an helper or list, but original had hardcoded checkboxes. I will keep hardcoded for now but styled -->
-          <!-- Styles for Checkboxes disguised as chips -->
-          <!-- Since I can't easily change the backend helper iterating over interests if it exists, but the original file had MANUAL divs. I will replicate manual divs with new style. -->
-
+        <div class="grid grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+          {{#each interestOptions}}
           <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="crafts" class="peer sr-only">
+            <input
+              type="checkbox"
+              name="interests"
+              value="{{this.value}}"
+              class="peer sr-only"
+              {{#if (hasInterest ../user.interests this.value)}}checked{{/if}}>
             <div
               class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/crafts.png" alt="crafts" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Crafts</span>
+              <img src="{{this.icon}}" alt="{{this.label}}" class="w-6 h-6 object-contain">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">{{this.label}}</span>
             </div>
           </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="cooking" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/cooking.png" alt="cooking" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Cooking</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="gardening and horticulture" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/gardening and horticulture.png" alt="gardening" class="w-6 h-6 object-contain">
-              <span
-                class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize leading-tight">Gardening</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="everyday life skills" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/everyday life skills.png" alt="life skills" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize leading-tight">Life
-                Skills</span>
-            </div>
-          </label>
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="music" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/music.png" alt="music" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Music</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="sports" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/sports.png" alt="sports" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Sports</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="technology" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/technology.png" alt="technology" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Tech</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="languages and culture" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/languages and culture.png" alt="languages" class="w-6 h-6 object-contain">
-              <span
-                class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize leading-tight">Languages</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer group">
-            <input type="checkbox" name="interests" value="others" class="peer sr-only">
-            <div
-              class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
-              <img src="/img/icons/others.png" alt="others" class="w-6 h-6 object-contain">
-              <span class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">Others</span>
-            </div>
-          </label>
-          {{!-- {{#each interests}} --}}
+          {{/each}}
         </div>
       </div>
 
-      <!-- Submit Button -->
       <div class="px-0 py-6">
         <button type="submit"
-          class="w-full h-14 bg-accent text-lg font-bold rounded-full hover:scale-[1.02] active:scale-[0.98] transition-all" style="color: #08111f; box-shadow: 0 14px 30px rgba(217, 119, 6, 0.28);">
+          class="w-full h-14 bg-accent text-lg font-bold rounded-full hover:scale-[1.02] active:scale-[0.98] transition-all"
+          style="color: #08111f; box-shadow: 0 14px 30px rgba(217, 119, 6, 0.28);">
           Create Account
         </button>
       </div>
-
     </form>
 
-    <!-- Bottom Link -->
     <div class="pb-10 text-center mt-auto">
       <p class="text-sm text-text-muted">
         Already have an account?
@@ -175,9 +92,7 @@
       </p>
     </div>
 
-    <!-- Decorative Blobs -->
     <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
-
   </div>
 </div>

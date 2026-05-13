@@ -1,32 +1,15 @@
 const hbs = require('hbs');
 const { options } = require('./routes.config');
 const daysJs = require("./dayjs.config");
+const { INTEREST_OPTIONS } = require("../controllers/users.helpers");
 
 
 
 hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("categoryImage", function (category) {
     const normalizedCategory = category?.toLowerCase();
-    switch (normalizedCategory) {
-        case "crafts":
-            return "/img/icons/crafts.png";
-        case "cooking":
-            return "/img/icons/cooking.png";
-        case "gardening and horticulture":
-            return "/img/icons/gardening and horticulture.png";
-        case "everyday life skills":
-            return "/img/icons/everyday life skills.png";
-        case "music":
-            return "/img/icons/music.png";
-        case "sports":
-            return "/img/icons/sports.png";
-        case "technology":
-            return "/img/icons/technology.png";
-        case "languages and culture":
-            return "/img/icons/languages and culture.png";
-        case "others":
-            return "/img/icons/others.png"
-    }
+    const match = INTEREST_OPTIONS.find((option) => option.value === normalizedCategory);
+    return match?.icon || "/img/icons/others.png";
 })
 
 hbs.registerHelper('ifEq', function (category1, category2, options) {
@@ -35,6 +18,11 @@ hbs.registerHelper('ifEq', function (category1, category2, options) {
     } else {
         return options.inverse(this);
     }
+})
+hbs.registerHelper("hasInterest", function (selectedInterests, value) {
+    if (!selectedInterests) return false;
+    if (Array.isArray(selectedInterests)) return selectedInterests.includes(value);
+    return selectedInterests === value;
 })
 hbs.registerHelper("dateFormat", function (options) {
     const { date, format } = options.hash;
