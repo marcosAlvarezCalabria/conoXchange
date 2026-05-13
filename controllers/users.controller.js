@@ -1,8 +1,12 @@
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
-const { sessions } = require("../middlewares/auth.middleware");
+const {
+  normalizeInterests,
+  pickProfileUpdates,
+} = require("./users.helpers");
 
 module.exports.create = (req, res, next) => res.render("users/register");
+
 module.exports.doCreate = (req, res, next) => {
   const user = req.body;
   User.findOne({ email: req.body.email })
@@ -52,10 +56,14 @@ module.exports.doLogin = (req, res, next) => {
       } else {
         return user.checkPassword(req.body.password).then((match) => {
           if (match) {
-            req.session.userId = user.id;
-            
+            req.session.regenerate((sessionError) => {
+              if (sessionError) {
+                return next(sessionError);
+              }
 
-            res.redirect(`/profile/${user.id}`);
+              req.session.userId = user.id;
+              return res.redirect(`/profile/${user.id}`);
+            });
           } else {
             res.status(401).render("users/login", {
               user: req.body,
@@ -75,31 +83,35 @@ module.exports.edit = (req, res, next) => {
 };
 module.exports.doEdit = (req, res, next) => {
   const userId = req.user.id;
-
-  const user = req.body;
   
-  User.findByIdAndUpdate(userId, req.body, { runValidators: true })
+  User.findById(userId)
     .then((user) => {
       if (!user) {
         return res.status(400).send("user not found");
-      } else {
-        
-        res.redirect(`/profile/me`);
       }
+
+      const updates = pickProfileUpdates(req.body);
+      user.set(updates);
+
+      return user.save().then(() => res.redirect(`/profile/me`));
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
         res
           .status(400)
-          .render("users/edit", { user: user, errors: error.errors });
+          .render("users/edit", { user: req.body, errors: error.errors });
       } else {
         next(error);
       }
     });
 };
 module.exports.logout = (req, res, next) => {
-  req.session.destroy();
-  req.session = null;
-  res.clearCookie("connect.sid");
-  res.redirect("/");
+  req.session.destroy((error) => {
+    if (error) {
+      return next(error);
+    }
+
+    res.clearCookie("connect.sid");
+    return res.redirect("/");
+  });
 };

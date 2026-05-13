@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
+const { getEnv } = require("./env.config");
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/conoXchange";
+const env = getEnv();
 
-mongoose.connect(MONGODB_URI)
-    .then(() =>
-        console.info(`Sucessfully connected to the database ${MONGODB_URI}`)
-    )
-    .catch((error) => 
-        console.info(`An error ocurred trying to connect to the database ${MONGODB_URI}`,error)
-    )
+mongoose
+  .connect(env.MONGODB_URI)
+  .then(() => console.info("Successfully connected to the database"))
+  .catch((error) =>
+    console.error("An error occurred while trying to connect to the database", error)
+  );
     

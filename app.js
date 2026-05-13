@@ -1,46 +1,62 @@
 require("dotenv").config();
 
-const express = require('express');
-const mongoose = require('mongoose');
-const authMiddleware = require("./middlewares/auth.middleware");
-const createError = require("http-errors")
+const express = require("express");
+const mongoose = require("mongoose");
+const createError = require("http-errors");
+const { getEnv } = require("./configs/env.config");
+const routes = require("./configs/routes.config");
+const { applySecurity, authRateLimiter } = require("./configs/security.config");
+const {
+  createSessionMiddleware,
+  loadUserSession,
+} = require("./configs/session.config");
 
-//Init configurations
-require('./configs/hbs.config');
-require("./configs/db.config");
+require("./configs/hbs.config");
 
-const app = express();
+function createApp() {
+  const app = express();
+  const env = getEnv();
 
-app.set ("view engine", "hbs");
-app.set('views',`${__dirname}/views`);
+  app.set("trust proxy", 1);
+  app.set("view engine", "hbs");
+  app.set("views", `${__dirname}/views`);
 
-//middlewares
-const { session ,loadUserSession} = require("./configs/session.config");
-app.use(session);
-app.use(loadUserSession);
+  applySecurity(app, env);
 
-app.use(express.urlencoded());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+  app.use(createSessionMiddleware());
+  app.use(loadUserSession);
+  app.use(["/login", "/register"], authRateLimiter);
+  app.use(express.static(`${__dirname}/public`));
+  app.use("/", routes);
 
-//session middleware
-
-//application routes
-const routes= require('./configs/routes.config');
-app.use('/',routes);
-app.use(express.static((`${__dirname}/public`)));
-
-//app.use((req, res, next) => next(createError(404, " Router not found")));
-app.use((error, req, res, next) => {
+  app.use((req, res, next) => next(createError(404, "Router not found")));
+  app.use((error, req, res, next) => {
     if (
       error instanceof mongoose.Error.CastError &&
-      error.message.includes('_id')
+      error.message.includes("_id")
     ) {
-      error = createError(404, 'Resource not found');
+      error = createError(404, "Resource not found");
     } else if (!error.status) {
-      error = createError(500, error);
+      error = createError(500, "Internal server error");
     }
+
     console.error(error);
     res.status(error.status).render(`errors/${error.status}`);
   });
 
-const port = 3000;
-app.listen(port,() => console.info (`aplication running port ${ port }`));
+  return app;
+}
+
+if (require.main === module) {
+  const env = getEnv();
+  require("./configs/db.config");
+
+  const app = createApp();
+  app.listen(env.PORT, () =>
+    console.info(`application running on port ${env.PORT}`)
+  );
+}
+
+module.exports = { createApp };
