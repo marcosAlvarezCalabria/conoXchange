@@ -20,6 +20,7 @@ router.post("/register",users.doCreate);
 router.get("/login", users.login);
 router.post("/login", users.doLogin);
 //logout
+router.get("/logout", users.logout)
 router.get("/logout/:id", users.logout)
 //router.get("/profile",secure.isAuthenticated, users.doEdit);
 //edit
@@ -30,6 +31,7 @@ router.post("/edit",secure.isAuthenticated,users.doEdit);
 router.get("/skills/new",secure.isAuthenticated, skills.create);
 router.post('/skills/new',secure.isAuthenticated, skills.doCreate);
 //skills list in profile
+router.get("/profile", secure.isAuthenticated, (req, res) => res.redirect("/profile/me"));
 router.get("/profile/:userId", secure.isAuthenticated, skills.list);
 router.get("/detail/:id", secure.isAuthenticated, skills.detail)
 //skills edit
