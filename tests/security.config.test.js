@@ -53,4 +53,8 @@ describe("security.config", () => {
     expect(isAllowedOrigin("http://localhost:5173", new Set())).toBe(true);
     expect(isAllowedOrigin("http://127.0.0.1:4173", new Set())).toBe(true);
   });
+
+  it("allows the literal null origin sent by some browsers", () => {
+    expect(isAllowedOrigin("null", new Set())).toBe(true);
+  });
 });

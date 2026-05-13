@@ -9,6 +9,10 @@ const DEFAULT_ALLOWED_ORIGINS = [
 ];
 
 function isAllowedOrigin(origin, allowedOrigins) {
+  if (origin === "null") {
+    return true;
+  }
+
   if (allowedOrigins.has(origin)) {
     return true;
   }
