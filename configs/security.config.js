@@ -8,6 +8,18 @@ const DEFAULT_ALLOWED_ORIGINS = [
   "http://127.0.0.1:3000",
 ];
 
+function isAllowedOrigin(origin, allowedOrigins) {
+  if (allowedOrigins.has(origin)) {
+    return true;
+  }
+
+  return (
+    /^https:\/\/[a-z0-9-]+\.fly\.dev$/i.test(origin) ||
+    /^http:\/\/localhost:\d+$/i.test(origin) ||
+    /^http:\/\/127\.0\.0\.1:\d+$/i.test(origin)
+  );
+}
+
 function createCorsOptions(env) {
   const allowedOrigins = new Set([
     ...DEFAULT_ALLOWED_ORIGINS,
@@ -20,11 +32,11 @@ function createCorsOptions(env) {
         return callback(null, true);
       }
 
-      if (allowedOrigins.has(origin)) {
+      if (isAllowedOrigin(origin, allowedOrigins)) {
         return callback(null, true);
       }
 
-      return callback(new Error("Origin not allowed by CORS"));
+      return callback(new Error(`Origin not allowed by CORS: ${origin}`));
     },
     credentials: true,
   };
@@ -53,4 +65,5 @@ module.exports = {
   authRateLimiter,
   createCorsOptions,
   DEFAULT_ALLOWED_ORIGINS,
+  isAllowedOrigin,
 };

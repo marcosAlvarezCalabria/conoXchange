@@ -1,6 +1,7 @@
 const {
   createCorsOptions,
   DEFAULT_ALLOWED_ORIGINS,
+  isAllowedOrigin,
 } = require("../configs/security.config");
 
 describe("security.config", () => {
@@ -29,7 +30,7 @@ describe("security.config", () => {
 
     corsOptions.origin("https://evil.example", (error, allowed) => {
       expect(error).toBeInstanceOf(Error);
-      expect(error.message).toBe("Origin not allowed by CORS");
+      expect(error.message).toBe("Origin not allowed by CORS: https://evil.example");
       expect(allowed).toBeUndefined();
     });
   });
@@ -40,5 +41,16 @@ describe("security.config", () => {
       "http://localhost:3000",
       "http://127.0.0.1:3000",
     ]);
+  });
+
+  it("allows Fly subdomains", () => {
+    expect(
+      isAllowedOrigin("https://my-preview-app.fly.dev", new Set())
+    ).toBe(true);
+  });
+
+  it("allows localhost ports", () => {
+    expect(isAllowedOrigin("http://localhost:5173", new Set())).toBe(true);
+    expect(isAllowedOrigin("http://127.0.0.1:4173", new Set())).toBe(true);
   });
 });
