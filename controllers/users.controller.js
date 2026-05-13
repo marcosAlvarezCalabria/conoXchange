@@ -25,12 +25,24 @@ module.exports.create = (req, res, next) => renderRegister(res);
 
 module.exports.doCreate = (req, res, next) => {
   const user = req.body;
-  User.findOne({ email: req.body.email })
+  User.findOne({
+    $or: [{ email: req.body.email }, { username: req.body.username }],
+  })
     .then((userFound) => {
       if (userFound) {
+        const errors = {};
+
+        if (userFound.email === req.body.email) {
+          errors.email = "already exists";
+        }
+
+        if (userFound.username === req.body.username) {
+          errors.username = "already exists";
+        }
+
         return renderRegister(res.status(409), {
           user: req.body,
-          errors: { email: "already exists" },
+          errors,
         });
       } else {
         const user = {
@@ -40,20 +52,32 @@ module.exports.doCreate = (req, res, next) => {
           interests: normalizeInterests(req.body.interests),
         };
         return User.create(user).then(() => {
-
           res.redirect("/login");
         });
       }
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
-        
         renderRegister(res.status(400), {
           user,
           errors: error.errors,
         });
+      } else if (error?.code === 11000) {
+        const errors = {};
+
+        if (error.keyPattern?.email || error.keyValue?.email) {
+          errors.email = "already exists";
+        }
+
+        if (error.keyPattern?.username || error.keyValue?.username) {
+          errors.username = "already exists";
+        }
+
+        renderRegister(res.status(409), {
+          user,
+          errors,
+        });
       } else {
-        
         next(error);
       }
     });

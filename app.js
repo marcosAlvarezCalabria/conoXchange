@@ -33,6 +33,8 @@ function createApp() {
 
   app.use((req, res, next) => next(createError(404, "Router not found")));
   app.use((error, req, res, next) => {
+    const originalError = error;
+
     if (
       error instanceof mongoose.Error.CastError &&
       error.message.includes("_id")
@@ -42,7 +44,7 @@ function createApp() {
       error = createError(500, "Internal server error");
     }
 
-    console.error(error);
+    console.error(originalError);
     res.status(error.status).render(`errors/${error.status}`);
   });
 
