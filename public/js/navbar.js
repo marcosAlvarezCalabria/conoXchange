@@ -40,12 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sticky Shadow & Compact Effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
-            navbar.classList.add('shadow-md', 'bg-white/95', 'dark:bg-slate-900/95', 'h-16');
-            navbar.classList.remove('h-20', 'bg-white/80', 'dark:bg-slate-900/80');
-            // Adjust inner container alignment if needed, but flex takes care of it.
+            navbar.classList.add('navbar-scrolled');
         } else {
-            navbar.classList.remove('shadow-md', 'bg-white/95', 'dark:bg-slate-900/95', 'h-16');
-            navbar.classList.add('h-20', 'bg-white/80', 'dark:bg-slate-900/80');
+            navbar.classList.remove('navbar-scrolled');
         }
     });
 
