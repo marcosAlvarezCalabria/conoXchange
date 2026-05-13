@@ -2,14 +2,25 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://conoxchange.fly.dev",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+];
+
 function createCorsOptions(env) {
+  const allowedOrigins = new Set([
+    ...DEFAULT_ALLOWED_ORIGINS,
+    ...(env.CORS_ORIGIN || []),
+  ]);
+
   return {
     origin(origin, callback) {
       if (!origin) {
         return callback(null, true);
       }
 
-      if (env.CORS_ORIGIN.includes(origin)) {
+      if (allowedOrigins.has(origin)) {
         return callback(null, true);
       }
 
@@ -41,4 +52,5 @@ module.exports = {
   applySecurity,
   authRateLimiter,
   createCorsOptions,
+  DEFAULT_ALLOWED_ORIGINS,
 };
