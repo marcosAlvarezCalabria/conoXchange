@@ -21,8 +21,8 @@
 
     <form action="/register" method="POST" class="flex flex-col gap-2 px-8 py-4">
       <div class="flex flex-col w-full py-2">
-        <label class="text-sm font-semibold text-white pb-2 pl-4">Email Address</label>
-        <input type="email" name="email" value="{{user.email}}"
+        <label for="register-email" class="text-sm font-semibold text-white pb-2 pl-4">Email Address</label>
+        <input id="register-email" type="email" name="email" value="{{user.email}}"
           class="w-full h-14 bg-gray-100 dark:bg-white/10 border-none rounded-full px-6 text-base text-primary dark:text-white transition-all focus:outline-none focus:ring-2 focus:ring-accent {{#if errors.email}}bg-red-100 ring-2 ring-red-500{{/if}}"
           placeholder="hello@example.com" required>
         {{#if errors.email}}
@@ -31,10 +31,10 @@
       </div>
 
       <div class="flex flex-col w-full py-2">
-        <label class="text-sm font-semibold text-white pb-2 pl-4">Username</label>
+        <label for="register-username" class="text-sm font-semibold text-white pb-2 pl-4">Username</label>
         <div class="relative w-full flex items-center">
           <span class="absolute left-6 text-gray-500 font-bold">@</span>
-          <input type="text" name="username" value="{{user.username}}"
+          <input id="register-username" type="text" name="username" value="{{user.username}}"
             class="w-full h-14 bg-gray-100 dark:bg-white/10 border-none rounded-full pl-12 pr-6 text-base text-primary dark:text-white transition-all focus:outline-none focus:ring-2 focus:ring-accent {{#if errors.username}}bg-red-100 ring-2 ring-red-500{{/if}}"
             placeholder="username" required>
         </div>
@@ -44,9 +44,9 @@
       </div>
 
       <div class="flex flex-col w-full py-2">
-        <label class="text-sm font-semibold text-white pb-2 pl-4">Password</label>
+        <label for="register-password" class="text-sm font-semibold text-white pb-2 pl-4">Password</label>
         <div class="relative w-full flex items-center">
-          <input type="password" name="password"
+          <input id="register-password" type="password" name="password"
             class="w-full h-14 bg-gray-100 dark:bg-white/10 border-none rounded-full px-6 text-base text-primary dark:text-white transition-all focus:outline-none focus:ring-2 focus:ring-accent {{#if errors.password}}bg-red-100 ring-2 ring-red-500{{/if}}"
             placeholder="Create a password" required>
         </div>
@@ -59,13 +59,14 @@
         <label class="text-sm font-semibold text-white pb-2 pl-4">My Interests</label>
         <div class="grid grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
           {{#each interestOptions}}
-          <label class="cursor-pointer group">
+          <label for="interest-{{@index}}" class="cursor-pointer group">
             <input
+              id="interest-{{@index}}"
               type="checkbox"
               name="interests"
               value="{{this.value}}"
               class="peer sr-only"
-              {{#if (hasInterest ../user.interests this.value)}}checked{{/if}}>
+              {{#if this.selected}}checked{{/if}}>
             <div
               class="flex items-center gap-2 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border-2 border-transparent peer-checked:border-accent peer-checked:bg-accent/10 transition-all hover:bg-gray-100 dark:hover:bg-white/10">
               <img src="{{this.icon}}" alt="{{this.label}}" class="w-6 h-6 object-contain">

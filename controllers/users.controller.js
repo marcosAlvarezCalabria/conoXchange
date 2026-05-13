@@ -7,9 +7,16 @@ const {
 } = require("./users.helpers");
 
 function renderRegister(res, overrides = {}) {
+  const user = overrides.user || {};
+  const selectedInterests = normalizeInterests(user.interests);
+  const interestOptions = INTEREST_OPTIONS.map((option) => ({
+    ...option,
+    selected: selectedInterests.includes(option.value),
+  }));
+
   return res.render("users/register", {
-    user: {},
-    interestOptions: INTEREST_OPTIONS,
+    user,
+    interestOptions,
     ...overrides,
   });
 }
@@ -21,13 +28,10 @@ module.exports.doCreate = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((userFound) => {
       if (userFound) {
-        res
-          .status(409)
-          .render("users/register", {
-            user: req.body,
-            interestOptions: INTEREST_OPTIONS,
-            errors: { email: "already exists" },
-          });
+        return renderRegister(res.status(409), {
+          user: req.body,
+          errors: { email: "already exists" },
+        });
       } else {
         const user = {
           email: req.body.email,
@@ -44,13 +48,10 @@ module.exports.doCreate = (req, res, next) => {
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
         
-        res
-          .status(400)
-          .render("users/register", {
-            user,
-            interestOptions: INTEREST_OPTIONS,
-            errors: error.errors,
-          });
+        renderRegister(res.status(400), {
+          user,
+          errors: error.errors,
+        });
       } else {
         
         next(error);
