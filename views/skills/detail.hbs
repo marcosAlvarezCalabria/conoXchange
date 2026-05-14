@@ -1,185 +1,210 @@
 <div class="skill-detail-page">
-    <div class="container">
-        <!-- Breadcrumbs -->
-        <nav class="breadcrumbs">
-            <a href="/">Home</a>
-            <i class="bi bi-chevron-right"></i>
-            <a href="/search">Skills</a>
-            <i class="bi bi-chevron-right"></i>
-            <span>{{skill.name}}</span>
-        </nav>
-    </div>
+  <div class="container skill-detail-shell">
+    <nav class="breadcrumbs">
+      <a href="/">Home</a>
+      <i class="bi bi-chevron-right"></i>
+      <a href="/search">Skills</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>{{skill.name}}</span>
+    </nav>
 
-    <!-- Hero Section -->
-    <section class="skill-hero">
-        <div class="container">
-            <div class="skill-hero-content">
-                <div class="skill-category-badge">
-                    <img src="{{categoryImage skill.category}}" alt="{{skill.category}}">
-                    <span>{{skill.category}}</span>
-                </div>
-
-                <h1>{{skill.name}}</h1>
-
-                <p class="skill-hero-description">{{skill.description}}</p>
-
-                <div class="skill-hero-meta">
-                    <div class="skill-owner-info">
-                        <a href="/profile/{{skill.owner.id}}">
-                            <img src="https://i.pravatar.cc/150?u={{skill.owner.email}}"
-                                 alt="{{skill.owner.username}}"
-                                 class="skill-owner-avatar">
-                        </a>
-                        <div>
-                            <div class="skill-owner-name">{{skill.owner.username}}</div>
-                        </div>
-                    </div>
-
-                    <div class="skill-rating-display">
-                        <div class="skill-rating-number">{{skill.averageRate}}</div>
-                        <div>
-                            <div class="skill-rating-stars" data-rate="{{skill.averageRate}}">
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                            </div>
-                            <div class="skill-rating-count">{{skill.ratings.length}} reviews</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="detail-overview-card">
+      <div class="detail-overview-main">
+        <div class="skill-category-badge">
+          <img src="{{categoryImage skill.category}}" alt="{{skill.category}}">
+          <span>{{skill.category}}</span>
         </div>
+
+        <h1>{{skill.name}}</h1>
+        <p class="detail-summary">{{skill.description}}</p>
+
+        <div class="detail-meta-row">
+          <div class="detail-meta-pill">
+            <span class="detail-meta-label">Instructor</span>
+            <span class="detail-meta-value">{{skill.owner.username}}</span>
+          </div>
+
+          <div class="detail-meta-pill">
+            <span class="detail-meta-label">Rating</span>
+            <span class="detail-meta-value">{{skill.averageRate}} / 5</span>
+          </div>
+
+          <div class="detail-meta-pill">
+            <span class="detail-meta-label">Reviews</span>
+            <span class="detail-meta-value">{{skill.ratings.length}}</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="detail-overview-side">
+        <a href="/profile/{{skill.owner.id}}" class="detail-owner-card">
+          <img
+            src="https://i.pravatar.cc/150?u={{skill.owner.email}}"
+            alt="{{skill.owner.username}}"
+            class="skill-owner-avatar">
+          <div>
+            <p class="detail-owner-eyebrow">Skill owner</p>
+            <p class="detail-owner-name">{{skill.owner.username}}</p>
+          </div>
+        </a>
+
+        {{#unless isUserLogged}}
+          <a href="/messages/{{skill.id}}" class="nav-cta-link detail-primary-action">
+            <i class="bi bi-send"></i>
+            Message {{skill.owner.username}}
+          </a>
+        {{/unless}}
+
+        {{#if isUserLogged}}
+          <div class="skill-actions">
+            <a href="/skills/{{skill.id}}/edit" class="btn-edit">
+              <i class="bi bi-pencil"></i>
+              Edit Skill
+            </a>
+          </div>
+        {{/if}}
+
+        <div class="detail-mini-note">
+          <p class="detail-meta-label">Quick note</p>
+          <p>This page is focused on what the skill is, who teaches it and whether people found it useful.</p>
+        </div>
+      </aside>
     </section>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="skill-detail-grid">
-            <!-- Main Info Card -->
-            <div class="skill-main-card">
-                <div class="skill-section">
-                    <h3>
-                        <i class="bi bi-info-circle"></i>
-                        About this Skill
-                    </h3>
-                    <p>{{skill.description}}</p>
-                </div>
-
-                <div class="skill-section">
-                    <h3>
-                        <i class="bi bi-tag"></i>
-                        Category
-                    </h3>
-                    <p style="text-transform: capitalize;">{{skill.category}}</p>
-                </div>
-
-                <div class="skill-section">
-                    <h3>
-                        <i class="bi bi-person"></i>
-                        Instructor
-                    </h3>
-                    <p>Learn from <strong>{{skill.owner.username}}</strong></p>
-                    {{#if skill.owner.description}}
-                        <p style="margin-top: var(--space-2);">{{skill.owner.description}}</p>
-                    {{/if}}
-                </div>
-
-                {{#unless isUserLogged}}
-                    <div class="skill-actions">
-                        <a href="/messages/{{skill.id}}" class="nav-cta-link">
-                            <i class="bi bi-send"></i>
-                            Message {{skill.owner.username}}
-                        </a>
-                    </div>
-                {{/unless}}
-
-                {{#if isUserLogged}}
-                    <div class="skill-actions">
-                        <a href="/skills/{{skill.id}}/edit" class="btn-edit">
-                            <i class="bi bi-pencil"></i>
-                            Edit Skill
-                        </a>
-                    </div>
-                {{/if}}
-            </div>
-
-            <!-- Sidebar - Comments & Ratings -->
-            <aside class="skill-sidebar">
-                <div class="comments-card">
-                    <h3><i class="bi bi-chat-dots"></i> Reviews</h3>
-
-                    <!-- Rating Form -->
-                    {{#ifUserRated skill.ratings currentUser}}
-                        {{#unless isUserLogged}}
-                            <form action="/detail/{{skill.id}}" method="post" class="rating-form">
-                                <textarea
-                                    class="form-control"
-                                    name="comment"
-                                    placeholder="Share your experience with this skill..."
-                                    required
-                                ></textarea>
-
-                                <div style="font-size: 30px;" class="rate {{#if errors.rate}}is-invalid{{/if}}">
-                                    <input type="radio" id="star5" name="rate" value="5" />
-                                    <label for="star5" title="5 stars">5 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="4" />
-                                    <label for="star4" title="4 stars">4 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3" />
-                                    <label for="star3" title="3 stars">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="2" />
-                                    <label for="star2" title="2 stars">2 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="1" />
-                                    <label for="star1" title="1 star">1 star</label>
-                                </div>
-                                {{#if errors.rate}}
-                                    <small class="invalid-feedback">{{errors.rate}}</small>
-                                {{/if}}
-
-                                <button type="submit" class="btn-submit-rating">
-                                    <i class="bi bi-send"></i>
-                                    Submit Review
-                                </button>
-                            </form>
-                        {{/unless}}
-                    {{/ifUserRated}}
-
-                    <!-- Comments List -->
-                    <div class="comment-list">
-                        {{#if skill.ratings.length}}
-                            {{#each skill.ratings as |rating|}}
-                                <div class="comment-item">
-                                    <div class="comment-header">
-                                        <a href="/profile/{{rating.sender.id}}">
-                                            <img src="https://i.pravatar.cc/150?u={{rating.sender.email}}"
-                                                 alt="{{rating.sender.username}}"
-                                                 class="comment-avatar">
-                                        </a>
-                                        <div class="comment-author">
-                                            <a href="/profile/{{rating.sender.id}}" class="comment-author-name">
-                                                {{rating.sender.username}}
-                                            </a>
-                                        </div>
-                                        <div class="comment-rating" data-rate="{{rating.rate}}">
-                                            <span class="star">&#9733;</span>
-                                            <span class="star">&#9733;</span>
-                                            <span class="star">&#9733;</span>
-                                            <span class="star">&#9733;</span>
-                                            <span class="star">&#9733;</span>
-                                        </div>
-                                    </div>
-                                    <p class="comment-text">{{rating.comment}}</p>
-                                </div>
-                            {{/each}}
-                        {{else}}
-                            <div class="empty-comments">
-                                <i class="bi bi-chat-dots"></i>
-                                <p>No reviews yet. Be the first to review this skill!</p>
-                            </div>
-                        {{/if}}
-                    </div>
-                </div>
-            </aside>
+    <div class="skill-detail-grid">
+      <section class="skill-main-card">
+        <div class="skill-section">
+          <h3>
+            <i class="bi bi-lightbulb"></i>
+            What You Can Expect
+          </h3>
+          <p>{{skill.description}}</p>
         </div>
+
+        <div class="skill-section skill-two-column">
+          <div class="skill-info-block">
+            <h3>
+              <i class="bi bi-tag"></i>
+              Category
+            </h3>
+            <p class="skill-highlight-text">{{skill.category}}</p>
+          </div>
+
+          <div class="skill-info-block">
+            <h3>
+              <i class="bi bi-star"></i>
+              Community Score
+            </h3>
+            <div class="detail-score-block">
+              <div class="skill-rating-stars detail-inline-stars" data-rate="{{skill.averageRate}}">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+              </div>
+              <p>{{skill.averageRate}} average rating from {{skill.ratings.length}} reviews</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-section">
+          <h3>
+            <i class="bi bi-person"></i>
+            About The Instructor
+          </h3>
+          <div class="detail-owner-panel">
+            <a href="/profile/{{skill.owner.id}}">
+              <img
+                src="https://i.pravatar.cc/150?u={{skill.owner.email}}"
+                alt="{{skill.owner.username}}"
+                class="detail-owner-panel-avatar">
+            </a>
+            <div>
+              <p class="detail-owner-name">{{skill.owner.username}}</p>
+              {{#if skill.owner.description}}
+                <p>{{skill.owner.description}}</p>
+              {{else}}
+                <p>No profile description yet.</p>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="skill-sidebar">
+        <div class="comments-card">
+          <h3><i class="bi bi-chat-dots"></i> Reviews</h3>
+
+          {{#ifUserRated skill.ratings currentUser}}
+            {{#unless isUserLogged}}
+              <form action="/detail/{{skill.id}}" method="post" class="rating-form">
+                <textarea
+                  class="form-control"
+                  name="comment"
+                  placeholder="Share your experience with this skill..."
+                  required
+                ></textarea>
+
+                <div style="font-size: 30px;" class="rate {{#if errors.rate}}is-invalid{{/if}}">
+                  <input type="radio" id="star5" name="rate" value="5" />
+                  <label for="star5" title="5 stars">5 stars</label>
+                  <input type="radio" id="star4" name="rate" value="4" />
+                  <label for="star4" title="4 stars">4 stars</label>
+                  <input type="radio" id="star3" name="rate" value="3" />
+                  <label for="star3" title="3 stars">3 stars</label>
+                  <input type="radio" id="star2" name="rate" value="2" />
+                  <label for="star2" title="2 stars">2 stars</label>
+                  <input type="radio" id="star1" name="rate" value="1" />
+                  <label for="star1" title="1 star">1 star</label>
+                </div>
+                {{#if errors.rate}}
+                  <small class="invalid-feedback">{{errors.rate}}</small>
+                {{/if}}
+
+                <button type="submit" class="btn-submit-rating">
+                  <i class="bi bi-send"></i>
+                  Submit Review
+                </button>
+              </form>
+            {{/unless}}
+          {{/ifUserRated}}
+
+          <div class="comment-list">
+            {{#if skill.ratings.length}}
+              {{#each skill.ratings as |rating|}}
+                <div class="comment-item">
+                  <div class="comment-header">
+                    <a href="/profile/{{rating.sender.id}}">
+                      <img src="https://i.pravatar.cc/150?u={{rating.sender.email}}"
+                        alt="{{rating.sender.username}}"
+                        class="comment-avatar">
+                    </a>
+                    <div class="comment-author">
+                      <a href="/profile/{{rating.sender.id}}" class="comment-author-name">
+                        {{rating.sender.username}}
+                      </a>
+                    </div>
+                    <div class="comment-rating" data-rate="{{rating.rate}}">
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                    </div>
+                  </div>
+                  <p class="comment-text">{{rating.comment}}</p>
+                </div>
+              {{/each}}
+            {{else}}
+              <div class="empty-comments">
+                <i class="bi bi-chat-dots"></i>
+                <p>No reviews yet. Be the first to review this skill.</p>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </aside>
     </div>
+  </div>
 </div>
