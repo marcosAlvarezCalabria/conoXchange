@@ -1,92 +1,141 @@
-<div class="container">
-  
-  <h3>Name of the skill: {{skill.name}}</h3>
-  <h3>Name of the expert: </h3>
-  <h3>Name of solicitor: {{currentUser.username}}</h3>
+<div class="min-h-[calc(100vh-80px)] bg-background pt-10 pb-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="breadcrumbs mb-6">
+      <a href="/">Home</a>
+      <i class="bi bi-chevron-right"></i>
+      <a href="/search">Skills</a>
+      <i class="bi bi-chevron-right"></i>
+      <a href="/detail/{{skill.id}}">{{skill.name}}</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>Messages</span>
+    </nav>
 
-  <form action="/messages/{{skill.id}}" method="post">
-    <input name="content" type="text" />
-    <button type="submit">send</button>
-  </form>
-  
-
-  {{#each messages as |message|}}
-  <ul>
-    <li>Mensaje de {{message.sender.username}}:{{message.content}} </li>
-    <small>{{message.createdAt}}</small>
-  </ul>
-  
-  {{/each}}
-
-  <!-- <form action="/messages/{{skill.id}}" method="post">
-<section style="background-color: #eee;">
-  <div class="container py-5">
-
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-8 col-lg-6 col-xl-4">
-
-        <div class="card" id="chat1" style="border-radius: 15px;">
-          <div
-            class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
-            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            <i class="fas fa-angle-left"></i>
-            <p class="mb-0 fw-bold">Live chat</p>
-            <i class="fas fa-times"></i>
-          </div>
-          <div class="card-body">
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
-                  below.</p>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end mb-4">
-              <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
-                <p class="small mb-0">Thank you, I really like your product.</p>
-              </div>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-            </div>
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div class="ms-3" style="border-radius: 15px;">
-                <div class="bg-image">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp"
-                    style="border-radius: 15px;" alt="video">
-                  <a href="#!">
-                    <div class="mask"></div>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                <p class="small mb-0">...</p>
-              </div>
-            </div>
-
-            <div class="form-outline">
-              <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
-              <label class="form-label" for="textAreaExample">Type your message</label>
-            </div>
-
+    <section class="rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl" style="background: var(--surface-strong);">
+      <div class="p-6 md:p-8 border-b border-white/10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-4">
+          <img
+            src="https://i.pravatar.cc/150?u={{skill.owner.email}}"
+            alt="{{skill.owner.username}}"
+            class="w-14 h-14 rounded-full object-cover ring-2 ring-white/10">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-text-muted">Conversation</p>
+            <h1 class="text-2xl md:text-3xl font-bold text-white">{{skill.name}}</h1>
+            <p class="text-sm text-text-muted mt-1">
+              Talking with <span class="text-white font-semibold">{{skill.owner.username}}</span>
+            </p>
           </div>
         </div>
 
+        <a href="/detail/{{skill.id}}" class="nav-cta-link whitespace-nowrap">Back to skill</a>
       </div>
-    </div>
 
+      <div class="grid lg:grid-cols-[320px,1fr]">
+        <aside class="border-b lg:border-b-0 lg:border-r border-white/10 p-6 md:p-8 space-y-5" style="background: rgba(255,255,255,0.02);">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">Skill owner</p>
+            <a href="/profile/{{skill.owner.id}}" class="text-xl font-semibold text-white hover:text-accent transition-colors">
+              {{skill.owner.username}}
+            </a>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">Description</p>
+            <p class="text-sm leading-7 text-text-muted">
+              {{#if skill.owner.description}}
+                {{skill.owner.description}}
+              {{else}}
+                No profile description yet.
+              {{/if}}
+            </p>
+          </div>
+
+          <div class="rounded-[1.5rem] border border-white/10 p-4">
+            <p class="text-xs uppercase tracking-[0.3em] text-text-muted mb-3">Guidelines</p>
+            <ul class="space-y-2 text-sm text-text-muted">
+              <li>Be specific about what you want to learn.</li>
+              <li>Keep it respectful and easy to answer.</li>
+              <li>Use this thread only for this skill.</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="p-6 md:p-8 flex flex-col gap-6">
+          <div class="rounded-[1.5rem] border border-white/10 p-4 md:p-5 min-h-[320px] max-h-[520px] overflow-y-auto space-y-4" style="background: rgba(255,255,255,0.02);">
+            {{#if messages.length}}
+              {{#each messages as |message|}}
+                {{#ifEq message.sender.id ../currentUser.id}}
+                  <div class="flex justify-end">
+                    <article class="max-w-[85%] rounded-[1.5rem] rounded-br-md px-4 py-3" style="background: linear-gradient(135deg, rgba(217,119,6,0.22), rgba(245,158,11,0.18)); border: 1px solid rgba(245,158,11,0.25);">
+                      <div class="flex items-center justify-between gap-4 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent">You</span>
+                        <span class="text-xs text-text-muted">{{dateFormat date=message.createdAt format="DD MMM YYYY, HH:mm"}}</span>
+                      </div>
+                      <p class="text-sm leading-7 text-white whitespace-pre-wrap">{{message.content}}</p>
+                    </article>
+                  </div>
+                {{else}}
+                  <div class="flex justify-start">
+                    <article class="max-w-[85%] rounded-[1.5rem] rounded-bl-md px-4 py-3 border border-white/10" style="background: rgba(255,255,255,0.05);">
+                      <div class="flex items-center justify-between gap-4 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-200">{{message.sender.username}}</span>
+                        <span class="text-xs text-text-muted">{{dateFormat date=message.createdAt format="DD MMM YYYY, HH:mm"}}</span>
+                      </div>
+                      <p class="text-sm leading-7 text-slate-100 whitespace-pre-wrap">{{message.content}}</p>
+                    </article>
+                  </div>
+                {{/ifEq}}
+              {{/each}}
+            {{else}}
+              <div class="h-full min-h-[240px] flex flex-col items-center justify-center text-center px-6">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4" style="background: rgba(245,158,11,0.12);">
+                  <i class="bi bi-chat-dots text-2xl text-accent"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-white mb-2">No messages yet</h2>
+                <p class="text-sm text-text-muted max-w-md">
+                  Start the conversation with {{skill.owner.username}} and explain what you want to learn from this skill.
+                </p>
+              </div>
+            {{/if}}
+          </div>
+
+          {{#if errors.content}}
+            <div class="rounded-2xl border border-red-500/30 px-4 py-3 text-sm text-red-200" style="background: rgba(127, 29, 29, 0.22);">
+              {{errors.content}}
+            </div>
+          {{/if}}
+
+          <form action="/messages/{{skill.id}}" method="post" class="space-y-4">
+            <label for="message-content" class="block text-sm font-semibold text-white">
+              Your message
+            </label>
+            <textarea
+              id="message-content"
+              name="content"
+              rows="4"
+              class="w-full rounded-[1.5rem] border border-white/10 px-5 py-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              style="background: rgba(255,255,255,0.04);"
+              placeholder="Hi! I am interested in this skill and would like to know more about..."
+              {{#if isOwnerConversation}}disabled{{/if}}>{{formData.content}}</textarea>
+
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-sm text-text-muted">
+                {{#if isOwnerConversation}}
+                  You cannot send messages to your own skill listing.
+                {{else}}
+                  Messages stay tied to this skill so the conversation keeps context.
+                {{/if}}
+              </p>
+
+              <button
+                type="submit"
+                class="nav-cta-link border-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                {{#if isOwnerConversation}}disabled{{/if}}>
+                Send message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
   </div>
-  <button type="submit">Send</button>
-</section>
-</form>-->
 </div>

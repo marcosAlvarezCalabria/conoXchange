@@ -85,6 +85,15 @@
                     {{/if}}
                 </div>
 
+                {{#unless isUserLogged}}
+                    <div class="skill-actions">
+                        <a href="/messages/{{skill.id}}" class="nav-cta-link">
+                            <i class="bi bi-send"></i>
+                            Message {{skill.owner.username}}
+                        </a>
+                    </div>
+                {{/unless}}
+
                 {{#if isUserLogged}}
                     <div class="skill-actions">
                         <a href="/skills/{{skill.id}}/edit" class="btn-edit">
