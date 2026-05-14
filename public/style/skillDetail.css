@@ -4,29 +4,29 @@
 
 /* Page Container */
 .skill-detail-page {
-  padding: var(--space-12) 0;
+  padding: var(--space-8) 0;
   background: var(--bg-secondary);
   min-height: calc(100vh - 70px);
 }
 
 /* Breadcrumbs */
 .breadcrumbs {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-5);
   display: flex;
   align-items: center;
   gap: var(--space-2);
   font-size: var(--text-sm);
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
 
 .breadcrumbs a {
-  color: var(--primary-600);
+  color: var(--accent-300);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
 .breadcrumbs a:hover {
-  color: var(--primary-700);
+  color: var(--accent-200);
 }
 
 .breadcrumbs i {
@@ -36,11 +36,11 @@
 /* Hero Section */
 .skill-hero {
   background: var(--gradient-primary);
-  padding: var(--space-16) 0 var(--space-20);
+  padding: var(--space-10) 0 var(--space-12);
   color: white;
   position: relative;
   overflow: hidden;
-  margin-bottom: calc(-1 * var(--space-16));
+  margin-bottom: calc(-1 * var(--space-10));
 }
 
 .skill-hero::before {
@@ -80,17 +80,19 @@
 }
 
 .skill-hero h1 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: var(--font-extrabold);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
   line-height: var(--leading-tight);
+  max-width: 760px;
 }
 
 .skill-hero-description {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   opacity: 0.95;
-  margin-bottom: var(--space-8);
-  max-width: 700px;
+  margin-bottom: var(--space-6);
+  max-width: 620px;
+  line-height: 1.7;
 }
 
 .skill-hero-meta {
@@ -150,20 +152,21 @@
 .skill-detail-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: var(--space-8);
-  margin-top: var(--space-16);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
 }
 
 /* Main Card */
 .skill-main-card {
   background: white;
   border-radius: var(--radius-2xl);
-  padding: var(--space-8);
+  padding: var(--space-6);
   box-shadow: var(--shadow-lg);
+  color: var(--gray-800);
 }
 
 .skill-section {
-  padding: var(--space-6) 0;
+  padding: var(--space-4) 0;
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -172,10 +175,10 @@
 }
 
 .skill-section h3 {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-4);
+  color: var(--gray-900);
+  margin-bottom: var(--space-3);
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -186,7 +189,7 @@
 }
 
 .skill-section p {
-  color: var(--text-secondary);
+  color: var(--gray-700);
   line-height: var(--leading-relaxed);
 }
 
@@ -194,7 +197,7 @@
 .skill-actions {
   display: flex;
   gap: var(--space-3);
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
 }
 
 .btn-edit {
@@ -229,26 +232,27 @@
 .comments-card {
   background: white;
   border-radius: var(--radius-2xl);
-  padding: var(--space-6);
+  padding: var(--space-5);
   box-shadow: var(--shadow-lg);
   position: sticky;
   top: calc(70px + var(--space-6));
+  color: var(--gray-800);
 }
 
 .comments-card h3 {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-6);
+  color: var(--gray-900);
+  margin-bottom: var(--space-4);
   text-align: center;
 }
 
 /* Rating Form */
 .rating-form {
-  padding: var(--space-6);
-  background: var(--bg-secondary);
+  padding: var(--space-4);
+  background: var(--gray-50);
   border-radius: var(--radius-lg);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 .rating-form textarea {
@@ -257,8 +261,10 @@
   border: 2px solid var(--border-light);
   border-radius: var(--radius-md);
   font-size: var(--text-base);
+  color: var(--gray-800);
+  background: white;
   resize: vertical;
-  min-height: 100px;
+  min-height: 90px;
   transition: all var(--transition-base);
   margin-bottom: var(--space-4);
 }
@@ -292,7 +298,7 @@
 
 /* Comment List */
 .comment-list {
-  max-height: 500px;
+  max-height: 420px;
   overflow-y: auto;
   padding-right: var(--space-2);
 }
@@ -316,7 +322,7 @@
 }
 
 .comment-item {
-  background: var(--bg-secondary);
+  background: var(--gray-50);
   padding: var(--space-4);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-3);
@@ -324,8 +330,8 @@
 }
 
 .comment-item:hover {
-  background: var(--bg-tertiary);
-  transform: translateX(4px);
+  background: var(--gray-100);
+  transform: translateX(2px);
 }
 
 .comment-header {
@@ -352,14 +358,14 @@
 
 .comment-author-name {
   font-weight: var(--font-semibold);
-  color: var(--text-primary);
+  color: var(--gray-900);
   font-size: var(--text-sm);
   text-decoration: none;
   display: block;
 }
 
 .comment-author-name:hover {
-  color: var(--primary-600);
+  color: var(--accent-700);
 }
 
 .comment-rating {
@@ -369,7 +375,7 @@
 }
 
 .comment-text {
-  color: var(--text-secondary);
+  color: var(--gray-700);
   line-height: var(--leading-relaxed);
   font-size: var(--text-sm);
   margin: 0;
@@ -379,7 +385,7 @@
 .empty-comments {
   text-align: center;
   padding: var(--space-12) var(--space-4);
-  color: var(--text-tertiary);
+  color: var(--gray-600);
 }
 
 .empty-comments i {
@@ -400,7 +406,7 @@
   }
 
   .skill-hero h1 {
-    font-size: var(--text-4xl);
+    font-size: var(--text-3xl);
   }
 
   .skill-hero-meta {
@@ -411,17 +417,17 @@
 
 @media (max-width: 768px) {
   .skill-hero {
-    padding: var(--space-8) 0 var(--space-12);
-    margin-bottom: calc(-1 * var(--space-8));
+    padding: var(--space-8) 0 var(--space-10);
+    margin-bottom: calc(-1 * var(--space-6));
   }
 
   .skill-hero h1 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
   }
 
   .skill-main-card,
   .comments-card {
-    padding: var(--space-6);
+    padding: var(--space-5);
   }
 
   .skill-actions {
